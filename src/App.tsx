@@ -75,7 +75,7 @@ const games:Array<obj>=[
                 }
             }
            
-           const Game:React.FC<Props>=({item})=>{
+           const Game:React.FC<Props>=({item}):any=>{
                     const params:Readonly<Params<string>> = useParams()
                 const game:any = item.find((x)=>x.id == params.id)
                 if (game.name=='Gallows') {
