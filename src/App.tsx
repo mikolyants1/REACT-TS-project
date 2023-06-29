@@ -1,4 +1,3 @@
-
 import React, { ReactNode } from "react";
 import { BrowserRouter as Router, Route, Routes,Link,Outlet,useParams, Params } from "react-router-dom";
 import Gallows from './components/Gallows';
@@ -9,7 +8,6 @@ type obj={
     id:string,
     name:string
 }
-
 const games:Array<obj>=[
 {id:'1', name: "Tic-tac-toe"}, 
  {id: '2', name: "Gallows"}, 
@@ -53,7 +51,6 @@ const games:Array<obj>=[
                         <h2>games</h2>
                        <Outlet />
                     </div>
-               
             }
             }
             class Games extends React.Component{
@@ -107,21 +104,26 @@ const games:Array<obj>=[
                         </div>
                 } 
             }
+            interface style1{
+              textAllign:string,
+              width:string,
+              margin:string,
+            
+            }
             class Main extends React.Component{
                 render():ReactNode{
-                    const style={
+                    const style:style1={
                         textAllign:'center',
                         width:'200px',
-                        margin:' auto'
+                        margin:'20px auto',
+                      
                     }
                     return <div style={style}>
-                        <h1>DynamicApps</h1>
+                       <h1>DynamicApps</h1>
                         <Outlet />
                         </div>
                 }
             } 
-
-
 
 function App():JSX.Element {
   return (
