@@ -16,8 +16,8 @@ const Left:number[]=[0,7,14,21,28,35,42]
 const Right:number[]=[6,13,20,27,34,41,48]
 const [mess,setMess]=React.useState<mass>({items:[],text:'',last:[]})
 const [con,setCon]=React.useState(0)
-const ref1:React.RefObject<any>=React.useRef()
-const ref2:React.RefObject<any>=React.useRef()
+const ref1=React.useRef<HTMLDivElement>(null!)
+const ref2=React.useRef<HTMLDivElement>(null!)
 React.useEffect(()=>{
     ref1.current.style.cssText='width:100%;text-align:center;font-size:20px'
     ref2.current.style.cssText=`width:115px;text-align:center;height:30px;
@@ -45,6 +45,9 @@ let right:any
 let left:any
 let down:any
 but[n].setAttribute('id','q')
+if (mess.text!=='lose') {
+    
+
     if (n==0) {
         let con2:number=0
         let x:number=0
@@ -291,7 +294,7 @@ td[x+=1].style.backgroundColor='grey'
 }, 1000);
     }
        
- 
+}
 }
 const style={backgroundColor:'white',width:'236px'}
 const style0={width:'120px'}
