@@ -1,6 +1,4 @@
 
-import logo from './logo.svg';
-import ReactDOM from "react-dom";
 import React, { ReactNode } from "react";
 import { BrowserRouter as Router, Route, Routes,Link,Outlet,useParams, Params } from "react-router-dom";
 import Gallows from './components/Gallows';
@@ -17,6 +15,9 @@ const games:Array<obj>=[
  {id: '2', name: "Gallows"}, 
  {id: '3', name: "Snake"} 
             ]
+            interface Props{
+              item: Array<obj>
+             }
             interface style{
               width?:string,
               textAlign?:any
@@ -73,9 +74,10 @@ const games:Array<obj>=[
                     </div>
                 }
             }
-           const Game=():any=>{
+           
+           const Game:React.FC<Props>=({item})=>{
                     const params:Readonly<Params<string>> = useParams()
-                const game:any = games.find((x)=>x.id == params.id)
+                const game:any = item.find((x)=>x.id == params.id)
                 if (game.name=='Gallows') {
                     const style1={marginLeft:'-90px'}
                     const style2={marginTop:'50px',marginLeft:'20px'}
@@ -130,7 +132,7 @@ function App():JSX.Element {
                  <Route path="/todo" element={<TodoApp />} />
                  <Route path="/games" element={<GamesApp />}>
                        <Route index element={<Games  />}/>
-                       <Route path="/games/:id" element={<Game  />} />
+                       <Route path="/games/:id" element={<Game item={games}  />} />
                  </Route>
             </Route>
          </Routes>
