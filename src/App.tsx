@@ -95,7 +95,7 @@ const games:Array<obj>=[
                         </div>
                 } 
                 if (game.name=='Snake') {
-                    const style1={marginLeft:'-75px'}
+                    const style1={marginLeft:'-100px'}
                     const style2={marginTop:'50px',marginLeft:'10px'}
                     return <div>
                          <h2> {game.name}</h2>
