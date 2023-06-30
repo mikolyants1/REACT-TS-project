@@ -16,14 +16,12 @@ const Up:number[]=[0,1,2,3,4,5,6,7,8]
 const Down:number[]=[73,74,75,76,77,78,79,80]
 const All:number[]=Left.concat(Right,Down,Up)
 for (let index = 0; index < All.length; index++) {
-    for (let i = 0; i < a1.length; i++) {
-       
+    for (let i = 0; i < a1.length; i++) {    
          if (All[index]==a1[i]) {
           a1.splice(i,1)
          }
         }
-       }
-      
+       }  
 a1.splice(64,1)
 console.log(a1)
 const [state,setState]=React.useState<state>({con:0,random:a1})
@@ -36,7 +34,6 @@ React.useEffect(()=>{
     ref2.current.style.cssText=`width:145px;text-align:center;height:30px;
     border-right:1px solid black;font-size:23px;background-color:white`
     const td:NodeListOf<HTMLTableCaptionElement>=document.querySelectorAll('td')
-  
     for (let i = 0; i < td.length; i++) {
 td[i].style.cssText=` width: 30px; height: 30px;border: 1px solid black;background-color:green`
     }
@@ -56,7 +53,7 @@ function move(n:number):void {
         }
     }
 but[n].setAttribute('id','q')
-if (mess.text!=='lose') {
+if (mess.text!=='lose'||'win') {
     if (n==0) {
         let con2:number=0
         let x:number=0
@@ -107,11 +104,11 @@ setMess({text:'lose',items:mess.items,last:mess.last})
         }   
     }
     for (let i = 0; i< td.length; i++) {
-        if (td[i].style.backgroundColor!=='green') {
+        if (td[i].style.backgroundColor=='green') {
            con2++ 
         }
     }
-    if (con2==td.length) {
+    if (con2==0) {
         setMess({text:'win',items:mess.items,last:mess.last})
     }
     if (!but[0].hasAttribute('id')) {
@@ -121,7 +118,7 @@ td[x-=9].style.backgroundColor='grey'
     
     }
     }
- }, 1000);  
+ }, 500);  
     }
     if (n==1) {
         let con2:number=0
@@ -173,11 +170,11 @@ setMess({text:'lose',items:mess.items,last:mess.last})
         }
     }
     for (let i = 0; i< td.length; i++) {
-        if (td[i].style.backgroundColor!=='green') {
+        if (td[i].style.backgroundColor=='green') {
            con2++ 
         }
     }
-    if (con2==td.length) {
+    if (con2==0) {
         setMess({text:'win',items:mess.items,last:mess.last})
     }
     if (!but[1].hasAttribute('id')) {
@@ -186,7 +183,7 @@ setMess({text:'lose',items:mess.items,last:mess.last})
     td[x+=9].style.backgroundColor='grey'
     }
 }
- }, 1000);  
+ }, 500);  
     }
     if (n==2) {
         let con2:number=0
@@ -238,11 +235,11 @@ setMess({text:'lose',items:mess.items,last:mess.last})
         }
     }
     for (let i = 0; i< td.length; i++) {
-        if (td[i].style.backgroundColor!=='green') {
+        if (td[i].style.backgroundColor=='green') {
            con2++ 
         }
     }
-    if (con2==td.length) {
+    if (con2==0) {
         setMess({text:'win',items:mess.items,last:mess.last})
     }
     if (!but[2].hasAttribute('id')) {
@@ -251,7 +248,7 @@ setMess({text:'lose',items:mess.items,last:mess.last})
     td[x-=1].style.backgroundColor='grey'
     }
 }
- }, 1000);  
+ }, 500);  
     }
     if (n==3) {
     let con2:number=0
@@ -303,11 +300,11 @@ for (let i = 0; i < td.length; i++) {
     }
 }
 for (let i = 0; i< td.length; i++) {
-    if (td[i].style.backgroundColor!=='green') {
+    if (td[i].style.backgroundColor=='green') {
        con2++ 
     }
 }
-if (con2==td.length) {
+if (con2==0) {
     setMess({text:'win',items:mess.items,last:mess.last})
 }
 if (!but[3].hasAttribute('id')) {
@@ -317,7 +314,7 @@ if (!but[3].hasAttribute('id')) {
 td[x+=1].style.backgroundColor='grey'
     }
     }
-}, 1000);
+}, 500);
     }
 }
 }
