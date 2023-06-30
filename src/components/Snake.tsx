@@ -17,11 +17,13 @@ const Down:number[]=[73,74,75,76,77,78,79,80]
 const All:number[]=Left.concat(Right,Down,Up)
 for (let index = 0; index < All.length; index++) {
     for (let i = 0; i < a1.length; i++) {
+       
          if (All[index]==a1[i]) {
           a1.splice(i,1)
          }
         }
        }
+      
 a1.splice(64,1)
 console.log(a1)
 const [state,setState]=React.useState<state>({con:0,random:a1})
@@ -53,13 +55,8 @@ function move(n:number):void {
             but[i].removeAttribute('id')
         }
     }
-    let up:NodeJS.Timer
-let right:NodeJS.Timer
-let left:NodeJS.Timer
-let down:NodeJS.Timer
 but[n].setAttribute('id','q')
 if (mess.text!=='lose') {
-
     if (n==0) {
         let con2:number=0
         let x:number=0
@@ -70,7 +67,7 @@ if (mess.text!=='lose') {
         }
     }
     let con1:number=0
-  up=setInterval(() => {    
+    const up:NodeJS.Timer=setInterval(() => {    
     if (All.some((z)=>z==x)) {    
         setMess({text:'lose',items:mess.items,last:mess.last})  
     }else{
@@ -81,7 +78,7 @@ if (mess.text!=='lose') {
    }
    }
    if (y==0) {
-            let b:number[]=[]
+            const b:number[]=[]
         for (let i = 0; i < td.length; i++) {
             if (td[i].style.backgroundColor!=='black'&&td[i].style.backgroundColor!=='grey'
             &&td[i].style.backgroundColor!=='brown') {
@@ -96,7 +93,7 @@ if (mess.text!=='lose') {
    }
     mess.items.push(x)
     if (td[x-9].style.backgroundColor=='black') {
-        clearInterval(right)
+        clearInterval(up)
 setMess({text:'lose',items:mess.items,last:mess.last})
      }
     td[x].style.backgroundColor='green'
@@ -136,7 +133,7 @@ td[x-=9].style.backgroundColor='grey'
         }
     }
     let con1:number=0
-  down=setInterval(() => {
+    const down:NodeJS.Timer=setInterval(() => {
     if (All.some((z)=>z==x)) {    
         setMess({text:'lose',items:mess.items,last:mess.last})  
     }else{
@@ -147,7 +144,7 @@ td[x-=9].style.backgroundColor='grey'
    }
    }
    if (y==0) {        
-            let b:number[]=[]
+            const b:number[]=[]
         for (let i = 0; i < td.length; i++) {
             if (td[i].style.backgroundColor!=='black'&&td[i].style.backgroundColor!=='grey'
             &&td[i].style.backgroundColor!=='brown') {
@@ -162,7 +159,7 @@ td[x-=9].style.backgroundColor='grey'
    }
     mess.items.push(x)
     if (td[x+9].style.backgroundColor=='black') {
-        clearInterval(right)
+        clearInterval(down)
 setMess({text:'lose',items:mess.items,last:mess.last})
      }
     td[x].style.backgroundColor='green'
@@ -201,7 +198,7 @@ setMess({text:'lose',items:mess.items,last:mess.last})
         }
     }
     let con1:number=0
-  left=setInterval(() => {
+    const left:NodeJS.Timer=setInterval(() => {
     if (All.some((z)=>z==x)) {    
         setMess({text:'lose',items:mess.items,last:mess.last})  
     }else{
@@ -212,7 +209,7 @@ setMess({text:'lose',items:mess.items,last:mess.last})
    }
    }
    if (y==0) {
-            let b:number[]=[]
+            const b:number[]=[]
         for (let i = 0; i < td.length; i++) {
             if (td[i].style.backgroundColor!=='black'&&td[i].style.backgroundColor!=='grey'
             &&td[i].style.backgroundColor!=='brown') {
@@ -266,7 +263,7 @@ setMess({text:'lose',items:mess.items,last:mess.last})
     }
 }
 let con1:number=0
- right=setInterval(() => {
+const right:NodeJS.Timer=setInterval(() => {
     if (All.some((z)=>z==x)) {    
         setMess({text:'lose',items:mess.items,last:mess.last})  
     }else{
@@ -277,7 +274,7 @@ y++
 }
 }
 if (y==0) {       
-        let b:number[]=[]
+        const b:number[]=[]
     for (let i = 0; i < td.length; i++) {
         if (td[i].style.backgroundColor!=='black'&&td[i].style.backgroundColor!=='grey'
         &&td[i].style.backgroundColor!=='brown') {
@@ -291,7 +288,6 @@ con1++
 setCon(con+1)
 }
 mess.items.push(x)
-
 if (td[x+1].style.backgroundColor=='black') {
             clearInterval(right)
 setMess({text:'lose',items:mess.items,last:mess.last})
@@ -323,16 +319,12 @@ td[x+=1].style.backgroundColor='grey'
     }
 }, 1000);
     }
-   
 }
 }
 const style={backgroundColor:'white',width:'290px'}
-const style0={width:'240px'}
 const style1={width:'72px',height:'30px'}
 const style2={width:'145px',height:'30px'}
-const style3={display:'flex'}
-const style4={width:'290px'}
-    return <div style={style4}> 
+    return <div style={{width:'290px'}}> 
         <div ref={ref1}>score:{con}</div>
         <div style={style}>
              <tr>
@@ -363,8 +355,8 @@ const style4={width:'290px'}
             <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
             </tr>
             </div>
-            <div style={style3}>
-<div style={style0}>
+            <div style={{display:'flex'}}>
+<div style={{width:'240px'}}>
 <button className='but' style={style1} onClick={()=>move(2)}>left</button>
 <button className='but' style={style1} onClick={()=>move(0)}>up</button>
 <button className='but' style={style1} onClick={()=>move(1)}>down</button>
