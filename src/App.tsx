@@ -53,13 +53,13 @@ const games:Array<obj>=[
                     </div>
             }
             }
-            class Games extends React.Component{
+            class Games extends React.Component<Props>{
                 render():React.ReactNode{
                     const style={
                         textAllign:'center',
                         marginLeft:'60px',
                     }
-                    const list=games.map((item,index,array)=>{
+                    const list=this.props.item.map((item,index,array)=>{
                    return <div className='list1'>
                 <h3><Link to={`/games/${item.id}`}>{item.name}</Link></h3>
                           </div>
@@ -133,7 +133,7 @@ function App():JSX.Element {
              <Route index element={<Apps />} />
                  <Route path="/todo" element={<TodoApp />} />
                  <Route path="/games" element={<GamesApp />}>
-                       <Route index element={<Games  />}/>
+                       <Route index element={<Games item={games} />}/>
                        <Route path="/games/:id" element={<Game item={games}  />} />
                  </Route>
             </Route>
