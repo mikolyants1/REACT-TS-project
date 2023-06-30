@@ -17,13 +17,11 @@ const Down:number[]=[73,74,75,76,77,78,79,80]
 const All:number[]=Left.concat(Right,Down,Up)
 for (let index = 0; index < All.length; index++) {
     for (let i = 0; i < a1.length; i++) {
-       
          if (All[index]==a1[i]) {
           a1.splice(i,1)
          }
         }
        }
-      
 a1.splice(64,1)
 console.log(a1)
 const [state,setState]=React.useState<state>({con:0,random:a1})
