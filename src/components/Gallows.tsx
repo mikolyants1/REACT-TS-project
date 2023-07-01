@@ -33,7 +33,7 @@ interface style{
         ],
         val:null,win:1,lose:'',win1:1,mass:[0,1,2,3,4,5],}
         x:number=this.state.mass[Math.floor(Math.random()*6)]
-        ref:React.RefObject<HTMLInputElement>=React.createRef()
+        ref=React.createRef<HTMLInputElement>()
         ref1:React.RefObject<any>=React.createRef()
         ref2:React.RefObject<any>=React.createRef()
         style:style={
