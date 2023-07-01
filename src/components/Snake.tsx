@@ -8,7 +8,7 @@ interface mass{
     text:string,
     last:number[]
 }
-export default function Snake() {
+export default function Snake():JSX.Element {
 const a1:number[]=Array.from(Array(81).keys())
 const Left:number[]=[9,18,27,36,45,54,63,72]
 const Right:number[]=[17,26,35,44,53,62,71]
