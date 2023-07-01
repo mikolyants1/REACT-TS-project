@@ -29,6 +29,7 @@ const [mess,setMess]=React.useState<mass>({items:[],text:'',last:[]})
 const [con,setCon]=React.useState(0)
 const ref1=React.useRef<HTMLDivElement>(null!)
 const ref2=React.useRef<HTMLDivElement>(null!)
+const best:number[]=[]
 React.useEffect(()=>{
     ref1.current.style.cssText='width:100%;text-align:center;font-size:20px'
     ref2.current.style.cssText=`width:145px;text-align:center;height:30px;
@@ -41,10 +42,19 @@ td[i].style.cssText=` width: 30px; height: 30px;border: 1px solid black;backgrou
     td[64].style.backgroundColor='grey'
     let ran:number=state.random[Math.floor(Math.random()*state.random.length)]
     td[ran].style.backgroundColor='yellow'
+    if (!localStorage.getItem('best')) {
+        localStorage.setItem('best','0')
+    }
 },[]
 )
-
-function move(n:number):void {
+React.useEffect(()=>{
+    if (typeof localStorage.getItem('best')!==null) {
+        if (con>=JSON.parse(localStorage.getItem("best") || "")) {
+          localStorage.setItem('best',`${con}`)
+        }  
+      }
+},[con])
+function move(n:number):void {  
     const td:NodeListOf<HTMLTableCaptionElement>=document.querySelectorAll('td')
     const but:NodeListOf<HTMLButtonElement>=document.querySelectorAll('.but')
     for (let i = 0; i < but.length; i++) {
@@ -87,6 +97,8 @@ if (mess.text!=='lose'||'win') {
     td[ran].style.backgroundColor='yellow'
     con1++
     setCon(con+1)
+    
+ 
    }
     mess.items.push(x)
     if (td[x-9].style.backgroundColor=='black') {
@@ -153,6 +165,7 @@ td[x-=9].style.backgroundColor='grey'
     td[ran].style.backgroundColor='yellow'
     con1++
     setCon(con+1)
+  
    }
     mess.items.push(x)
     if (td[x+9].style.backgroundColor=='black') {
@@ -218,6 +231,7 @@ setMess({text:'lose',items:mess.items,last:mess.last})
     td[ran].style.backgroundColor='yellow'
     con1++
     setCon(con+1)
+   
    }
     mess.items.push(x)
     if (td[x-1].style.backgroundColor=='black') {
@@ -283,6 +297,7 @@ let ran:number=state.random[Math.floor(Math.random()*state.random.length)]
 td[ran].style.backgroundColor='yellow'
 con1++
 setCon(con+1)
+
 }
 mess.items.push(x)
 if (td[x+1].style.backgroundColor=='black') {
@@ -316,13 +331,15 @@ td[x+=1].style.backgroundColor='grey'
     }
 }, 500);
     }
+    
+    
 }
 }
 const style={backgroundColor:'white',width:'290px'}
 const style1={width:'72px',height:'30px'}
 const style2={width:'145px',height:'30px'}
     return <div style={{width:'290px'}}> 
-        <div ref={ref1}>score:{con}</div>
+        <div ref={ref1}>score:{con} {'   '}best:{localStorage.getItem('best')}</div>
         <div style={style}>
              <tr>
             <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
