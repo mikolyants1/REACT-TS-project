@@ -9,6 +9,10 @@ interface gal{
      win1?:number,
      mass?:Array<number>
 }
+interface style{
+    margin:string,
+    width:string
+}
  export default class Gallows extends React.Component<gal>{
         state={
         name:[
@@ -32,10 +36,9 @@ interface gal{
         ref:React.RefObject<HTMLInputElement>=React.createRef()
         ref1:React.RefObject<any>=React.createRef()
         ref2:React.RefObject<any>=React.createRef()
-        style={
+        style:style={
      margin:'100px auto 0 auto', width:`300px`
-        }
-    
+        } 
    componentDidMount() {
  this.ref1.current.style.cssText=` margin-left: 45px;
  justify-content:space-between; width: 200px;display: flex;`
@@ -51,7 +54,7 @@ interface gal{
       const a9:any=document.querySelector('.a9')
       const a10:any=document.querySelector('.a10')
       if (this.state.val!=='') {     
-       let con=0
+       let con:number=0
        for (let i = 0; i < this.state.skin[this.x].length; i++) {
             if (this.state.val==this.state.name[this.x][i]) {
             this.state.skin[this.x].splice(i,1,this.state.name[this.x][i])
