@@ -19,10 +19,12 @@ cress:[], combos:[ [0, 1, 2],[3, 4, 5], [6, 7, 8],
   combos1:[ [0, 1, 2],[3, 4, 5],[6, 7, 8],[0, 3, 6],
    [1, 4, 7], [2, 5, 8], [0, 4, 8],[6, 4, 2]
       ]})
-    const style={
-    display: 'flex',width: '247px',
-    height: '40px',border:'1px solid black',
-    justifyContent:'space-between'
+    enum style {
+    display= 'flex',
+    width='247px',
+    height='40px',
+    border='1px solid black',
+    justifyContent='space-between'
     }
     const style1:style1={
     fontSize: '30px', width: '100%',

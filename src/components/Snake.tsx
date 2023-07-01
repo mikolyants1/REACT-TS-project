@@ -35,7 +35,7 @@ React.useEffect(()=>{
     ref2.current.style.cssText=`width:145px;text-align:center;height:30px;
     border-right:1px solid black;font-size:23px;background-color:white`
     const td:NodeListOf<HTMLTableCaptionElement>=document.querySelectorAll('td')
-    for (let i = 0; i < td.length; i++) {
+    for (let i:number = 0; i < td.length; i++) {
 td[i].style.cssText=` width: 30px; height: 30px;border: 1px solid black;background-color:green`
     }
    All.forEach((item,index,array)=>td[item].style.backgroundColor='brown')
@@ -335,9 +335,18 @@ td[x+=1].style.backgroundColor='grey'
     
 }
 }
-const style={backgroundColor:'white',width:'290px'}
-const style1={width:'72px',height:'30px'}
-const style2={width:'145px',height:'30px'}
+enum style {
+    backgroundColor='white',
+    width='290px'
+}
+enum style1 {
+    width='72px',
+    height='30px'
+}
+enum style2 {
+    width='145px',
+height='30px'
+}
     return <div style={{width:'290px'}}> 
         <div ref={ref1}>score:{con} {'   '}best:{localStorage.getItem('best')}</div>
         <div style={style}>
