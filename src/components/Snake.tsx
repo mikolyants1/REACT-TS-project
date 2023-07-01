@@ -130,7 +130,7 @@ td[x-=9].style.backgroundColor='grey'
     
     }
     }
- }, 500);  
+ }, 600);  
     }
     if (n==1) {
         let con2:number=0
@@ -196,7 +196,7 @@ setMess({text:'lose',items:mess.items,last:mess.last})
     td[x+=9].style.backgroundColor='grey'
     }
 }
- }, 500);  
+ }, 600);  
     }
     if (n==2) {
         let con2:number=0
@@ -262,7 +262,7 @@ setMess({text:'lose',items:mess.items,last:mess.last})
     td[x-=1].style.backgroundColor='grey'
     }
 }
- }, 500);  
+ }, 600);  
     }
     if (n==3) {
     let con2:number=0
@@ -329,7 +329,7 @@ if (!but[3].hasAttribute('id')) {
 td[x+=1].style.backgroundColor='grey'
     }
     }
-}, 500);
+}, 600);
     }
     
     
