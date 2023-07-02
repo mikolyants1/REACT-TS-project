@@ -59,7 +59,7 @@ const games:Array<obj>=[
                         textAllign:'center',
                         marginLeft:'60px',
                     }
-                    const list=this.props.item.map((item,index,array)=>{
+                    const list:JSX.Element[]=this.props.item.map((item,index,array)=>{
                    return <div className='list1'>
                 <h3><Link to={`/games/${item.id}`}>{item.name}</Link></h3>
                           </div>
@@ -124,7 +124,6 @@ const games:Array<obj>=[
                         </div>
                 }
             } 
-
 function App():JSX.Element {
   return (
     <Router>
