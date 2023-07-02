@@ -38,11 +38,11 @@ export default class Todo extends React.Component<web>{
     this.setState({text:this.items,con:0,height:200})
     }
     press1=(x:number):void=>{
-        const task=document.querySelector('.task')  as HTMLElement
+        const task:HTMLElement=document.querySelector('.task')  as HTMLElement
         if (x==0) {
             if (this.state.value!=='') {
         
-     const val=this.state.height<400?this.state.height+50:this.state.height
+     const val:number=this.state.height<400?this.state.height+50:this.state.height
       if (val>=400) {
         task.style.height='200px'
       }else{
@@ -55,8 +55,8 @@ export default class Todo extends React.Component<web>{
         }
         }
         if (x==1) {
-            const val=this.state.value.trim().toLowerCase()
-            const text=this.items.filter((item)=>{
+            const val:string=this.state.value.trim().toLowerCase()
+            const text:string[]=this.items.filter((item)=>{
                 return item.toLowerCase().indexOf(val)!==-1
             })
            
@@ -65,7 +65,7 @@ export default class Todo extends React.Component<web>{
     }
     delete=(x:number):void=>{
     const task:any=document.querySelector('.task')
-    const val=this.state.con<5?this.state.height-50:this.state.height
+    const val:number=this.state.con<5?this.state.height-50:this.state.height
     if (this.state.con<5) {
      task.style.height=`${parseInt(task.style.height.split('').splice(0,task.style.height.split('').length-2).join(''))-50}px`
       }else{
@@ -79,8 +79,13 @@ export default class Todo extends React.Component<web>{
      x==0?this.setState({style1:{backgroundColor:'rgb(210, 210, 210'}}):this.setState({style1:{backgroundColor:''}})
     }
     render():React.ReactNode{
-        const style1={width: '100%',marginTop: '7px',marginLeft: '10px',fontSize: '16px'}
-        const items=this.state.text.map((item,index,array)=>{
+        enum style1 {
+            width= '100%',
+            marginTop= '7px',
+            marginLeft= '10px',
+            fontSize='16px'
+        }
+        const items:JSX.Element[]=this.state.text.map((item,index,array)=>{
         return <div className='items'  onMouseOver={()=>this.set(index+1)}
           onMouseOut={()=>this.set(-(index+1))}>
          <div className='div' style={style1}>{item}</div>

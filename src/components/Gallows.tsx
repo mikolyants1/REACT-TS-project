@@ -45,7 +45,8 @@ interface style{
  this.ref2.current.style.cssText=` width: 200px;height: 30px;
  text-align: center;font-size: 23px;margin-left: 50px;`
     }
-    press():void{     
+    press():void{   
+    
       const a4:any=document.querySelector('.a4')
       const a5:any=document.querySelector('.a5')
       const a6:any=document.querySelector('.a6')
@@ -101,7 +102,7 @@ interface style{
       this.ref.current?.focus()
     }
     render():React.ReactNode{
-    const text=this.state.skin[this.x].map((item,index,array)=>{
+    const text:JSX.Element[]=this.state.skin[this.x].map((item,index,array)=>{
             return <div>{item}</div>
         })
         return <div style={this.style}>

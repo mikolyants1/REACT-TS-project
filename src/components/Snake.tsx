@@ -345,7 +345,7 @@ enum style1 {
 }
 enum style2 {
     width='145px',
-height='30px'
+  height='30px'
 }
     return <div style={{width:'290px'}}> 
         <div ref={ref1}>score:{con} {'   '}best:{localStorage.getItem('best')}</div>
