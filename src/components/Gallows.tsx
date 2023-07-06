@@ -45,15 +45,14 @@ interface style{
  this.ref2.current.style.cssText=` width: 200px;height: 30px;
  text-align: center;font-size: 23px;margin-left: 50px;`
     }
-    press():void{   
-    
-      const a4:any=document.querySelector('.a4')
-      const a5:any=document.querySelector('.a5')
-      const a6:any=document.querySelector('.a6')
-      const a7:any=document.querySelector('.a7')
-      const a8:any=document.querySelector('.a8')
-      const a9:any=document.querySelector('.a9')
-      const a10:any=document.querySelector('.a10')
+    press():void{    
+      const a4:HTMLElement=document.querySelector('.a4') as HTMLElement
+      const a5:HTMLElement=document.querySelector('.a5') as HTMLElement
+      const a6:HTMLElement=document.querySelector('.a6') as HTMLElement
+      const a7:HTMLElement=document.querySelector('.a7') as HTMLElement
+      const a8:HTMLElement=document.querySelector('.a8') as HTMLElement
+      const a9:HTMLElement=document.querySelector('.a9') as HTMLElement
+      const a10:HTMLElement=document.querySelector('.a10') as HTMLElement
       if (this.state.val!=='') {     
        let con:number=0
        for (let i = 0; i < this.state.skin[this.x].length; i++) {
