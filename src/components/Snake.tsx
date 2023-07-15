@@ -23,19 +23,18 @@ for (let index = 0; index < All.length; index++) {
         }
        }  
 a1.splice(64,1)
-console.log(a1)
 const [state,setState]=React.useState<state>({con:0,random:a1})
 const [mess,setMess]=React.useState<mass>({items:[],text:'',last:[]})
 const [con,setCon]=React.useState(0)
 const ref1=React.useRef<HTMLDivElement>(null!)
 const ref2=React.useRef<HTMLDivElement>(null!)
-const best:number[]=[]
+
 React.useEffect(()=>{
     ref1.current.style.cssText='width:100%;text-align:center;font-size:20px'
     ref2.current.style.cssText=`width:145px;text-align:center;height:30px;
     border-right:1px solid black;font-size:23px;background-color:white`
-    const td:NodeListOf<HTMLTableCaptionElement>=document.querySelectorAll('td')
-    for (let i:number = 0; i < td.length; i++) {
+    const td:NodeListOf<HTMLTableCellElement>=document.querySelectorAll('td')
+    for (let i = 0; i < td.length; i++) {
 td[i].style.cssText=` width: 30px; height: 30px;border: 1px solid black;background-color:green`
     }
    All.forEach((item,index,array)=>td[item].style.backgroundColor='brown')
@@ -52,10 +51,12 @@ React.useEffect(()=>{
         if (con>=JSON.parse(localStorage.getItem("best") || "")) {
           localStorage.setItem('best',`${con}`)
         }  
+      }else{
+        localStorage.setItem('best','0')
       }
 },[con])
 function move(n:number):void {  
-    const td:NodeListOf<HTMLTableCaptionElement>=document.querySelectorAll('td')
+    const td:NodeListOf<HTMLTableCellElement>=document.querySelectorAll('td')
     const but:NodeListOf<HTMLButtonElement>=document.querySelectorAll('.but')
     for (let i = 0; i < but.length; i++) {
         if (but[i].hasAttribute('id')) {
@@ -348,7 +349,7 @@ enum style2 {
   height='30px'
 }
     return <div style={{width:'290px'}}> 
-        <div ref={ref1}>score:{con} {'   '}best:{localStorage.getItem('best')}</div>
+        <div ref={ref1}>score:{con} best:{localStorage.getItem('best')}</div>
         <div style={style}>
              <tr>
             <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>

@@ -3,16 +3,18 @@ type mass=Array<string>
 interface gal{
     name?:Array<mass>,
     skin?:Array<mass>,
-    val?:null,
+    val?:string|undefined,
     win?:number,
      lose?:string,
      win1?:number,
      mass?:Array<number>
+    
 }
 interface style{
     margin:string,
-    width:string
-}
+    width:string,
+} 
+
  export default class Gallows extends React.Component<gal>{
         state={
         name:[
@@ -31,13 +33,15 @@ interface style{
          ['_','_','_','_','_','_','_','_'],
          ['_','_','_','_','_','_','_','_','_','_','_'],
         ],
-        val:null,win:1,lose:'',win1:1,mass:[0,1,2,3,4,5],}
-        x:number=this.state.mass[Math.floor(Math.random()*6)]
+        val:'', win:1,lose:'',
+    }
+        x:number=[0,1,2,3,4,5][Math.floor(Math.random()*6)]
         ref=React.createRef<HTMLInputElement>()
         ref1:React.RefObject<any>=React.createRef()
         ref2:React.RefObject<any>=React.createRef()
         style:style={
-     margin:'100px auto 0 auto', width:`300px`
+     margin:'100px auto 0 auto',
+      width:`300px`,
         } 
    componentDidMount() {
  this.ref1.current.style.cssText=` margin-left: 45px;
@@ -46,13 +50,13 @@ interface style{
  text-align: center;font-size: 23px;margin-left: 50px;`
     }
     press():void{    
-      const a4:HTMLElement=document.querySelector('.a4') as HTMLElement
-      const a5:HTMLElement=document.querySelector('.a5') as HTMLElement
-      const a6:HTMLElement=document.querySelector('.a6') as HTMLElement
-      const a7:HTMLElement=document.querySelector('.a7') as HTMLElement
-      const a8:HTMLElement=document.querySelector('.a8') as HTMLElement
-      const a9:HTMLElement=document.querySelector('.a9') as HTMLElement
-      const a10:HTMLElement=document.querySelector('.a10') as HTMLElement
+      const a4=document.querySelector('.a4') as HTMLElement
+      const a5=document.querySelector('.a5') as HTMLElement
+      const a6=document.querySelector('.a6') as HTMLElement
+      const a7=document.querySelector('.a7') as HTMLElement
+      const a8=document.querySelector('.a8') as HTMLElement
+      const a9=document.querySelector('.a9') as HTMLElement
+      const a10=document.querySelector('.a10') as HTMLElement
       if (this.state.val!=='') {     
        let con:number=0
        for (let i = 0; i < this.state.skin[this.x].length; i++) {
@@ -63,31 +67,31 @@ interface style{
         }          
        }
        if (con==this.state.skin[this.x].length) {
-     this.setState({win1:this.state.win1+1})
+     this.setState({win1:this.state.win+1})
         }  
-        if (this.state.win1==2) {
+        if (this.state.win==2) {
             a4.style.display="block"
             a10.style.marginTop='86px'
         }
-        if (this.state.win1==3) {
+        if (this.state.win==3) {
             a6.style.display="block"
             a6.style.marginLeft='129px'
             a10.style.marginTop='56px'
         }
-        if (this.state.win1==4) {
+        if (this.state.win==4) {
             a5.style.display="block"
             a6.style.marginLeft='3px'
             a10.style.marginTop='56px'
         }
-        if (this.state.win1==5) {
+        if (this.state.win==5) {
             a7.style.display="block"
             a10.style.marginTop='56px'
         }
-        if (this.state.win1==6) {
+        if (this.state.win==6) {
             a8.style.display="block"
             a10.style.marginTop='37px'
         }  
-       if (this.state.win1==7) {
+       if (this.state.win==7) {
         a9.style.display="block"
         this.setState({lose:'lose'})
        }
@@ -102,7 +106,7 @@ interface style{
     }
     render():React.ReactNode{
     const text:JSX.Element[]=this.state.skin[this.x].map((item,index,array)=>{
-            return <div>{item}</div>
+            return <div key={index}>{item}</div>
         })
         return <div style={this.style}>
             <div>Буква: <input ref={this.ref} className="galInput" type="text"
@@ -126,6 +130,8 @@ interface style{
             </div>
             <div className='a10'></div>
                 <button onClick={()=>window.location.reload()}>restart</button>
+                <div style={{width:'50px',height:'50px',background:`${this.context}`}}></div>
             </div>
     }
   }
+ 

@@ -20,13 +20,15 @@ const games:Array<obj>=[
               width?:string,
               textAlign?:any
             }
+      
+
             class Apps extends React.Component<style>{
                 render():React.ReactNode{
                   const state:style={
                      width:'100%',
                      textAlign:'center'
                   }
-                    return <div className='list0'>
+                    return <div className='list0'>  
                    <div style={state}><h2><Link to='/todo'>Todo App </Link></h2></div> 
                    <div style={state}><h2><Link to='/games'>Games App </Link></h2></div> 
                 </div>
@@ -60,7 +62,7 @@ const games:Array<obj>=[
                         marginLeft:'60px',
                     }
                     const list:JSX.Element[]=this.props.item.map((item,index,array)=>{
-                   return <div className='list1'>
+                   return <div key={index} className='list1'>
                 <h3><Link to={`/games/${item.id}`}>{item.name}</Link></h3>
                           </div>
                              })
@@ -73,12 +75,12 @@ const games:Array<obj>=[
             }
            
            const Game:React.FC<Props>=({item}):any=>{
-                    const params:Readonly<Params<string>> = useParams()
+ const params:Readonly<Params<string>> = useParams()
                 const game:any = item.find((x)=>x.id == params.id)
                 if (game.name=='Gallows') {
                     const style1={marginLeft:'-90px'}
                     const style2={marginTop:'50px',marginLeft:'20px'}
-                    return <div >
+                    return <div>
                          <h2> {game.name}</h2>
                         <div style={style1}><Gallows /></div>
                      <div style={style2}><Link  to='/'>MAIN</Link></div> 
@@ -104,6 +106,7 @@ const games:Array<obj>=[
                         </div>
                 } 
             }
+            
             interface style1{
               textAllign:string,
               width:string,
@@ -111,6 +114,7 @@ const games:Array<obj>=[
             
             }
             class Main extends React.Component{
+               
                 render():ReactNode{
                     const style:style1={
                         textAllign:'center',
@@ -118,9 +122,9 @@ const games:Array<obj>=[
                         margin:'20px auto',
                       
                     }
-                    return <div style={style}>
+                    return <div  style={style}>
                        <h1>DynamicApps</h1>
-                        <Outlet />
+                        <Outlet  />
                         </div>
                 }
             } 

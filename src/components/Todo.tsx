@@ -17,10 +17,13 @@ height?:number
 }
 export default class Todo extends React.Component<web>{
        public items:Array<string>=[]
-        state={text:this.items,value:'',value1:'',con:0,
+        state={
+            text:this.items,value:'',value1:'',con:0,
         style:{transform:`translateX(50px)`,transitionDuration:'0.5s', transitionTimingFunction:'ease'},
-    style1:{backgroundColor:''},height:200}
-        public ref=React.createRef<HTMLInputElement>()
+      style1:{backgroundColor:''},height:200
+}
+     
+    public ref=React.createRef<HTMLInputElement>()
   public wrap:React.RefObject<any>=React.createRef()
     set=(x:number):void=>{
     const  img:NodeListOf<HTMLImageElement>=document.querySelectorAll('.img')
@@ -31,14 +34,14 @@ export default class Todo extends React.Component<web>{
        }
     }
     clear():void{
-        const task:any=document.querySelector('.task') 
+        const task=document.querySelector('.task') as HTMLElement
        task.style.height=`0px`
         this.wrap.current.style.height='200px'
         this.items=[]
     this.setState({text:this.items,con:0,height:200})
     }
     press1=(x:number):void=>{
-        const task:HTMLElement=document.querySelector('.task')  as HTMLElement
+        const task=document.querySelector('.task') as HTMLDivElement
         if (x==0) {
             if (this.state.value!=='') {
         
@@ -49,8 +52,8 @@ export default class Todo extends React.Component<web>{
      task.style.height=`${parseInt(task.style.height.split('').splice(0,task.style.height.split('').length-2).join(''))+50}px`
       }
      this.wrap.current.style.height=`${val}px`
-     this.state.text.push(this.state.value)
-    this.setState({text:this.state.text,con:this.state.con+1,height:val})
+    this.items.push(this.state.value)
+    this.setState({text:this.items,con:this.state.con+1,height:val})
     this.ref.current?.focus()
         }
         }
@@ -64,7 +67,7 @@ export default class Todo extends React.Component<web>{
         }
     }
     delete=(x:number):void=>{
-    const task:any=document.querySelector('.task')
+    const task=document.querySelector('.task') as HTMLDivElement
     const val:number=this.state.con<5?this.state.height-50:this.state.height
     if (this.state.con<5) {
      task.style.height=`${parseInt(task.style.height.split('').splice(0,task.style.height.split('').length-2).join(''))-50}px`
@@ -80,13 +83,13 @@ export default class Todo extends React.Component<web>{
     }
     render():React.ReactNode{
         enum style1 {
-            width= '100%',
-            marginTop= '7px',
-            marginLeft= '10px',
+            width='100%',
+            marginTop='7px',
+            marginLeft='10px',
             fontSize='16px'
         }
         const items:JSX.Element[]=this.state.text.map((item,index,array)=>{
-        return <div className='items'  onMouseOver={()=>this.set(index+1)}
+        return <div key={index} className='items'  onMouseOver={()=>this.set(index+1)}
           onMouseOut={()=>this.set(-(index+1))}>
          <div className='div' style={style1}>{item}</div>
          <img className='img' style={this.state.style} onClick={()=>this.delete(index)}
@@ -98,8 +101,7 @@ export default class Todo extends React.Component<web>{
         <div className='head' > 
             <h2><label>Todo App</label></h2></div>
               <div className='Main' >
-         <button  onClick={()=>this.press1(0)} className='but1'> +
-                </button>
+         <button  onClick={()=>this.press1(0)} className='but1'>+</button>
                 <div className='main1'>
         <input id='input' ref={this.ref} value={this.state.value} style={this.state.style1}  onFocus={()=>this.focus(0)}
          onBlur={()=>this.focus(1)}   onChange={(e:React.ChangeEvent<HTMLInputElement>)=>this.setState({value:e.target.value})}
