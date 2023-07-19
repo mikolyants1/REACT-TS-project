@@ -105,7 +105,7 @@ interface style{
       this.ref.current?.focus()
     }
     render():React.ReactNode{
-    const text:JSX.Element[]=this.state.skin[this.x].map((item,index,array)=>{
+    const text:JSX.Element[]=this.state.skin[this.x].map((item:string,index:number)=>{
             return <div key={index}>{item}</div>
         })
         return <div style={this.style}>

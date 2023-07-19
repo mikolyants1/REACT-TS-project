@@ -61,9 +61,9 @@ const games:Array<obj>=[
                         textAllign:'center',
                         marginLeft:'60px',
                     }
-                    const list:JSX.Element[]=this.props.item.map((item,index,array)=>{
+                    const list:JSX.Element[]=this.props.item.map(({id,name}:obj,index:number)=>{
                    return <div key={index} className='list1'>
-                <h3><Link to={`/games/${item.id}`}>{item.name}</Link></h3>
+                <h3><Link to={`/games/${id}`}>{name}</Link></h3>
                           </div>
                              })
                     return <div style={style}>

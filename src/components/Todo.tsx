@@ -19,8 +19,11 @@ export default class Todo extends React.Component<web>{
        public items:Array<string>=[]
         state={
             text:this.items,value:'',value1:'',con:0,
-        style:{transform:`translateX(50px)`,transitionDuration:'0.5s', transitionTimingFunction:'ease'},
-      style1:{backgroundColor:''},height:200
+        style:{transform:`translateX(50px)`,
+        transitionDuration:'0.5s',
+         transitionTimingFunction:'ease'},
+      style1:{backgroundColor:''},
+      height:200
 }
      
     public ref=React.createRef<HTMLInputElement>()
@@ -59,7 +62,7 @@ export default class Todo extends React.Component<web>{
         }
         if (x==1) {
             const val:string=this.state.value.trim().toLowerCase()
-            const text:string[]=this.items.filter((item)=>{
+            const text:string[]=this.items.filter((item:string)=>{
                 return item.toLowerCase().indexOf(val)!==-1
             })
            
@@ -88,7 +91,7 @@ export default class Todo extends React.Component<web>{
             marginLeft='10px',
             fontSize='16px'
         }
-        const items:JSX.Element[]=this.state.text.map((item,index,array)=>{
+        const items:JSX.Element[]=this.state.text.map((item:string,index:number)=>{
         return <div key={index} className='items'  onMouseOver={()=>this.set(index+1)}
           onMouseOut={()=>this.set(-(index+1))}>
          <div className='div' style={style1}>{item}</div>
@@ -99,12 +102,12 @@ export default class Todo extends React.Component<web>{
      return <div>
          <div className="wrap" ref={this.wrap} >
         <div className='head' > 
-            <h2><label>Todo App</label></h2></div>
+            <h2><label htmlFor='input'>Todo App</label></h2></div>
               <div className='Main' >
          <button  onClick={()=>this.press1(0)} className='but1'>+</button>
                 <div className='main1'>
         <input id='input' ref={this.ref} value={this.state.value} style={this.state.style1}  onFocus={()=>this.focus(0)}
-         onBlur={()=>this.focus(1)}   onChange={(e:React.ChangeEvent<HTMLInputElement>)=>this.setState({value:e.target.value})}
+         onBlur={()=>this.focus(1)}  onChange={(e:React.ChangeEvent<HTMLInputElement>)=>this.setState({value:e.target.value})}
              placeholder=" Add your new todo" type="text" />
              </div>
              <button onClick={()=>this.press1(1)}  className='ser'>search</button>
