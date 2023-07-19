@@ -109,7 +109,8 @@ interface style{
             return <div key={index}>{item}</div>
         })
         return <div style={this.style}>
-            <div>Буква: <input ref={this.ref} className="galInput" type="text"
+            <div><label htmlFor="galInput">Буква:</label>
+            <input ref={this.ref} id="galInput" type="text"
              onChange={(e:React.ChangeEvent<HTMLInputElement>)=>this.setState({val:e.target.value})} />
             <button onClick={this.press.bind(this)}>try</button>
            </div> 
