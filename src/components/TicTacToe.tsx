@@ -8,7 +8,8 @@ interface state{
     combos1:Array<mass1>,
 }
 interface style1{
-    fontSize: string, width: string,
+    fontSize: string,
+     width: string,
     backgroundColor:string,
     textAlign: any,
 }

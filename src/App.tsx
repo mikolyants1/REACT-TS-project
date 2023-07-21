@@ -82,7 +82,7 @@ const games:Array<obj>=[
                     const style2={marginTop:'50px',marginLeft:'20px'}
                     return <div>
                          <h2> {game.name}</h2>
-                        <div style={style1}><Gallows /></div>
+                        <div style={style1}><Gallows  /></div>
                      <div style={style2}><Link  to='/'>MAIN</Link></div> 
                         </div>
                 }

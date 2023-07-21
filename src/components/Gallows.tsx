@@ -1,4 +1,4 @@
-import React from "react";
+import React, { SetStateAction } from "react";
 type mass=Array<string>
 interface gal{
     name?:Array<mass>,
@@ -132,6 +132,7 @@ interface style{
             <div className='a10'></div>
                 <button onClick={()=>window.location.reload()}>restart</button>
                 <div style={{width:'50px',height:'50px',background:`${this.context}`}}></div>
+                
             </div>
     }
   }

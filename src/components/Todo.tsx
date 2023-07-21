@@ -10,19 +10,21 @@ interface web{
         transitionDuration:string,
         transitionTimingFunction:string
     },
-    style1?:{
-        backgroundColor:string
-    },
+backgroundColor?:string,
 height?:number
 }
 export default class Todo extends React.Component<web>{
        public items:Array<string>=[]
         state={
-            text:this.items,value:'',value1:'',con:0,
-        style:{transform:`translateX(50px)`,
+            text:this.items,value:'',
+            value1:'',
+            con:0,
+        style:{
+            transform:`translateX(50px)`,
         transitionDuration:'0.5s',
-         transitionTimingFunction:'ease'},
-      style1:{backgroundColor:''},
+         transitionTimingFunction:'ease'
+        },
+      backgroundColor:'',
       height:200
 }
      
@@ -82,7 +84,7 @@ export default class Todo extends React.Component<web>{
     this.setState({text:this.items,con:this.state.con-1,height:val})
     }
     focus=(x:number):void=>{
-     x==0?this.setState({style1:{backgroundColor:'rgb(210, 210, 210'}}):this.setState({style1:{backgroundColor:''}})
+     x==0?this.setState({backgroundColor:'rgb(210, 210, 210'}):this.setState({backgroundColor:''})
     }
     render():React.ReactNode{
         enum style1 {
@@ -95,8 +97,8 @@ export default class Todo extends React.Component<web>{
         return <div key={index} className='items'  onMouseOver={()=>this.set(index+1)}
           onMouseOut={()=>this.set(-(index+1))}>
          <div className='div' style={style1}>{item}</div>
-         <img className='img' style={this.state.style} onClick={()=>this.delete(index)}
-             src={svg} />
+         <img className='img' style={this.state.style}
+          onClick={()=>this.delete(index)}  src={svg} />
             </div>
     })
      return <div>
@@ -106,9 +108,13 @@ export default class Todo extends React.Component<web>{
               <div className='Main' >
          <button  onClick={()=>this.press1(0)} className='but1'>+</button>
                 <div className='main1'>
-        <input id='input' ref={this.ref} value={this.state.value} style={this.state.style1}  onFocus={()=>this.focus(0)}
-         onBlur={()=>this.focus(1)}  onChange={(e:React.ChangeEvent<HTMLInputElement>)=>this.setState({value:e.target.value})}
-             placeholder=" Add your new todo" type="text" />
+        <input id='input' ref={this.ref} value={this.state.value}
+         style={{backgroundColor:this.state.backgroundColor}}
+          onFocus={()=>this.focus(0)}
+         onBlur={()=>this.focus(1)} 
+          onChange={(e:React.ChangeEvent<HTMLInputElement>)=>this.setState({value:e.target.value})}
+             placeholder=" Add your new todo"
+              type="text" />
              </div>
              <button onClick={()=>this.press1(1)}  className='ser'>search</button>
                      
