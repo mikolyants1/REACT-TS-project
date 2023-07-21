@@ -1,4 +1,4 @@
-import React, { SetStateAction } from "react";
+import React from "react";
 type mass=Array<string>
 interface gal{
     name?:Array<mass>,
