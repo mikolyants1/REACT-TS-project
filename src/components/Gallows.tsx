@@ -34,7 +34,9 @@ interface style{
          ['_','_','_','_','_','_','_','_'],
          ['_','_','_','_','_','_','_','_','_','_','_'],
         ],
-        val:'', win:1,lose:'',
+        val:'',
+         win:1,
+         lose:'',
     }
         x:number=[0,1,2,3,4,5][Math.floor(Math.random()*6)]
         ref=React.createRef<HTMLInputElement>()
@@ -44,7 +46,7 @@ interface style{
      margin:'100px auto 0 auto',
       width:`300px`,
         } 
-   componentDidMount() {
+   componentDidMount():void {
  this.ref1.current.style.cssText=` margin-left: 45px;
  justify-content:space-between; width: 200px;display: flex;`
  this.ref2.current.style.cssText=` width: 200px;height: 30px;
