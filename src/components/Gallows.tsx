@@ -1,4 +1,5 @@
 import React from "react";
+import { props } from "../props/state";
 type mass=Array<string>
 interface gal{
     name?:Array<mass>,
@@ -15,7 +16,7 @@ interface style{
     width:string,
 } 
 
- export default class Gallows extends React.Component<gal>{
+ export default class Gallows extends React.Component<props,gal>{
         state={
         name:[
          ['х','о','л','о','д','и','л','ь','н','и','к'],
@@ -105,6 +106,10 @@ interface style{
       this.ref.current?.focus()
     }
     render():React.ReactNode{
+        enum style{
+            width='70px',
+            height='20px'
+        }
     const text:JSX.Element[]=this.state.skin[this.x].map((item:string,index:number)=>{
             return <div key={index}>{item}</div>
         })
@@ -130,9 +135,10 @@ interface style{
                <div className='a9'></div>
             </div>
             <div className='a10'></div>
-                <button onClick={()=>window.location.reload()}>restart</button>
-                <div style={{width:'50px',height:'50px',background:`${this.context}`}}></div>
-                
+              <div style={style}>
+                {this.props.children}
+                </div>  
+                            
             </div>
     }
   }

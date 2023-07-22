@@ -104,7 +104,10 @@ export default class Todo extends React.Component<web>{
      return <div>
          <div className="wrap" ref={this.wrap} >
         <div className='head' > 
-            <h2><label htmlFor='input'>Todo App</label></h2></div>
+            <h2>
+                <label htmlFor='input'>Todo App</label>
+            </h2>
+        </div>
               <div className='Main' >
          <button  onClick={()=>this.press1(0)} className='but1'>+</button>
                 <div className='main1'>
@@ -126,8 +129,7 @@ export default class Todo extends React.Component<web>{
     </div>
     <div className='foot' >
     <div className="con">you have {this.state.con} pending tasks</div>
-    <button onClick={this.clear.bind(this)} className='but2'>
-        Clear All</button>
+    <button onClick={this.clear.bind(this)} className='but2'> Clear All</button>
     </div>
         </div>
          </div>

@@ -1,4 +1,5 @@
 import React from "react";
+import { props } from "../props/state";
 type mass1=Array<number>
 interface state{
     text:string,
@@ -7,13 +8,8 @@ interface state{
     combos:Array<mass1>,
     combos1:Array<mass1>,
 }
-interface style1{
-    fontSize: string,
-     width: string,
-    backgroundColor:string,
-    textAlign: any,
-}
-  export default  function TicTacToe():JSX.Element{ 
+
+  export default  function TicTacToe({children}:props):JSX.Element{ 
     const [state,setState]=React.useState<state>({text:'', origBoard:[0,1,2,3,4,5,6,7,8],
 cress:[], combos:[ [0, 1, 2],[3, 4, 5], [6, 7, 8],
    [0, 3, 6],[1, 4, 7], [2, 5, 8], [0, 4, 8],[6, 4, 2] ], 
@@ -27,10 +23,11 @@ cress:[], combos:[ [0, 1, 2],[3, 4, 5], [6, 7, 8],
     border='1px solid black',
     justifyContent='space-between'
     }
-    const style1:style1={
-    fontSize: '30px', width: '100%',
-    backgroundColor:'white',
-    textAlign: 'center',
+    enum style1 {
+    fontSize='30px',
+     width='100%',
+    backgroundColor='white',
+    textAlign='center',
     }
     function press(n:number):void {
    const cells:NodeListOf<HTMLTableCellElement> = document.querySelectorAll("td")
@@ -38,8 +35,7 @@ cress:[], combos:[ [0, 1, 2],[3, 4, 5], [6, 7, 8],
 		if (state.text=='') {
       if (cells[n].textContent!=='o') {
         cells[n].innerHTML='x'
-        state.cress.push(n)
-        
+        state.cress.push(n)    
        con+1
       }
     if (con==1) {  
@@ -154,7 +150,11 @@ cress:[], combos:[ [0, 1, 2],[3, 4, 5], [6, 7, 8],
                    <td onClick={()=>press(7)}></td>
                    <td onClick={()=>press(8)}></td>
                </tr>
-                <div style={style}><div style={style1}> {state.text}</div>
-                <button className="res"  onClick={()=>window.location.reload()}>restart</button></div>       
+                <div style={style}>
+                <div style={style1}> {state.text}</div>
+                <div className="res">
+                  {children}
+                </div>
+                </div>       
                 </div>
     }

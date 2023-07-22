@@ -4,24 +4,7 @@ import Gallows from './components/Gallows';
 import Todo from "./components/Todo";
 import Snake from "./components/Snake";
 import  TicTacToe  from "./components/TicTacToe";
-type obj={
-    id:string,
-    name:string
-}
-const games:Array<obj>=[
-{id:'1', name: "Tic-tac-toe"}, 
- {id: '2', name: "Gallows"}, 
- {id: '3', name: "Snake"} 
-            ]
-            interface Props{
-              item: Array<obj>
-             }
-            interface style{
-              width?:string,
-              textAlign?:any
-            }
-      
-
+import { style,style1,Restart,Props,obj,games } from "./props/state";
             class Apps extends React.Component<style>{
                 render():React.ReactNode{
                   const state:style={
@@ -74,45 +57,79 @@ const games:Array<obj>=[
                 }
             }
            
-           const Game:React.FC<Props>=({item}):any=>{
+           const Game:React.FC<Props>=({item}):JSX.Element|null=>{
  const params:Readonly<Params<string>> = useParams()
                 const game:any = item.find((x)=>x.id == params.id)
                 if (game.name=='Gallows') {
-                    const style1={marginLeft:'-90px'}
-                    const style2={marginTop:'50px',marginLeft:'20px'}
+                    const style1={
+                        marginLeft:'-90px'
+                    }
+                    const style2={
+                        marginTop:'50px',
+                        marginLeft:'20px'
+                    }
                     return <div>
                          <h2> {game.name}</h2>
-                        <div style={style1}><Gallows  /></div>
-                     <div style={style2}><Link  to='/'>MAIN</Link></div> 
+                        <div style={style1}>
+                            <Gallows>
+                                <Restart />
+                            </Gallows>
+                            </div>
+                     <div style={style2}>
+                        <Link  to='/'>MAIN</Link>
+                        </div> 
                         </div>
                 }
                 if (game.name=='Tic-tac-toe') {
-                 const style={width:'140%',marginLeft:'-30px'}
-                    const style1={marginLeft:'-75px'}
-                    const style2={marginTop:'50px',marginLeft:'28px'}
+                 const style={
+                    width:'140%',
+                 marginLeft:'-30px'
+                }
+                    const style1={
+                        marginLeft:'-75px'
+                    }
+                    const style2={
+                        marginTop:'50px',
+                        marginLeft:'28px'
+                    }
                     return <div >
-                       <div style={style}><h2> {game.name}</h2></div>  
-                        <div style={style1}><TicTacToe /></div>
-                        <div style={style2}><Link to='/'>MAIN</Link></div>
+                       <div style={style}>
+                        <h2> {game.name}</h2>
+                        </div>  
+                        <div style={style1}>
+                            <TicTacToe>
+                                <Restart />
+                            </TicTacToe>
+                            </div>
+                        <div style={style2}>
+                            <Link to='/'>MAIN</Link>
+                            </div>
                         </div>
                 } 
                 if (game.name=='Snake') {
-                    const style1={marginLeft:'-100px'}
-                    const style2={marginTop:'50px',marginLeft:'10px'}
+                    const style1={
+                        marginLeft:'-100px'
+                    }
+                    const style2={
+                        marginTop:'50px',
+                        marginLeft:'10px'
+                    }
                     return <div>
                          <h2> {game.name}</h2>
-                        <div style={style1}><Snake /></div>
-                        <div style={style2}><Link to='/'>MAIN</Link></div>
+                        <div style={style1}>
+                            <Snake>
+                                <Restart />
+                            </Snake>
+                            </div>
+                        <div style={style2}>
+                            <Link to='/'>MAIN</Link>
+                            </div>
                         </div>
                 } 
+                return null
             }
             
-            interface style1{
-              textAllign:string,
-              width:string,
-              margin:string,
             
-            }
             class Main extends React.Component{
                
                 render():ReactNode{

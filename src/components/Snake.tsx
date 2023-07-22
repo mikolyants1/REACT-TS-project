@@ -1,4 +1,5 @@
 import React from "react";
+import { props } from "../props/state";
 interface state{
     con?:number,
     random:number[]
@@ -8,7 +9,7 @@ interface mass{
     text:string,
     last:number[]
 }
-export default function Snake():JSX.Element {
+export default function Snake({children}:props):JSX.Element {
 const a1:number[]=Array.from(Array(81).keys())
 const Left:number[]=[9,18,27,36,45,54,63,72]
 const Right:number[]=[17,26,35,44,53,62,71]
@@ -345,7 +346,7 @@ enum style1 {
     height='30px'
 }
 enum style2 {
-    width='145px',
+    width='146px',
   height='30px'
 }
     return <div style={{width:'290px'}}> 
@@ -388,8 +389,10 @@ enum style2 {
     </div>
 <div>
     <div ref={ref2}>{mess.text}</div>
-    <button style={style2} onClick={()=>window.location.reload()}>restart</button>
+    <div style={style2}>
+    {children}
+    </div>
     </div>           
-                </div>
-        </div>
+     </div>
+    </div>
     }
