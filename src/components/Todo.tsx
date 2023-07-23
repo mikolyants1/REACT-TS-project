@@ -16,19 +16,19 @@ height?:number
 export default class Todo extends React.Component<web>{
        public items:Array<string>=[]
         state={
-            text:this.items,value:'',
-            value1:'',
+            text:this.items,
+            value:'',
             con:0,
         style:{
             transform:`translateX(50px)`,
-        transitionDuration:'0.5s',
-         transitionTimingFunction:'ease'
+            transitionDuration:'0.5s',
+            transitionTimingFunction:'ease'
         },
       backgroundColor:'',
       height:200
 }
      
-    public ref=React.createRef<HTMLInputElement>()
+  public ref=React.createRef<HTMLInputElement>()
   public wrap:React.RefObject<any>=React.createRef()
     set=(x:number):void=>{
     const  img:NodeListOf<HTMLImageElement>=document.querySelectorAll('.img')
@@ -39,37 +39,39 @@ export default class Todo extends React.Component<web>{
        }
     }
     clear():void{
-        const task=document.querySelector('.task') as HTMLElement
-       task.style.height=`0px`
-        this.wrap.current.style.height='200px'
-        this.items=[]
+    const task=document.querySelector('.task') as HTMLElement
+    task.style.height=`0px`
+    this.wrap.current.style.height='200px'
+    this.items=[]
     this.setState({text:this.items,con:0,height:200})
     }
     press1=(x:number):void=>{
-        const task=document.querySelector('.task') as HTMLDivElement
-        if (x==0) {
-            if (this.state.value!=='') {
-        
-     const val:number=this.state.height<400?this.state.height+50:this.state.height
-      if (val>=400) {
+    const task=document.querySelector('.task') as HTMLDivElement
+    switch (x) {
+        case 0:
+        if (this.state.value!=='') {
+        const val:number=this.state.height<400?this.state.height+50:this.state.height
+        if (val>=400) {
         task.style.height='200px'
-      }else{
-     task.style.height=`${parseInt(task.style.height.split('').splice(0,task.style.height.split('').length-2).join(''))+50}px`
-      }
+            }else{
+        task.style.height=`${parseInt(task.style.height.split('').splice(0,task.style.height.split('').length-2).join(''))+50}px`
+             }
      this.wrap.current.style.height=`${val}px`
-    this.items.push(this.state.value)
-    this.setState({text:this.items,con:this.state.con+1,height:val})
-    this.ref.current?.focus()
-        }
-        }
-        if (x==1) {
-            const val:string=this.state.value.trim().toLowerCase()
-            const text:string[]=this.items.filter((item:string)=>{
-                return item.toLowerCase().indexOf(val)!==-1
-            })
-           
+     this.items.push(this.state.value)
+     this.setState({text:this.items,con:this.state.con+1,height:val})
+     this.ref.current?.focus()
+     }
+     break;
+      case 1:
+        const val:string=this.state.value.trim().toLowerCase()
+        const text:string[]=this.items.filter((item:string)=>{
+        return item.toLowerCase().indexOf(val)!==-1
+        })  
         this.setState({text:text,con:text.length}) 
-        }
+      break;
+        default:
+        break;
+      }  
     }
     delete=(x:number):void=>{
     const task=document.querySelector('.task') as HTMLDivElement
@@ -94,7 +96,8 @@ export default class Todo extends React.Component<web>{
             fontSize='16px'
         }
         const items:JSX.Element[]=this.state.text.map((item:string,index:number)=>{
-        return <div key={index} className='items'  onMouseOver={()=>this.set(index+1)}
+        return <div key={index} className='items'
+          onMouseOver={()=>this.set(index+1)}
           onMouseOut={()=>this.set(-(index+1))}>
          <div className='div' style={style1}>{item}</div>
          <img className='img' style={this.state.style}
@@ -112,11 +115,11 @@ export default class Todo extends React.Component<web>{
          <button  onClick={()=>this.press1(0)} className='but1'>+</button>
                 <div className='main1'>
         <input id='input' ref={this.ref} value={this.state.value}
-         style={{backgroundColor:this.state.backgroundColor}}
-          onFocus={()=>this.focus(0)}
-         onBlur={()=>this.focus(1)} 
-          onChange={(e:React.ChangeEvent<HTMLInputElement>)=>this.setState({value:e.target.value})}
-             placeholder=" Add your new todo"
+        style={{backgroundColor:this.state.backgroundColor}}
+        onFocus={()=>this.focus(0)}
+        onBlur={()=>this.focus(1)} 
+        onChange={(e:React.ChangeEvent<HTMLInputElement>)=>this.setState({value:e.target.value})}
+        placeholder=" Add your new todo"
               type="text" />
              </div>
              <button onClick={()=>this.press1(1)}  className='ser'>search</button>
@@ -133,5 +136,5 @@ export default class Todo extends React.Component<web>{
     </div>
         </div>
          </div>
-            }
         }
+    }
