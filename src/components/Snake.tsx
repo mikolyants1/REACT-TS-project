@@ -332,9 +332,7 @@ td[x+=1].style.backgroundColor='grey'
     }
     }
 }, 600);
-    }
-    
-    
+    } 
 }
 }
 enum style {
@@ -353,31 +351,67 @@ enum style2 {
         <div ref={ref1}>score:{con} best:{localStorage.getItem('best')}</div>
         <div style={style}>
              <tr>
-            <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+            <td></td><td></td>
+            <td></td><td></td>
+            <td></td><td></td>
+            <td></td><td></td>
+            <td></td>
+            </tr>
+             <tr>
+            <td></td><td></td>
+            <td></td><td></td>
+            <td></td><td></td>
+            <td></td><td></td>
+            <td></td>
             </tr>
             <tr>
-            <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+            <td></td><td></td>
+            <td></td><td></td>
+            <td></td><td></td>
+            <td></td><td></td>
+            <td></td>
             </tr>
             <tr>
-            <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+            <td></td><td></td>
+            <td></td><td></td>
+            <td></td><td></td>
+            <td></td><td></td>
+            <td></td>
             </tr>
             <tr>
-            <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+            <td></td><td></td>
+            <td></td><td></td>
+            <td></td><td></td>
+            <td></td><td></td>
+            <td></td>
             </tr>
             <tr>
-            <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+            <td></td><td></td>
+            <td></td><td></td>
+            <td></td><td></td>
+            <td></td><td></td>
+            <td></td>
             </tr>
             <tr>
-            <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+            <td></td><td></td>
+            <td></td><td></td>
+            <td></td><td></td>
+            <td></td><td></td>
+            <td></td>
             </tr>
             <tr>
-            <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+            <td></td><td></td>
+            <td></td><td></td>
+            <td></td><td></td>
+            <td></td><td></td>
+            <td></td>
             </tr>
             <tr>
-            <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
-            </tr>
-            <tr>
-            <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+            <td></td><td></td>
+            <td></td><td></td>
+            <td></td><td></td>
+            <td></td><td></td>
+            <td></td>
             </tr>
             </div>
             <div style={{display:'flex'}}>
@@ -391,8 +425,8 @@ enum style2 {
     <div ref={ref2}>{mess.text}</div>
     <div style={style2}>
     {children}
-    </div>
+      </div>
     </div>           
-     </div>
-    </div>
+  </div>
+</div>
     }

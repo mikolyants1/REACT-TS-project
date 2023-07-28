@@ -35,8 +35,8 @@ interface style{
          ['_','_','_','_','_','_','_','_','_','_','_'],
         ],
         val:'',
-         win:1,
-         lose:'',
+        win:1,
+        lose:'',
     }
         x:number=[0,1,2,3,4,5][Math.floor(Math.random()*6)]
         ref=React.createRef<HTMLInputElement>()
@@ -116,7 +116,8 @@ interface style{
             return <div key={index}>{item}</div>
         })
         return <div style={this.style}>
-            <div><label htmlFor="galInput">Буква:</label>
+            <div>
+            <label htmlFor="galInput">Буква:</label>
             <input ref={this.ref} id="galInput" type="text"
              onChange={(e:React.ChangeEvent<HTMLInputElement>)=>this.setState({val:e.target.value})} />
             <button onClick={this.press.bind(this)}>try</button>
@@ -138,7 +139,7 @@ interface style{
             </div>
             <div className='a10'></div>
               <div style={style}>
-                {this.props.children}
+            {this.props.children}
                 </div>  
                             
             </div>

@@ -1,5 +1,7 @@
 import React from "react";
 import { props } from "../props/state";
+import styled,{IStyledComponent} from 'styled-components'
+import { BaseObject } from "styled-components/dist/types";
 type mass1=Array<number>
 interface state{
     text:string,
@@ -8,7 +10,9 @@ interface state{
     combos:Array<mass1>,
     combos1:Array<mass1>,
 }
-
+const Main:IStyledComponent<'web',BaseObject>=styled.div`
+width:249px
+`
   export default  function TicTacToe({children}:props):JSX.Element{ 
     const [state,setState]=React.useState<state>({text:'', origBoard:[0,1,2,3,4,5,6,7,8],
 cress:[], combos:[ [0, 1, 2],[3, 4, 5], [6, 7, 8],
@@ -36,16 +40,10 @@ cress:[], combos:[ [0, 1, 2],[3, 4, 5], [6, 7, 8],
       if (cells[n].textContent!=='o') {
         cells[n].innerHTML='x'
         state.cress.push(n)    
-       con+1
       }
-    if (con==1) {  
-    if (n!==4) {
-      cells[4].innerHTML='o'
-    }else{
+    if (con==1) {    
       let ran:number=[0,6,8][Math.floor(Math.random()*3)]
-      cells[ran].innerHTML='o'
-    }
-    
+      cells[ran].innerHTML='o' 
     }else {
       const del:number[]=[]
        for (let i = 0; i < cells.length; i++) {
@@ -69,7 +67,6 @@ cress:[], combos:[ [0, 1, 2],[3, 4, 5], [6, 7, 8],
           break
         }
       }
-
       const con1:Array<number>=[]
       for (let i = 0; i < state.combos.length; i++) {
     if (state.combos[i].length==1) {
@@ -134,27 +131,27 @@ cress:[], combos:[ [0, 1, 2],[3, 4, 5], [6, 7, 8],
       }
 	}
     }
-            return <div style={{ width:'249px' }}>
-                <tr>
-                   <td onClick={()=>press(0)}></td>
-                   <td onClick={()=>press(1)}></td> 
-                   <td onClick={()=>press(2)}></td>
-                 </tr>
-                <tr>
-                   <td onClick={()=>press(3)}></td>
-                   <td onClick={()=>press(4)}></td>
-                   <td onClick={()=>press(5)}></td>
-                 </tr>
-                <tr>
-                   <td onClick={()=>press(6)}></td>
-                   <td onClick={()=>press(7)}></td>
-                   <td onClick={()=>press(8)}></td>
-               </tr>
-                <div style={style}>
-                <div style={style1}> {state.text}</div>
-                <div className="res">
-                  {children}
-                </div>
-                </div>       
-                </div>
+            return <Main>
+                      <tr>
+                        <td onClick={()=>press(0)}></td>
+                        <td onClick={()=>press(1)}></td> 
+                        <td onClick={()=>press(2)}></td>
+                       </tr>
+                     <tr>
+                       <td onClick={()=>press(3)}></td>
+                       <td onClick={()=>press(4)}></td>
+                       <td onClick={()=>press(5)}></td>
+                      </tr>
+                     <tr>
+                       <td onClick={()=>press(6)}></td>
+                       <td onClick={()=>press(7)}></td>
+                       <td onClick={()=>press(8)}></td>
+                    </tr>
+                   <div style={style}>
+                    <div style={style1}>{state.text}</div>
+                    <div className="res">
+                      {children}
+                        </div>
+                    </div>       
+                 </Main>
     }
