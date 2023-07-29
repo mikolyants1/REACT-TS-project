@@ -168,7 +168,7 @@ import { BaseObject} from "styled-components/dist/types";
             }
             
             function Main():JSX.Element{
-            const [state,setState]=React.useState<string>(themes.current)
+            const [state,setState]=React.useState<string>(themes.color1)
             const [marg,setMarg]=React.useState<number>(0)
             const [rot,setRot]=React.useState<number>(0)
             const press=():void=>{

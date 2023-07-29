@@ -2,8 +2,8 @@ import React,{useContext,useEffect} from 'react'
 import styled from 'styled-components'
 import { ThemeContext} from '../props/state'
 interface props {
-    marg:number,
-    rotate:number,
+marg:number,
+rotate:number,
 onClick:()=>void
 }
 export  const ChangeContext=({marg,rotate,onClick}:props):JSX.Element=>{
@@ -28,7 +28,6 @@ margin-left:${marg}px;
 useEffect(()=>{
 const root=document.getElementById('root') as HTMLElement
 root.style.background=`${context}`
-console.log(context)
 },[context])
     return <Toggle>
     <div onClick={onClick}></div>

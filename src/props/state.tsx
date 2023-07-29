@@ -14,14 +14,13 @@ export const games:Array<obj>=[
         export  type color={
                 color1:string,
                 color2:string,
-                current:string
+            
             }
       export  const themes:color={
         color1:'linear-gradient(40deg,#eaebe2,#85d3f1,#56bee7) no-repeat',
         color2:'linear-gradient(40deg,rgb(250, 216, 24),rgb(236, 72, 72),rgb(240, 56, 240)) no-repeat',
-        current:'linear-gradient(40deg,#eaebe2,#85d3f1,#56bee7) no-repeat',  
             }
-        export const ThemeContext=createContext(themes.current)
+        export const ThemeContext=createContext(themes.color1)
             
          export   interface style2{
                 Wrapper:IStyledComponent<'web',any>,
