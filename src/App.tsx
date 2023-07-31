@@ -1,10 +1,7 @@
 import React, { ReactNode} from "react";
 import { BrowserRouter as Router, Route, Routes,Link,Outlet,useParams, Params } from "react-router-dom";
 import { ChangeContext } from "./components/Context";
-import Gallows from './components/Gallows';
 import Todo from "./components/Todo";
-import Snake from "./components/Snake";
-import  TicTacToe  from "./components/TicTacToe";
 import { style,Restart,Props,obj,games,Struct,ThemeContext,Brand,themes} from "./props/state";
 import styled,{IStyledComponent} from 'styled-components'
 import { BaseObject} from "styled-components/dist/types";
@@ -92,81 +89,31 @@ import { BaseObject} from "styled-components/dist/types";
                 margin-top:50px;
                 margin-left:20px
                 `
-                if (game.name=='Gallows') {
-                    const Title=styled.div`
-                    width:140%;
-                 margin-left:-10px
+                const {Game,ml,marginLeft,name}:obj=game
+                const Title:IStyledComponent<'web',BaseObject>=styled.div`
+                width:140%;
+                 margin-left:${ml}
                 `
-                    const Main=styled.div`
-                margin-left:${game.marginLeft}
+                    const Main:IStyledComponent<'web',BaseObject>=styled.div`
+                margin-left:-${marginLeft}px
                 `
-                    return <div>
+            return <div>
                      <Title>
                           <h2> 
-                            {game.name}
+                            {name}
                          </h2>
                      </Title>
                         <Main>
-                            <Gallows>
-                                <Restart />
-                            </Gallows>
+                            <Game>
+                               <Restart />
+                            </Game>
                         </Main>
                       <HomeLink>
                         <Link  to='/'>MAIN</Link>
                      </HomeLink> 
                     </div>
                 }
-                if (game.name=='Tic-tac-toe') {
-                 const Title=styled.div`
-                    width:140%;
-                 margin-left:-30px
-                `
-                const Main=styled.div`
-                margin-left:${game.marginLeft}
-                `
-                    return <div>
-                       <Title>
-                           <h2>
-                             {game.name}
-                            </h2>
-                        </Title>  
-                           <Main>
-                            <TicTacToe>
-                                <Restart />
-                            </TicTacToe>
-                           </Main>
-                        <HomeLink>
-                            <Link to='/'>MAIN</Link>
-                        </HomeLink>
-                        </div>
-                } 
-                if (game.name=='Snake') {
-                const Title:IStyledComponent<'web',BaseObject>=styled.div`
-                width:140%;
-                 margin-left:2px
-                `
-                const Main:IStyledComponent<'web',BaseObject>=styled.div`
-                margin-left:${game.marginLeft}
-                `
-                    return <div>
-                    <Title>
-                         <h2>
-                            {game.name}
-                         </h2>
-                    </Title>
-                        <Main>
-                            <Snake>
-                                <Restart />
-                            </Snake>
-                            </Main>
-                        <HomeLink>
-                            <Link to='/'>MAIN</Link>
-                        </HomeLink>
-                        </div>
-                } 
-                return null
-            }
-            
+                
             function Main():JSX.Element{
             const [state,setState]=React.useState<string>(themes.color1)
             const [marg,setMarg]=React.useState<number>(0)
@@ -198,7 +145,7 @@ function App():JSX.Element {
                  <Route path="/todo" element={<TodoApp />} />
                  <Route path="/games" element={<GamesApp />}>
                     <Route index element={<Games item={games} />}/>
-                    <Route path="/games/:id" element={<Game item={games}  />} />
+                    <Route path=":id" element={<Game item={games}  />} />
                  </Route>
             </Route>
          </Routes>
