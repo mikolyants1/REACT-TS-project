@@ -1,14 +1,15 @@
 import React,{useContext,useEffect} from 'react'
-import styled from 'styled-components'
+import { BaseObject } from "styled-components/dist/types"
+import styled,{IStyledComponent} from 'styled-components'
 import { ThemeContext} from '../props/state'
 interface props {
 marg:number,
 rotate:number,
 onClick:()=>void
 }
-export  const ChangeContext=({marg,rotate,onClick}:props):JSX.Element=>{
+export  const ChangeContext:React.FC<props>=({marg,rotate,onClick}):JSX.Element=>{
 const context:string=useContext(ThemeContext)
-const Toggle=styled.div`
+const Toggle:IStyledComponent<'web',BaseObject>=styled.div`
 width:60px;
 height:30px;
 background-color:rgb(200,200,200);
@@ -22,9 +23,11 @@ height:30px;
 background-color:white;
 box-shadow:1px 1px 1px 0px grey;
 border-radius:50%;
+transition-duration:1s;
 margin-left:${marg}px;
 }
 `
+
 useEffect(()=>{
 const root=document.getElementById('root') as HTMLElement
 root.style.background=`${context}`
