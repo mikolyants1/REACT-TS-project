@@ -10,6 +10,7 @@ interface mass{
     last:number[]
 }
 export default function Snake({children}:props):JSX.Element {
+const tds:number[]=Array.from(Array(9).keys())
 const a1:number[]=Array.from(Array(81).keys())
 const Left:number[]=[9,18,27,36,45,54,63,72]
 const Right:number[]=[17,26,35,44,53,62,71]
@@ -350,69 +351,13 @@ enum style2 {
     return <div style={{width:'290px'}}> 
         <div ref={ref1}>score:{con} best:{localStorage.getItem('best')}</div>
         <div style={style}>
-             <tr>
-            <td></td><td></td>
-            <td></td><td></td>
-            <td></td><td></td>
-            <td></td><td></td>
-            <td></td>
-            </tr>
-             <tr>
-            <td></td><td></td>
-            <td></td><td></td>
-            <td></td><td></td>
-            <td></td><td></td>
-            <td></td>
-            </tr>
-            <tr>
-            <td></td><td></td>
-            <td></td><td></td>
-            <td></td><td></td>
-            <td></td><td></td>
-            <td></td>
-            </tr>
-            <tr>
-            <td></td><td></td>
-            <td></td><td></td>
-            <td></td><td></td>
-            <td></td><td></td>
-            <td></td>
-            </tr>
-            <tr>
-            <td></td><td></td>
-            <td></td><td></td>
-            <td></td><td></td>
-            <td></td><td></td>
-            <td></td>
-            </tr>
-            <tr>
-            <td></td><td></td>
-            <td></td><td></td>
-            <td></td><td></td>
-            <td></td><td></td>
-            <td></td>
-            </tr>
-            <tr>
-            <td></td><td></td>
-            <td></td><td></td>
-            <td></td><td></td>
-            <td></td><td></td>
-            <td></td>
-            </tr>
-            <tr>
-            <td></td><td></td>
-            <td></td><td></td>
-            <td></td><td></td>
-            <td></td><td></td>
-            <td></td>
-            </tr>
-            <tr>
-            <td></td><td></td>
-            <td></td><td></td>
-            <td></td><td></td>
-            <td></td><td></td>
-            <td></td>
-            </tr>
+            {tds.map((index:number)=>{
+            return <tr key={index}>
+                    {tds.map((index)=>{
+                     return <td key={index}></td>
+                    })}
+                 </tr>
+            })}     
             </div>
             <div style={{display:'flex'}}>
 <div style={{width:'240px'}}>
