@@ -11,9 +11,9 @@ interface web{
         transitionDuration:string,
         transitionTimingFunction:string
     },
-backgroundColor?:string,
-height?:number
-}
+    backgroundColor?:string,
+    height?:number
+   }
 export default class Todo extends React.Component<prop,web>{
        public items:Array<string>=[]
         state={
@@ -64,7 +64,7 @@ export default class Todo extends React.Component<prop,web>{
         break;
       }  
     }
-    
+
     delete=(x:number):void=>{
     const val:number=this.state.con<5?this.state.height-50:this.state.height
     this.wrap.current.style.height=`${val}px`
@@ -72,7 +72,7 @@ export default class Todo extends React.Component<prop,web>{
     this.setState({text:this.items,con:this.state.con-1,height:val})
     }
     focus=(x:number):void=>{
-     x==0?this.setState({backgroundColor:'rgb(210, 210, 210'}):this.setState({backgroundColor:''})
+    this.setState({backgroundColor:x==0?'rgb(210, 210, 210':''})
     }
     render():React.ReactNode{  
     const {Wrapper,Header,Main,TodoList,Footer}:style2=this.props.struct
@@ -92,7 +92,7 @@ export default class Todo extends React.Component<prop,web>{
             </div>
         })
      return <div>
-         <Wrapper ref={this.wrap} >
+    <Wrapper ref={this.wrap} >
         <Header> 
             <h2>
                 <label htmlFor='input'>Todo App</label>
@@ -106,13 +106,12 @@ export default class Todo extends React.Component<prop,web>{
         onFocus={()=>this.focus(0)}
         onBlur={()=>this.focus(1)} 
         onChange={(e:React.ChangeEvent<HTMLInputElement>)=>this.setState({value:e.target.value})}
-        placeholder=" Add your new todo"
-              type="text" />
+        placeholder=" Add your new todo"  type="text" />
              </div>
              <button onClick={()=>this.press1(1)}  className='ser'>search</button>
           </Main>   
     <TodoList>
-          {items}
+        {items}
     </TodoList>
     <Footer>
       <div className="con">you have {this.state.con} pending tasks</div>
