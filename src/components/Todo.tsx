@@ -72,7 +72,7 @@ export default class Todo extends React.Component<prop,web>{
     this.setState({text:this.items,con:this.state.con-1,height:val})
     }
     focus=(x:number):void=>{
-    this.setState({backgroundColor:x==0?'rgb(210, 210, 210':''})
+    this.setState({backgroundColor:x==0?'rgb(210, 210, 210)':''})
     }
     render():React.ReactNode{  
     const {Wrapper,Header,Main,TodoList,Footer}:style2=this.props.struct
