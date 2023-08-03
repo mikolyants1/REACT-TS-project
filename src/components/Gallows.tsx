@@ -43,9 +43,9 @@ interface style{
         ref1:React.RefObject<any>=React.createRef()
         ref2:React.RefObject<any>=React.createRef()
         style:style={
-     margin:'100px auto 0 auto',
-      width:`300px`,
-        } 
+         margin:'100px auto 0 auto',
+         width:`300px`,
+           } 
    componentDidMount():void {
  this.ref1.current.style.cssText=` margin-left: 45px;
  justify-content:space-between; width: 200px;display: flex;`
@@ -53,13 +53,13 @@ interface style{
  text-align: center;font-size: 23px;margin-left: 50px;`
     }
     press():void{    
-      const a4=document.querySelector('.a4') as HTMLElement
-      const a5=document.querySelector('.a5') as HTMLElement
-      const a6=document.querySelector('.a6') as HTMLElement
-      const a7=document.querySelector('.a7') as HTMLElement
-      const a8=document.querySelector('.a8') as HTMLElement
-      const a9=document.querySelector('.a9') as HTMLElement
-      const a10=document.querySelector('.a10') as HTMLElement
+    const a4=document.querySelector('.a4') as HTMLElement
+    const a5=document.querySelector('.a5') as HTMLElement
+    const a6=document.querySelector('.a6') as HTMLElement
+    const a7=document.querySelector('.a7') as HTMLElement
+    const a8=document.querySelector('.a8') as HTMLElement
+    const a9=document.querySelector('.a9') as HTMLElement
+    const a10=document.querySelector('.a10') as HTMLElement
       if (this.state.val!=='') {     
        let con:number=0
        for (let i = 0; i < this.state.skin[this.x].length; i++) {
@@ -69,9 +69,11 @@ interface style{
         con++
         }          
        }
+       console.log(con==this.state.skin[this.x].length)
        if (con==this.state.skin[this.x].length) {
-     this.setState({win1:this.state.win+1})
+     this.setState({win:this.state.win+1})
         }  
+        console.log(this.state.win)
         if (this.state.win==2) {
             a4.style.display="block"
             a10.style.marginTop='86px'
@@ -98,14 +100,12 @@ interface style{
         a9.style.display="block"
         this.setState({lose:'lose'})
        }
-        if (this.state.skin[this.x].every((x)=>{
-            return x!=='_'
-        })) {
+    if (this.state.skin[this.x].every((x)=>x!=='_')) {
         this.setState({lose:'win'}) 
        }
 
     }
-      this.ref.current?.focus()
+    this.ref.current?.focus()
     }
     render():React.ReactNode{
         enum style{
