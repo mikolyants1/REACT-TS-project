@@ -69,11 +69,9 @@ interface style{
         con++
         }          
        }
-       console.log(con==this.state.skin[this.x].length)
        if (con==this.state.skin[this.x].length) {
-     this.setState({win:this.state.win+1})
-        }  
-        console.log(this.state.win)
+     this.setState({win :this.state.win+1})
+        } 
         if (this.state.win==2) {
             a4.style.display="block"
             a10.style.marginTop='86px'
