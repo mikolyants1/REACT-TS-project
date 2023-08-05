@@ -3,23 +3,27 @@ import { props } from "../props/state";
 import styled,{IStyledComponent} from 'styled-components'
 import { BaseObject } from "styled-components/dist/types";
 type mass1=Array<number>
-interface state{
-    text:string,
-    origBoard:number[],
-    cress:Array<any>,
-    combos:Array<mass1>,
-    combos1:Array<mass1>,
-}
 const Main:IStyledComponent<'web',BaseObject>=styled.div`
 width:249px
 `
-  export default  function TicTacToe({children}:props):JSX.Element{ 
-    const [state,setState]=React.useState<state>({text:'', origBoard:[0,1,2,3,4,5,6,7,8],
-cress:[], combos:[ [0, 1, 2],[3, 4, 5], [6, 7, 8],
-   [0, 3, 6],[1, 4, 7], [2, 5, 8], [0, 4, 8],[6, 4, 2] ], 
-  combos1:[ [0, 1, 2],[3, 4, 5],[6, 7, 8],[0, 3, 6],
-   [1, 4, 7], [2, 5, 8], [0, 4, 8],[6, 4, 2]
-      ]})
+interface state{
+  result:string
+}
+export default  function TicTacToe({children}:props):JSX.Element{  
+const [text,setText]=React.useState<state>({result:''})
+const [cress,setCress]=React.useState<number[]>([])
+const combos:Array<mass1>=[
+[0, 1, 2],[3, 4, 5],
+[6, 7, 8],[0, 3, 6],
+[1, 4, 7],[2, 5, 8],
+[0, 4, 8],[6, 4, 2]
+      ]
+const combos1:Array<mass1>=[
+[0, 1, 2],[3, 4, 5],
+[6, 7, 8],[0, 3, 6],
+[1, 4, 7],[2, 5, 8],
+[0, 4, 8],[6, 4, 2]
+         ]
     enum style {
     display= 'flex',
     width='247px',
@@ -35,120 +39,94 @@ cress:[], combos:[ [0, 1, 2],[3, 4, 5], [6, 7, 8],
     }
     function press(n:number):void {
    const cells:NodeListOf<HTMLTableCellElement> = document.querySelectorAll("td")
-   let con:number=0
-		if (state.text=='') {
+		if (text.result=='') {
       if (cells[n].textContent!=='o') {
         cells[n].innerHTML='x'
-        state.cress.push(n)    
+        cress.push(n)   
+        setCress(cress)
       }
-    if (con==1) {    
-      let ran:number=[0,6,8][Math.floor(Math.random()*3)]
-      cells[ran].innerHTML='o' 
-    }else {
       const del:number[]=[]
-       for (let i = 0; i < cells.length; i++) {
-       if (cells[i].textContent=='o'||cells[i].textContent=='x') {
-        del.push(i)
-       }
-       }
+      cells.forEach((item,i)=>{
+      if (item.textContent=='o'||item.textContent=='x') del.push(i)   
+           })
        for (let i = 0; i < del.length; i++) {
-       for (let ind = 0; ind < state.combos.length; ind++) {
-        for (let index = 0; index < state.combos[ind].length; index++) {
-       if (state.combos[ind][index]==del[i]) {
-        state.combos[ind].splice(index,1)
+       for (let ind = 0; ind < combos.length; ind++) {
+        for (let index = 0; index < combos[ind].length; index++) {
+       if (combos[ind][index]==del[i]) {
+        combos[ind].splice(index,1)
        }
         }
        }
        }
-      let x1:number=0
-      for (let i = 0; i < cells.length; i++) {
-        if (cells[i].textContent=='x') {
-          x1=i
-          break
-        }
-      }
       const con1:Array<number>=[]
-      for (let i = 0; i < state.combos.length; i++) {
-    if (state.combos[i].length==1) {
+      for (let i = 0; i < combos.length; i++) {
+    if (combos[i].length==1) {
      con1.push(i)
     }
     
       }
 	  let con2:number=0
 	  let con3:number=0
-      for (let i = 0; i < state.combos1.length; i++) {
-        if (state.combos1[i].every((x)=>cells[x].textContent=='o')){
-    con2++
-        }
-        if (state.combos1[i].every((x)=>cells[x].textContent=='x')){
-    con3++
-        }
+    combos1.forEach((item)=>{
+   if (item.every((x)=>cells[x].textContent=='o')) con2++     
+   if (item.every((x)=>cells[x].textContent=='x')) con3++
+      })
+      if (con3>0){
+        setText({result:'WIN'})
       }
-      if (con3>0) {
-        setState({text:'WIN',origBoard:state.origBoard,
-         cress:state.cress, combos:state.combos, combos1:state.combos1,})
-      }
-      else if (state.combos.every((x)=>x.length==0&&state.text!=='WIN'&&state.text!=='LOSE')) {
-        setState({text:'TIE',origBoard:state.origBoard,
-        cress:state.cress, combos:state.combos, combos1:state.combos1})
-        }
       if (con2>0) {
-       setState({text:'LOSE',origBoard:state.origBoard,
-       cress:state.cress, combos:state.combos, combos1:state.combos1})
+       setText({result:'LOSE'})
       }
-  else if (state.combos.every((x)=>x.length==0&&state.text!=='WIN'&&state.text!=='LOSE')) {
-      setState({text:'TIE',origBoard:state.origBoard,
-      cress:state.cress, combos:state.combos, combos1:state.combos1})
+      if (combos.every((x)=>x.length==0&&con2==0&&con3==0)) {
+      setText({result:'TIE'})
       }
       if (con1.length>0) {
         let con4:number=0
         for (let i = 0; i < con1.length; i++) {
-        if (state.combos1[con1[i]].every((x)=>cells[x].textContent!=='o')) {
-          cells[state.combos[con1[i]][0]].innerHTML='o'
+        if (combos1[con1[i]].every((x)=>cells[x].textContent!=='o')) {
+          cells[combos[con1[i]][0]].innerHTML='o'
          break
         }
-        if (state.combos1[con1[i]].some((x)=>cells[x].textContent=='o')) {
+        if (combos1[con1[i]].some((x)=>cells[x].textContent=='o')) {
           con4++
         }
         }
       if (con4==con1.length) {
-        cells[state.combos[con1[0]][0]].innerHTML='o'
+        cells[combos[con1[0]][0]].innerHTML='o'
       }
       }else{
         let mas:number=0
-        for (let i = 0; i < state.combos1.length; i++) {
-          for (let ind = 0; ind < state.combos1[i].length; ind++) {
-         if (state.combos1[i][ind]==state.cress[state.cress.length-1]&&state.combos[i].length!==0) {
+        for (let i = 0; i < combos1.length; i++) {
+          for (let ind = 0; ind < combos1[i].length; ind++) {
+         if (combos1[i][ind]==cress[cress.length-1]&&combos[i].length!==0) {
           mas=i
           break
          } 
           }        
         }
-        if (mas!==0) {
-        cells[state.combos[mas][Math.floor(Math.random()*2)]].innerHTML='o'
-        }
+    if (mas!==0) cells[combos[mas][Math.floor(Math.random()*2)]].innerHTML='o'
       }   
-      }
+      
 	}
     }
             return <Main>
                       <tr>
-                        <td onClick={()=>press(0)}></td>
-                        <td onClick={()=>press(1)}></td> 
-                        <td onClick={()=>press(2)}></td>
+                        {combos[0].map((item,index)=>(
+                          <td key={index} onClick={()=>press(item)}></td>
+                        ))}
                        </tr>
                      <tr>
-                       <td onClick={()=>press(3)}></td>
-                       <td onClick={()=>press(4)}></td>
-                       <td onClick={()=>press(5)}></td>
+                     {combos[1].map((item,index)=>(
+                          <td key={index} onClick={()=>press(item)}></td>
+                        ))}
                       </tr>
                      <tr>
-                       <td onClick={()=>press(6)}></td>
-                       <td onClick={()=>press(7)}></td>
-                       <td onClick={()=>press(8)}></td>
+                     {combos[2].map((item,index)=>(
+                          <td key={index} onClick={()=>press(item)}></td>
+                        ))}
                     </tr>
                    <div style={style}>
-                    <div style={style1}>{state.text}</div>
+                    <div style={style1}>{text.result}</div>
                     <div className="res">
                       {children}
                         </div>
