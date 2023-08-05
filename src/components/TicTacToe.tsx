@@ -46,7 +46,7 @@ const combos1:Array<mass1>=[
         setCress(cress)
       }
       const del:number[]=[]
-      cells.forEach((item,i)=>{
+      cells.forEach((item:HTMLTableCellElement,i:number)=>{
       if (item.textContent=='o'||item.textContent=='x') del.push(i)   
            })
        for (let i = 0; i < del.length; i++) {
@@ -59,41 +59,35 @@ const combos1:Array<mass1>=[
        }
        }
       const con1:Array<number>=[]
-      for (let i = 0; i < combos.length; i++) {
-    if (combos[i].length==1) {
-     con1.push(i)
-    }
+      combos.forEach((item:mass1,i:number)=>{
+      if  (item.length==1) con1.push(i)
+      })
     
-      }
 	  let con2:number=0
 	  let con3:number=0
-    combos1.forEach((item)=>{
-   if (item.every((x)=>cells[x].textContent=='o')) con2++     
-   if (item.every((x)=>cells[x].textContent=='x')) con3++
+    combos1.forEach((item:mass1)=>{
+   if (item.every((x:number)=>cells[x].textContent=='o')) con2++     
+   if (item.every((x:number)=>cells[x].textContent=='x')) con3++
       })
-      if (con3>0){
-        setText({result:'WIN'})
-      }
-      if (con2>0) {
-       setText({result:'LOSE'})
-      }
-      if (combos.every((x)=>x.length==0&&con2==0&&con3==0)) {
+    if (con3>0) setText({result:'WIN'})
+    if (con2>0) setText({result:'LOSE'})
+    if (combos.every((x:mass1)=>x.length==0&&con2==0&&con3==0)){
       setText({result:'TIE'})
-      }
+            }
       if (con1.length>0) {
         let con4:number=0
         for (let i = 0; i < con1.length; i++) {
-        if (combos1[con1[i]].every((x)=>cells[x].textContent!=='o')) {
+        if (combos1[con1[i]].every((x:number)=>cells[x].textContent!=='o')) {
           cells[combos[con1[i]][0]].innerHTML='o'
          break
         }
-        if (combos1[con1[i]].some((x)=>cells[x].textContent=='o')) {
+        if (combos1[con1[i]].some((x:number)=>cells[x].textContent=='o')) {
           con4++
         }
         }
       if (con4==con1.length) {
         cells[combos[con1[0]][0]].innerHTML='o'
-      }
+           }
       }else{
         let mas:number=0
         for (let i = 0; i < combos1.length; i++) {
@@ -111,17 +105,17 @@ const combos1:Array<mass1>=[
     }
             return <Main>
                       <tr>
-                        {combos[0].map((item,index)=>(
+                        {combos[0].map((item:number,index:number)=>(
                           <td key={index} onClick={()=>press(item)}></td>
                         ))}
                        </tr>
                      <tr>
-                     {combos[1].map((item,index)=>(
+                     {combos[1].map((item:number,index:number)=>(
                           <td key={index} onClick={()=>press(item)}></td>
                         ))}
                       </tr>
                      <tr>
-                     {combos[2].map((item,index)=>(
+                     {combos[2].map((item:number,index:number)=>(
                           <td key={index} onClick={()=>press(item)}></td>
                         ))}
                     </tr>
