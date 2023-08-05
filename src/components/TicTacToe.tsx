@@ -12,12 +12,12 @@ interface state{
 export default  function TicTacToe({children}:props):JSX.Element{  
 const [text,setText]=React.useState<state>({result:''})
 const [cress,setCress]=React.useState<number[]>([])
-const combos:Array<mass1>=[
+const [combos,setCombos]=React.useState<mass1[]>([
 [0, 1, 2],[3, 4, 5],
 [6, 7, 8],[0, 3, 6],
 [1, 4, 7],[2, 5, 8],
 [0, 4, 8],[6, 4, 2]
-      ]
+         ])
 const combos1:Array<mass1>=[
 [0, 1, 2],[3, 4, 5],
 [6, 7, 8],[0, 3, 6],
@@ -54,6 +54,7 @@ const combos1:Array<mass1>=[
         for (let index = 0; index < combos[ind].length; index++) {
        if (combos[ind][index]==del[i]) {
         combos[ind].splice(index,1)
+        setCombos(combos)
        }
         }
        }
@@ -99,23 +100,22 @@ const combos1:Array<mass1>=[
           }        
         }
     if (mas!==0) cells[combos[mas][Math.floor(Math.random()*2)]].innerHTML='o'
-      }   
-      
-	}
-    }
+      }     
+	  }
+ }
             return <Main>
                       <tr>
-                        {combos[0].map((item:number,index:number)=>(
+                        {combos1[0].map((item:number,index:number)=>(
                           <td key={index} onClick={()=>press(item)}></td>
                         ))}
                        </tr>
                      <tr>
-                     {combos[1].map((item:number,index:number)=>(
+                     {combos1[1].map((item:number,index:number)=>(
                           <td key={index} onClick={()=>press(item)}></td>
                         ))}
                       </tr>
                      <tr>
-                     {combos[2].map((item:number,index:number)=>(
+                     {combos1[2].map((item:number,index:number)=>(
                           <td key={index} onClick={()=>press(item)}></td>
                         ))}
                     </tr>
