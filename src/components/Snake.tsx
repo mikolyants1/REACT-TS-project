@@ -30,16 +30,15 @@ const [mess,setMess]=React.useState<mass>({items:[],text:'',last:[]})
 const [con,setCon]=React.useState(0)
 const ref1=React.useRef<HTMLDivElement>(null!)
 const ref2=React.useRef<HTMLDivElement>(null!)
-
 React.useEffect(()=>{
     ref1.current.style.cssText='width:100%;text-align:center;font-size:20px'
     ref2.current.style.cssText=`width:145px;text-align:center;height:30px;
     border-right:1px solid black;font-size:23px;background-color:white`
     const td:NodeListOf<HTMLTableCellElement>=document.querySelectorAll('td')
-    for (let i = 0; i < td.length; i++) {
-td[i].style.cssText=` width: 30px; height: 30px;border: 1px solid black;background-color:green`
-    }
-   All.forEach((item,index,array)=>td[item].style.backgroundColor='brown')
+    td.forEach(({style}:HTMLTableCellElement)=>{
+    style.cssText=` width: 30px; height: 30px;border: 1px solid black;background-color:green`
+    })
+   All.forEach((item:number)=>td[item].style.backgroundColor='brown')
     td[64].style.backgroundColor='grey'
     let ran:number=state.random[Math.floor(Math.random()*state.random.length)]
     td[ran].style.backgroundColor='yellow'
@@ -60,13 +59,12 @@ React.useEffect(()=>{
 function move(n:number):void {  
     const td:NodeListOf<HTMLTableCellElement>=document.querySelectorAll('td')
     const but:NodeListOf<HTMLButtonElement>=document.querySelectorAll('.but')
-    for (let i = 0; i < but.length; i++) {
-        if (but[i].hasAttribute('id')) {
-            but[i].removeAttribute('id')
-        }
-    }
+    but.forEach((item:HTMLButtonElement)=>{
+    if (item.hasAttribute('id')) {
+    item.removeAttribute('id')
+    }})
 but[n].setAttribute('id','q')
-if (mess.text!=='lose'||'win') {
+if (mess.text!=='lose'&&mess.text!=='win') {
     if (n==0) {
         let con2:number=0
         let x:number=0
@@ -78,35 +76,29 @@ if (mess.text!=='lose'||'win') {
     }
     let con1:number=0
     const up:NodeJS.Timer=setInterval(() => {    
-    if (All.some((z)=>z==x)) {    
+    if (All.some((z:number)=>z==x)) {    
         setMess({text:'lose',items:mess.items,last:mess.last})  
     }else{
     let y:number=0
-    for (let i = 0; i < td.length; i++) {
-   if (td[i].style.backgroundColor=='yellow') {
-    y++
-   }
-   }
+    td.forEach(({style}:HTMLTableCellElement)=>{
+     if (style.backgroundColor=='yellow') y++
+     })
    if (y==0) {
-            const b:number[]=[]
+    const b:number[]=[]
         for (let i = 0; i < td.length; i++) {
             if (td[i].style.backgroundColor!=='black'&&td[i].style.backgroundColor!=='grey'
-            &&td[i].style.backgroundColor!=='brown') {
-                b.push(i)
-   }    
+            &&td[i].style.backgroundColor!=='brown') b.push(i)  
 }  
     setState({random:b})
     let ran:number=state.random[Math.floor(Math.random()*state.random.length)]
     td[ran].style.backgroundColor='yellow'
     con1++
     setCon(con+1)
-    
- 
    }
     mess.items.push(x)
     if (td[x-9].style.backgroundColor=='black') {
-        clearInterval(up)
-setMess({text:'lose',items:mess.items,last:mess.last})
+     clearInterval(up)
+     setMess({text:'lose',items:mess.items,last:mess.last})
      }
     td[x].style.backgroundColor='green'
     for (let i = 0; i < td.length; i++) {
@@ -118,13 +110,11 @@ setMess({text:'lose',items:mess.items,last:mess.last})
           td[mess.items[ind]].style.backgroundColor='black'  
         }   
     }
-    for (let i = 0; i< td.length; i++) {
-        if (td[i].style.backgroundColor=='green') {
-           con2++ 
-        }
-    }
+    td.forEach(({style}:HTMLTableCellElement)=>{
+    if (style.backgroundColor=='green') con2++ 
+        })
     if (con2==0) {
-        setMess({text:'win',items:mess.items,last:mess.last})
+    setMess({text:'win',items:mess.items,last:mess.last})
     }
     if (!but[0].hasAttribute('id')) {
         clearInterval(up)
@@ -146,22 +136,18 @@ td[x-=9].style.backgroundColor='grey'
     }
     let con1:number=0
     const down:NodeJS.Timer=setInterval(() => {
-    if (All.some((z)=>z==x)) {    
+    if (All.some((z:number)=>z==x)) {    
         setMess({text:'lose',items:mess.items,last:mess.last})  
     }else{
     let y:number=0
-    for (let i = 0; i < td.length; i++) {
-   if (td[i].style.backgroundColor=='yellow') {
-    y++
-   }
-   }
+    td.forEach(({style}:HTMLTableCellElement)=>{
+        if (style.backgroundColor=='yellow') y++
+          })
    if (y==0) {        
-            const b:number[]=[]
+     const b:number[]=[]
         for (let i = 0; i < td.length; i++) {
-            if (td[i].style.backgroundColor!=='black'&&td[i].style.backgroundColor!=='grey'
-            &&td[i].style.backgroundColor!=='brown') {
-                b.push(i)
-   }    
+    if (td[i].style.backgroundColor!=='black'&&td[i].style.backgroundColor!=='grey'
+     &&td[i].style.backgroundColor!=='brown') b.push(i) 
 }  
     setState({random:b})
     let ran:number=state.random[Math.floor(Math.random()*state.random.length)]
@@ -172,8 +158,8 @@ td[x-=9].style.backgroundColor='grey'
    }
     mess.items.push(x)
     if (td[x+9].style.backgroundColor=='black') {
-        clearInterval(down)
-setMess({text:'lose',items:mess.items,last:mess.last})
+    clearInterval(down)
+   setMess({text:'lose',items:mess.items,last:mess.last})
      }
     td[x].style.backgroundColor='green'
     for (let i = 0; i < td.length; i++) {
@@ -185,13 +171,11 @@ setMess({text:'lose',items:mess.items,last:mess.last})
           td[mess.items[ind]].style.backgroundColor='black'
         }
     }
-    for (let i = 0; i< td.length; i++) {
-        if (td[i].style.backgroundColor=='green') {
-           con2++ 
-        }
-    }
+    td.forEach(({style}:HTMLTableCellElement)=>{
+   if (style.backgroundColor=='green') con2++ 
+    })
     if (con2==0) {
-        setMess({text:'win',items:mess.items,last:mess.last})
+    setMess({text:'win',items:mess.items,last:mess.last})
     }
     if (!but[1].hasAttribute('id')) {
         clearInterval(down)
@@ -212,22 +196,18 @@ setMess({text:'lose',items:mess.items,last:mess.last})
     }
     let con1:number=0
     const left:NodeJS.Timer=setInterval(() => {
-    if (All.some((z)=>z==x)) {    
-        setMess({text:'lose',items:mess.items,last:mess.last})  
+    if (All.some((z:number)=>z==x)) {    
+    setMess({text:'lose',items:mess.items,last:mess.last})  
     }else{
     let y:number=0
-    for (let i = 0; i < td.length; i++) {
-   if (td[i].style.backgroundColor=='yellow') {
-    y++
-   }
-   }
+    td.forEach(({style}:HTMLTableCellElement)=>{
+    if (style.backgroundColor=='yellow') y++
+        })
    if (y==0) {
             const b:number[]=[]
         for (let i = 0; i < td.length; i++) {
             if (td[i].style.backgroundColor!=='black'&&td[i].style.backgroundColor!=='grey'
-            &&td[i].style.backgroundColor!=='brown') {
-                b.push(i)
-   }    
+            &&td[i].style.backgroundColor!=='brown') b.push(i)
 }  
     setState({random:b})
     let ran:number=state.random[Math.floor(Math.random()*state.random.length)]
@@ -238,8 +218,8 @@ setMess({text:'lose',items:mess.items,last:mess.last})
    }
     mess.items.push(x)
     if (td[x-1].style.backgroundColor=='black') {
-            clearInterval(left)
-setMess({text:'lose',items:mess.items,last:mess.last})
+    clearInterval(left)
+    setMess({text:'lose',items:mess.items,last:mess.last})
          }
     td[x].style.backgroundColor='green'
     for (let i = 0; i < td.length; i++) {
@@ -251,11 +231,9 @@ setMess({text:'lose',items:mess.items,last:mess.last})
           td[mess.items[ind]].style.backgroundColor='black'
         }
     }
-    for (let i = 0; i< td.length; i++) {
-        if (td[i].style.backgroundColor=='green') {
-           con2++ 
-        }
-    }
+    td.forEach(({style}:HTMLTableCellElement)=>{
+    if (style.backgroundColor=='green') con2++ 
+         })
     if (con2==0) {
         setMess({text:'win',items:mess.items,last:mess.last})
     }
@@ -278,22 +256,19 @@ setMess({text:'lose',items:mess.items,last:mess.last})
 }
 let con1:number=0
 const right:NodeJS.Timer=setInterval(() => {
-    if (All.some((z)=>z==x)) {    
+    if (All.some((z:number)=>z==x)) {    
         setMess({text:'lose',items:mess.items,last:mess.last})  
     }else{
 let y:number=0
-for (let i = 0; i < td.length; i++) {
-if (td[i].style.backgroundColor=='yellow') {
-y++
-}
-}
+td.forEach(({style}:HTMLTableCellElement)=>{
+if (style.backgroundColor=='yellow') y++
+    })
 if (y==0) {       
         const b:number[]=[]
     for (let i = 0; i < td.length; i++) {
         if (td[i].style.backgroundColor!=='black'&&td[i].style.backgroundColor!=='grey'
-        &&td[i].style.backgroundColor!=='brown') {
-            b.push(i)
-}    
+        &&td[i].style.backgroundColor!=='brown')  b.push(i)
+
 }  
 setState({random:b})
 let ran:number=state.random[Math.floor(Math.random()*state.random.length)]
@@ -304,7 +279,7 @@ setCon(con+1)
 }
 mess.items.push(x)
 if (td[x+1].style.backgroundColor=='black') {
-            clearInterval(right)
+clearInterval(right)
 setMess({text:'lose',items:mess.items,last:mess.last})
          }
 td[x].style.backgroundColor='green'
@@ -317,11 +292,9 @@ for (let i = 0; i < td.length; i++) {
       td[mess.items[ind]].style.backgroundColor='black'
     }
 }
-for (let i = 0; i< td.length; i++) {
-    if (td[i].style.backgroundColor=='green') {
-       con2++ 
-    }
-}
+td.forEach(({style}:HTMLTableCellElement)=>{
+if (style.backgroundColor=='green') con2++ 
+     })
 if (con2==0) {
     setMess({text:'win',items:mess.items,last:mess.last})
 }
@@ -351,13 +324,13 @@ enum style2 {
     return <div style={{width:'290px'}}> 
         <div ref={ref1}>score:{con} best:{localStorage.getItem('best')}</div>
         <div style={style}>
-            {tds.map((index:number)=>{
-            return <tr key={index}>
-                    {tds.map((index)=>{
-                     return <td key={index}></td>
-                    })}
+            {tds.map((index:number)=>(
+                 <tr key={index}>
+                    {tds.map((index:number)=>(
+                    <td key={index}></td>
+                     ))}
                  </tr>
-            })}     
+            ))}     
             </div>
             <div style={{display:'flex'}}>
 <div style={{width:'240px'}}>
