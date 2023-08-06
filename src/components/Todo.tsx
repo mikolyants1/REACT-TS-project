@@ -32,7 +32,7 @@ export default class Todo extends React.Component<prop,web>{
   public ref=React.createRef<HTMLInputElement>()
   public wrap:React.RefObject<any>=React.createRef()
     set=(x:number):void=>{
-    const  img:NodeListOf<HTMLImageElement>=document.querySelectorAll('.img')
+   const img:NodeListOf<HTMLImageElement>=document.querySelectorAll('.img')
        if (x>0) {
         img[x-1].style.transform='translateX(0px)'
        }else{
@@ -45,18 +45,19 @@ export default class Todo extends React.Component<prop,web>{
     this.setState({text:this.items,con:0,height:200})
     }
     press1=(x:number):void=>{
+    const {height,value}:web=this.state
     switch (x) {
     case 0:
-     if (this.state.value!=='') {
-     const val:number=this.state.height<400?this.state.height+50:this.state.height
+     if (value!=='') {
+     const val:number=height<400?height+50:height
      this.wrap.current.style.height=`${val}px`
-     this.items.push(this.state.value)
+     this.items.push(value)
      this.setState({text:this.items,con:this.state.con+1,height:val})
      this.ref.current?.focus()
      }
      break;
     case 1:
-     const val:string=this.state.value.trim().toLowerCase()
+     const val:string=value.trim().toLowerCase()
      const text:string[]=this.items.filter((item:string)=>item.toLowerCase().indexOf(val)!==-1)  
      this.setState({text:text,con:text.length}) 
       break;
@@ -66,13 +67,14 @@ export default class Todo extends React.Component<prop,web>{
     }
 
     delete=(x:number):void=>{
-    const val:number=this.state.con<5?this.state.height-50:this.state.height
+    const {con,height}:web=this.state
+    const val:number=con<5?height-50:height
     this.wrap.current.style.height=`${val}px`
     this.items.splice(x,1)
-    this.setState({text:this.items,con:this.state.con-1,height:val})
+    this.setState({text:this.items,con:con-1,height:val})
     }
     focus=(x:number):void=>{
-    this.setState({backgroundColor:x==0?'rgb(210, 210, 210)':''})
+    this.setState({backgroundColor:x==0?'rgb(210, 210, 210':''})
     }
     render():React.ReactNode{  
     const {Wrapper,Header,Main,TodoList,Footer}:style2=this.props.struct
@@ -82,6 +84,7 @@ export default class Todo extends React.Component<prop,web>{
         marginLeft='10px',
         fontSize='16px'
         }
+    
     const items:JSX.Element[]=this.state.text.map((item:string,index:number)=>{
         return <div key={index} className='items'
           onMouseOver={()=>this.set(index+1)}
@@ -103,12 +106,12 @@ export default class Todo extends React.Component<prop,web>{
         <div className='main1'>
         <input id='input' ref={this.ref} value={this.state.value}
         style={{backgroundColor:this.state.backgroundColor}}
-        onFocus={()=>this.focus(0)}
-        onBlur={()=>this.focus(1)} 
+        onFocus={()=>this.focus(0)} onBlur={()=>this.focus(1)} 
         onChange={(e:React.ChangeEvent<HTMLInputElement>)=>this.setState({value:e.target.value})}
-        placeholder=" Add your new todo"  type="text" />
+        placeholder=" Add your new todo"
+              type="text" />
              </div>
-             <button onClick={()=>this.press1(1)}  className='ser'>search</button>
+             <button onClick={()=>this.press1(1)} className='ser'>search</button>
           </Main>   
     <TodoList>
         {items}
