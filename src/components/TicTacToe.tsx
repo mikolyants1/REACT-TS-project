@@ -9,7 +9,7 @@ width:249px
 interface state{
   result:string
 }
-export default  function TicTacToe({children}:props):JSX.Element{  
+export default function TicTacToe({children}:props):JSX.Element{  
 const [text,setText]=React.useState<state>({result:''})
 const [cress,setCress]=React.useState<number[]>([])
 const [combos,setCombos]=React.useState<mass1[]>([
@@ -46,24 +46,23 @@ const combos1:Array<mass1>=[
         setCress(cress)
       }
       const del:number[]=[]
-      cells.forEach((item:HTMLTableCellElement,i:number)=>{
-      if (item.textContent=='o'||item.textContent=='x') del.push(i)   
+      cells.forEach(({textContent}:HTMLTableCellElement,i:number)=>{
+      if (textContent=='o'||textContent=='x') del.push(i)   
            })
-       for (let i = 0; i < del.length; i++) {
-       for (let ind = 0; ind < combos.length; ind++) {
-        for (let index = 0; index < combos[ind].length; index++) {
-       if (combos[ind][index]==del[i]) {
+      for (let i = 0; i < del.length; i++) {
+      for (let ind = 0; ind < combos.length; ind++) {
+      for (let index = 0; index < combos[ind].length; index++) {
+      if (combos[ind][index]==del[i]) {
         combos[ind].splice(index,1)
         setCombos(combos)
-       }
+         }
         }
        }
        }
       const con1:Array<number>=[]
-      combos.forEach((item:mass1,i:number)=>{
-      if  (item.length==1) con1.push(i)
+      combos.forEach(({length}:mass1,i:number)=>{
+        if (length==1) con1.push(i)
       })
-    
 	  let con2:number=0
 	  let con3:number=0
     combos1.forEach((item:mass1)=>{
@@ -72,7 +71,7 @@ const combos1:Array<mass1>=[
       })
     if (con3>0) setText({result:'WIN'})
     if (con2>0) setText({result:'LOSE'})
-    if (combos.every((x:mass1)=>x.length==0&&con2==0&&con3==0)){
+    if (combos.every(({length}:mass1)=>length==0&&con2==0&&con3==0)){
       setText({result:'TIE'})
             }
       if (con1.length>0) {
@@ -86,9 +85,7 @@ const combos1:Array<mass1>=[
           con4++
         }
         }
-      if (con4==con1.length) {
-        cells[combos[con1[0]][0]].innerHTML='o'
-           }
+      if (con4==con1.length) cells[combos[con1[0]][0]].innerHTML='o'    
       }else{
         let mas:number=0
         for (let i = 0; i < combos1.length; i++) {
@@ -105,12 +102,12 @@ const combos1:Array<mass1>=[
  }
             return <Main>
                       <tr>
-                        {combos1[0].map((item:number,index:number)=>(
+                      {combos1[0].map((item:number,index:number)=>(
                           <td key={index} onClick={()=>press(item)}></td>
                         ))}
                        </tr>
                      <tr>
-                     {combos1[1].map((item:number,index:number)=>(
+                      {combos1[1].map((item:number,index:number)=>(
                           <td key={index} onClick={()=>press(item)}></td>
                         ))}
                       </tr>
