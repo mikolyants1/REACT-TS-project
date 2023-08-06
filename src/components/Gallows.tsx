@@ -7,9 +7,7 @@ interface gal{
     val?:string|undefined,
     win?:number,
      lose?:string,
-     win1?:number,
      mass?:Array<number>
-    
 }
 interface style{
     margin:string,
@@ -42,7 +40,7 @@ interface style{
         ref=React.createRef<HTMLInputElement>()
         ref1:React.RefObject<any>=React.createRef()
         ref2:React.RefObject<any>=React.createRef()
-        style:style={
+        readonly style:style={
          margin:'100px auto 0 auto',
          width:`300px`,
            } 
@@ -53,66 +51,67 @@ interface style{
  text-align: center;font-size: 23px;margin-left: 50px;`
     }
     press():void{    
-    const a4=document.querySelector('.a4') as HTMLElement
-    const a5=document.querySelector('.a5') as HTMLElement
-    const a6=document.querySelector('.a6') as HTMLElement
-    const a7=document.querySelector('.a7') as HTMLElement
-    const a8=document.querySelector('.a8') as HTMLElement
-    const a9=document.querySelector('.a9') as HTMLElement
-    const a10=document.querySelector('.a10') as HTMLElement
-      if (this.state.val!=='') {     
+    const {style:s1}=document.querySelector('.a4') as HTMLElement
+    const {style:s2}=document.querySelector('.a5') as HTMLElement
+    const {style:s3}=document.querySelector('.a6') as HTMLElement
+    const {style:s4}=document.querySelector('.a7') as HTMLElement
+    const {style:s5}=document.querySelector('.a8') as HTMLElement
+    const {style:s6}=document.querySelector('.a9') as HTMLElement
+    const {style:s7}=document.querySelector('.a10') as HTMLElement
+    const {name,skin,val,win}:gal=this.state
+      if (val!=='') {   
        let con:number=0
-       for (let i = 0; i < this.state.skin[this.x].length; i++) {
-            if (this.state.val==this.state.name[this.x][i]) {
-            this.state.skin[this.x].splice(i,1,this.state.name[this.x][i])
+       for (let i = 0; i < skin[this.x].length; i++) {
+        if (val==name[this.x][i]) {
+        skin[this.x].splice(i,1,name[this.x][i])
         }else{ 
         con++
         }          
        }
-       if (con==this.state.skin[this.x].length) {
-     this.setState({win :this.state.win+1})
+       if (con==skin[this.x].length) {
+         this.setState({win:win+1})
         } 
-        if (this.state.win==2) {
-            a4.style.display="block"
-            a10.style.marginTop='86px'
+        if (win==2) {
+        s1.display="block"
+        s7.marginTop='86px'
         }
-        if (this.state.win==3) {
-            a6.style.display="block"
-            a6.style.marginLeft='129px'
-            a10.style.marginTop='56px'
+        if (win==3) {
+        s3.display="block"
+        s3.marginLeft='129px'
+        s7.marginTop='56px'
         }
-        if (this.state.win==4) {
-            a5.style.display="block"
-            a6.style.marginLeft='3px'
-            a10.style.marginTop='56px'
+        if (win==4) {
+        s2.display="block"
+        s3.marginLeft='3px'
+        s7.marginTop='56px'
         }
-        if (this.state.win==5) {
-            a7.style.display="block"
-            a10.style.marginTop='56px'
+        if (win==5) {
+        s4.display="block"
+        s7.marginTop='56px'
         }
-        if (this.state.win==6) {
-            a8.style.display="block"
-            a10.style.marginTop='37px'
+        if (win==6) {
+        s5.display="block"
+        s7.marginTop='37px'
         }  
-       if (this.state.win==7) {
-        a9.style.display="block"
-        this.setState({lose:'lose'})
+       if (win==7) {
+           s6.display="block"
+           this.setState({lose:'lose'})
        }
-    if (this.state.skin[this.x].every((x)=>x!=='_')) {
+    if (skin[this.x].every((x:string)=>x!=='_')) {
         this.setState({lose:'win'}) 
        }
-
     }
     this.ref.current?.focus()
     }
     render():React.ReactNode{
+        const {skin}:gal=this.state
         enum style{
             width='70px',
             height='20px'
         }
-    const text:JSX.Element[]=this.state.skin[this.x].map((item:string,index:number)=>{
-            return <div key={index}>{item}</div>
-        })
+    const text:JSX.Element[]=skin[this.x].map((item:string,index:number)=>(
+        <div key={index}>{item}</div>
+    ))
         return <div style={this.style}>
             <div>
             <label htmlFor="galInput">Буква:</label>
@@ -138,8 +137,7 @@ interface style{
             <div className='a10'></div>
               <div style={style}>
             {this.props.children}
-                </div>  
-                            
+                </div>               
             </div>
     }
   }
