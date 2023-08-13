@@ -79,8 +79,8 @@ if (All.some((z:number)=>z==x)) {
 setMess({text:'lose',items:mess.items,last:mess.last})  
     }else{
 let y:number=0
-td.forEach(({style}:HTMLTableCellElement)=>{
-if (style.backgroundColor=='yellow') y++
+td.forEach(({style:{backgroundColor}}:HTMLTableCellElement)=>{
+if (backgroundColor=='yellow') y++
     })
 if (y==0) {
 const b:number[]=[]
@@ -108,8 +108,8 @@ for (let i = 0; i < td.length; i++) {
         td[mess.items[ind]].style.backgroundColor='black'  
         }   
     }
-td.forEach(({style}:HTMLTableCellElement)=>{
-if (style.backgroundColor=='green') con2++ 
+td.forEach(({style:{backgroundColor}}:HTMLTableCellElement)=>{
+if (backgroundColor=='green') con2++ 
     })
 if (con2==0) setMess({text:'win',items:mess.items,last:mess.last})
 if (!but[0].hasAttribute('id')) {
@@ -135,8 +135,8 @@ if (All.some((z:number)=>z==x)) {
 setMess({text:'lose',items:mess.items,last:mess.last})  
     }else{
 let y:number=0
-td.forEach(({style}:HTMLTableCellElement)=>{
-if (style.backgroundColor=='yellow') y++
+td.forEach(({style:{backgroundColor}}:HTMLTableCellElement)=>{
+if (backgroundColor=='yellow') y++
     })
    if (y==0) {        
 const b:number[]=[]
@@ -165,8 +165,8 @@ for (let i = 0; i < td.length; i++) {
           td[mess.items[ind]].style.backgroundColor='black'
         }
     }
-td.forEach(({style}:HTMLTableCellElement)=>{
-if (style.backgroundColor=='green') con2++ 
+td.forEach(({style:{backgroundColor}}:HTMLTableCellElement)=>{
+if (backgroundColor=='green') con2++ 
     })
 if (con2==0) setMess({text:'win',items:mess.items,last:mess.last})
     if (!but[1].hasAttribute('id')) {
@@ -192,8 +192,8 @@ if (All.some((z:number)=>z==x)) {
 setMess({text:'lose',items:mess.items,last:mess.last})  
     }else{
 let y:number=0
-td.forEach(({style}:HTMLTableCellElement)=>{
-if (style.backgroundColor=='yellow') y++
+td.forEach(({style:{backgroundColor}}:HTMLTableCellElement)=>{
+if (backgroundColor=='yellow') y++
     })
 if (y==0) {
 const b:number[]=[]
@@ -221,8 +221,8 @@ for (let i = 0; i < td.length; i++) {
     td[mess.items[ind]].style.backgroundColor='black'
     }
   }
-td.forEach(({style}:HTMLTableCellElement)=>{
-if (style.backgroundColor=='green') con2++ 
+td.forEach(({style:{backgroundColor}}:HTMLTableCellElement)=>{
+if (backgroundColor=='green') con2++ 
     })
 if (con2==0) setMess({text:'win',items:mess.items,last:mess.last})
     if (!but[2].hasAttribute('id')) {
