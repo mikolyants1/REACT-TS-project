@@ -76,7 +76,7 @@ if (n==0) {
 let con1:number=0
 const up:NodeJS.Timer=setInterval(() => {    
 if (All.some((z:number)=>z==x)) {    
-    setMess({text:'lose',items:mess.items,last:mess.last})  
+setMess({text:'lose',items:mess.items,last:mess.last})  
     }else{
 let y:number=0
 td.forEach(({style}:HTMLTableCellElement)=>{
@@ -84,10 +84,11 @@ if (style.backgroundColor=='yellow') y++
     })
 if (y==0) {
 const b:number[]=[]
-for (let i = 0; i < td.length; i++) {
- if (td[i].style.backgroundColor!=='black'&&td[i].style.backgroundColor!=='grey'
-    &&td[i].style.backgroundColor!=='brown') b.push(i)  
-}  
+td.forEach(({style}:HTMLTableCellElement,i:number)=>{
+const {backgroundColor}:CSSStyleDeclaration=style
+if (backgroundColor!=='black'&&backgroundColor!=='grey'
+&&backgroundColor!=='brown') b.push(i)
+    })
 setState({random:b})
 let ran:number=state.random[Math.floor(Math.random()*state.random.length)]
 td[ran].style.backgroundColor='yellow'
@@ -139,10 +140,11 @@ if (style.backgroundColor=='yellow') y++
     })
    if (y==0) {        
 const b:number[]=[]
-  for (let i = 0; i < td.length; i++) {
-    if (td[i].style.backgroundColor!=='black'&&td[i].style.backgroundColor!=='grey'
-     &&td[i].style.backgroundColor!=='brown') b.push(i) 
-}  
+td.forEach(({style}:HTMLTableCellElement,i:number)=>{
+    const {backgroundColor}:CSSStyleDeclaration=style
+    if (backgroundColor!=='black'&&backgroundColor!=='grey'
+    &&backgroundColor!=='brown') b.push(i)
+    })
     setState({random:b})
     let ran:number=state.random[Math.floor(Math.random()*state.random.length)]
     td[ran].style.backgroundColor='yellow'
@@ -195,10 +197,11 @@ if (style.backgroundColor=='yellow') y++
     })
 if (y==0) {
 const b:number[]=[]
-for (let i = 0; i < td.length; i++) {
-  if (td[i].style.backgroundColor!=='black'&&td[i].style.backgroundColor!=='grey'
-    &&td[i].style.backgroundColor!=='brown') b.push(i)
-}  
+td.forEach(({style}:HTMLTableCellElement,i:number)=>{
+const {backgroundColor}:CSSStyleDeclaration=style
+if (backgroundColor!=='black'&&backgroundColor!=='grey'
+&&backgroundColor!=='brown') b.push(i)
+})
 setState({random:b})
 let ran:number=state.random[Math.floor(Math.random()*state.random.length)]
 td[ran].style.backgroundColor='yellow'
@@ -249,12 +252,12 @@ td.forEach(({style}:HTMLTableCellElement)=>{
 if (style.backgroundColor=='yellow') y++
     })
 if (y==0) {       
-        const b:number[]=[]
-    for (let i = 0; i < td.length; i++) {
-        if (td[i].style.backgroundColor!=='black'&&td[i].style.backgroundColor!=='grey'
-        &&td[i].style.backgroundColor!=='brown') b.push(i)
-
-}  
+ const b:number[]=[]
+td.forEach(({style}:HTMLTableCellElement,i:number)=>{
+const {backgroundColor}:CSSStyleDeclaration=style
+if (backgroundColor!=='black'&&backgroundColor!=='grey'
+&&backgroundColor!=='brown') b.push(i)
+    })
 setState({random:b})
 let ran:number=state.random[Math.floor(Math.random()*state.random.length)]
 td[ran].style.backgroundColor='yellow'
