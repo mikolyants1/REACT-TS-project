@@ -1,6 +1,6 @@
 import styled,{IStyledComponent} from "styled-components"
 import { BaseObject } from "styled-components/dist/types"
-import { createContext,Context, Dispatch, SetStateAction } from "react"
+import { createContext,Context, RefObject} from "react"
 import Gallows from "../components/Gallows"
 import TicTacToe from "../components/TicTacToe"
 import Snake from "../components/Snake"
@@ -13,9 +13,9 @@ export type obj={
     Game:play
 }
 export const games:Array<obj>=[
-{id:'1', name: "Tic-tac-toe",marginLeft:80,ml:'-30px',Game:TicTacToe}, 
- {id: '2', name: "Gallows",marginLeft:85,ml:'-10px',Game:Gallows}, 
- {id: '3', name: "Snake",marginLeft:100,ml:'2px',Game:Snake} 
+ {id:'1', name: "Tic-tac-toe",marginLeft:80,ml:'-30px',Game:TicTacToe}, 
+ {id:'2', name: "Gallows",marginLeft:85,ml:'-10px',Game:Gallows}, 
+ {id:'3', name: "Snake",marginLeft:100,ml:'2px',Game:Snake} 
             ]
         export  type color={
                 color1:string,
@@ -27,9 +27,12 @@ export const games:Array<obj>=[
         color2:'linear-gradient(40deg,rgb(250, 216, 24),rgb(236, 72, 72),rgb(240, 56, 240)) no-repeat',
             }
         export const ThemeContext:Context<string>=createContext(themes.color1)
-            
-         export   interface style2{
-                Wrapper:IStyledComponent<'web',any>,
+            type base1={
+                children:JSX.Element[],
+                ref:RefObject<HTMLDivElement>
+            }
+         export  interface style2{
+                Wrapper:IStyledComponent<'web',base1>,
                 Header:IStyledComponent<'web',BaseObject>,
                 Main:IStyledComponent<'web',BaseObject>,
                 Footer:IStyledComponent<'web',BaseObject>,
@@ -67,23 +70,19 @@ export const games:Array<obj>=[
                 width:200px;
                 margin:20px auto
                 `
-    export const Struct:style2={
+export const Struct:style2={
         Wrapper:Wrapper,
         Header:Header,
         Main:Main,
         TodoList:TodoList,
         Footer:Footer
     }
-   export interface prop{
+export interface prop{
         struct:style2
     }
 export  interface Props{
         item: Array<obj>
              }
- export interface style{
-        width?:string,
-        textAlign?:any
-            }
 export  interface style1{
     textAllign:string,
     width:string,

@@ -17,8 +17,8 @@ const Right:number[]=[17,26,35,44,53,62,71]
 const Up:number[]=[0,1,2,3,4,5,6,7,8]
 const Down:number[]=[73,74,75,76,77,78,79,80]
 const All:number[]=Left.concat(Right,Down,Up)
-for (let index = 0; index < All.length; index++) {
-    for (let i = 0; i < a1.length; i++) {    
+for (let index:number = 0; index < All.length; index++) {
+    for (let i:number = 0; i < a1.length; i++) {    
          if (All[index]==a1[i]) {
           a1.splice(i,1)
          }
@@ -99,8 +99,8 @@ clearInterval(up)
 setMess({text:'lose',items:mess.items,last:mess.last})
      }
 td[x].style.backgroundColor='green'
-for (let i = 0; i < td.length; i++) {
-  for (let ind =mess.items.length-con ; ind < mess.items.length; ind++) {
+for (let i:number = 0; i < td.length; i++) {
+  for (let ind:number =mess.items.length-con ; ind < mess.items.length; ind++) {
      if (i!==mess.items[ind]&&td[i].style.backgroundColor!=='grey'&&td[i].style.backgroundColor!=='yellow'
         &&td[i].style.backgroundColor!=='brown') td[i].style.backgroundColor='green'
         td[mess.items[ind]].style.backgroundColor='black'  
@@ -154,8 +154,8 @@ if (td[x+9].style.backgroundColor=='black') {
    setMess({text:'lose',items:mess.items,last:mess.last})
      }
     td[x].style.backgroundColor='green'
-for (let i = 0; i < td.length; i++) {
-  for (let ind = mess.items.length-con ; ind < mess.items.length; ind++) {
+for (let i:number = 0; i < td.length; i++) {
+  for (let ind:number = mess.items.length-con ; ind < mess.items.length; ind++) {
     if (i!==mess.items[ind]&& td[i].style.backgroundColor!=='grey'&&td[i].style.backgroundColor!=='yellow'
         &&td[i].style.backgroundColor!=='brown') td[i].style.backgroundColor='green'
           td[mess.items[ind]].style.backgroundColor='black'
@@ -208,8 +208,8 @@ clearInterval(left)
 setMess({text:'lose',items:mess.items,last:mess.last})
     }
 td[x].style.backgroundColor='green'
-for (let i = 0; i < td.length; i++) {
-  for (let ind = mess.items.length-con ; ind < mess.items.length; ind++) {
+for (let i:number = 0; i < td.length; i++) {
+  for (let ind:number = mess.items.length-con ; ind < mess.items.length; ind++) {
     if (i!==mess.items[ind]&& td[i].style.backgroundColor!=='grey'&&td[i].style.backgroundColor!=='yellow'
     &&td[i].style.backgroundColor!=='brown') td[i].style.backgroundColor='green'
     td[mess.items[ind]].style.backgroundColor='black'
@@ -263,8 +263,8 @@ clearInterval(right)
 setMess({text:'lose',items:mess.items,last:mess.last})
     }
 td[x].style.backgroundColor='green'
-for (let i = 0; i < td.length; i++) {
-  for (let ind =mess.items.length-con ; ind < mess.items.length; ind++) {
+for (let i:number = 0; i < td.length; i++) {
+  for (let ind:number=mess.items.length-con ; ind < mess.items.length; ind++) {
     if (i!==mess.items[ind]&&td[i].style.backgroundColor!=='grey'&&td[i].style.backgroundColor!=='yellow'
       &&td[i].style.backgroundColor!=='brown') td[i].style.backgroundColor='green'
       td[mess.items[ind]].style.backgroundColor='black'

@@ -37,18 +37,22 @@ interface style{
         lose:'',
     }
         x:number=[0,1,2,3,4,5][Math.floor(Math.random()*6)]
-        ref=createRef<HTMLInputElement>()
-        ref1:RefObject<any>=createRef()
-        ref2:RefObject<any>=createRef()
+        readonly ref=createRef<HTMLInputElement>()
+        readonly ref1=createRef<HTMLDivElement>()
+        readonly ref2=createRef<HTMLDivElement>()
         readonly style:style={
          margin:'100px auto 0 auto',
          width:`300px`,
            } 
    componentDidMount():void {
+if (this.ref1.current) {
  this.ref1.current.style.cssText=` margin-left: 45px;
  justify-content:space-between; width: 200px;display: flex;`
+    }
+if (this.ref2.current){
  this.ref2.current.style.cssText=` width: 200px;height: 30px;
  text-align: center;font-size: 23px;margin-left: 50px;`
+   }
     }
     press():void{    
     const {style:s1}=document.querySelector('.a4') as HTMLElement
@@ -61,7 +65,7 @@ interface style{
     const {name,skin,val,win}:gal=this.state
       if (val!=='') {   
        let con:number=0
-       for (let i = 0; i < skin[this.x].length; i++) {
+       for (let i:number = 0; i < skin[this.x].length; i++) {
         if (val==name[this.x][i]) {
         skin[this.x].splice(i,1,name[this.x][i])
         }else{ 
@@ -109,8 +113,8 @@ interface style{
             width='70px',
             height='20px'
         }
-    const text:JSX.Element[]=skin[this.x].map((item:string,index:number):JSX.Element=>(
-        <div key={index}>{item}</div>
+    const text:JSX.Element[]=skin[this.x].map((item:string,i:number):JSX.Element=>(
+        <div key={i}>{item}</div>
            ))
         return <div style={this.style}>
             <div>

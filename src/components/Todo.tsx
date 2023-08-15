@@ -30,7 +30,7 @@ export default class Todo extends Component<prop,web>{
 }
 
   public ref=createRef<HTMLInputElement>()
-  public wrap:RefObject<any>=createRef()
+  public wrap=createRef<HTMLDivElement>()
     set=(x:number):void=>{
    const img:NodeListOf<HTMLImageElement>=document.querySelectorAll('.img')
        if (x>0) {
@@ -40,7 +40,7 @@ export default class Todo extends Component<prop,web>{
        }
     }
     clear():void{
-    this.wrap.current.style.height='200px'
+    if (this.wrap.current) this.wrap.current.style.height='200px'
     this.items=[]
     this.setState({text:this.items,con:0,height:200})
     }
@@ -50,7 +50,7 @@ export default class Todo extends Component<prop,web>{
     case 0:
      if (value!=='') {
      const val:number=height<400?height+50:height
-     this.wrap.current.style.height=`${val}px`
+     if (this.wrap.current) this.wrap.current.style.height=`${val}px`
      this.items.push(value)
      this.setState({text:this.items,con:this.state.con+1,height:val})
      this.ref.current?.focus()
@@ -69,7 +69,7 @@ export default class Todo extends Component<prop,web>{
     delete=(x:number):void=>{
     const {con,height}:web=this.state
     const val:number=con<5?height-50:height
-    this.wrap.current.style.height=`${val}px`
+    if (this.wrap.current) this.wrap.current.style.height=`${val}px`
     this.items.splice(x,1)
     this.setState({text:this.items,con:con-1,height:val})
     }
@@ -85,13 +85,13 @@ export default class Todo extends Component<prop,web>{
         fontSize='16px'
         }
     
-    const items:JSX.Element[]=this.state.text.map((item:string,index:number):JSX.Element=>(
-        <div key={index} className='items'
-          onMouseOver={()=>this.set(index+1)}
-          onMouseOut={()=>this.set(-(index+1))}>
+    const items:JSX.Element[]=this.state.text.map((item:string,i:number):JSX.Element=>(
+        <div key={i} className='items'
+          onMouseOver={()=>this.set(i+1)}
+          onMouseOut={()=>this.set(-(i+1))}>
          <div className='div' style={style1}>{item}</div>
          <img className='img' style={this.state.style}
-          onClick={()=>this.delete(index)}  src={svg} />
+          onClick={()=>this.delete(i)}  src={svg} />
             </div>
     ))
      return <div>

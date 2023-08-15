@@ -46,9 +46,9 @@ const del:number[]=[]
 cells.forEach(({textContent}:HTMLTableCellElement,i:number):void=>{
 if (textContent=='o'||textContent=='x') del.push(i)   
     })
-for (let i = 0; i < del.length; i++) {
-  for (let ind = 0; ind < combos.length; ind++) {
-    for (let index = 0; index < combos[ind].length; index++) {
+for (let i:number = 0; i < del.length; i++) {
+  for (let ind:number = 0; ind < combos.length; ind++) {
+    for (let index:number = 0; index < combos[ind].length; index++) {
       if (combos[ind][index]==del[i]) {
         combos[ind].splice(index,1)
         setCombos(combos)
@@ -70,7 +70,7 @@ if (con2>0) setText('LOSE')
 if (combos.every(({length}:mass1):boolean=>length==0&&con2==0)) setText('TIE')
 if (con1.length>0) {
 let con4:number=0
-for (let i = 0; i < con1.length; i++) {
+for (let i:number = 0; i < con1.length; i++) {
   if (combos1[con1[i]].every((x:number):boolean=>cells[x].textContent!=='o')) {
       cells[combos[con1[i]][0]].innerHTML='o'
       break
@@ -81,8 +81,8 @@ for (let i = 0; i < con1.length; i++) {
   if (con4==con1.length) cells[combos[con1[0]][0]].innerHTML='o'    
       }else{
 let mas:number|null=null
-  for (let i = 0; i < combos1.length; i++) {
-    for (let ind = 0; ind < combos1[i].length; ind++) {
+  for (let i:number = 0; i < combos1.length; i++) {
+    for (let ind:number = 0; ind < combos1[i].length; ind++) {
       if (combos1[i][ind]==cress[cress.length-1]&&combos[i].length!==0) {
           mas=i
           break
