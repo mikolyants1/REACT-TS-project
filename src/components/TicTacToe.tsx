@@ -1,4 +1,4 @@
-import React from "react";
+import {useState} from "react";
 import { props } from "../props/state";
 import styled,{IStyledComponent} from 'styled-components'
 import { BaseObject } from "styled-components/dist/types";
@@ -7,9 +7,9 @@ const Main:IStyledComponent<'web',BaseObject>=styled.div`
 width:249px
 `
 export default function TicTacToe({children}:props):JSX.Element{  
-const [text,setText]=React.useState<string>('')
-const [cress,setCress]=React.useState<number[]>([])
-const [combos,setCombos]=React.useState<mass1[]>([
+const [text,setText]=useState<string>('')
+const [cress,setCress]=useState<number[]>([])
+const [combos,setCombos]=useState<mass1[]>([
 [0, 1, 2],[3, 4, 5],
 [6, 7, 8],[0, 3, 6],
 [1, 4, 7],[2, 5, 8],
@@ -35,7 +35,7 @@ backgroundColor='white',
 textAlign='center',
     }
 function press(n:number):void {
-const cells:NodeListOf<HTMLTableCellElement> = document.querySelectorAll("td")
+const cells:NodeListOf<HTMLTableCellElement>=document.querySelectorAll("td")
 if (text=='') {
   if (cells[n].textContent!=='o') {
       cells[n].innerHTML='x'
@@ -43,7 +43,7 @@ if (text=='') {
       setCress(cress)
       }
 const del:number[]=[]
-cells.forEach(({textContent}:HTMLTableCellElement,i:number)=>{
+cells.forEach(({textContent}:HTMLTableCellElement,i:number):void=>{
 if (textContent=='o'||textContent=='x') del.push(i)   
     })
 for (let i = 0; i < del.length; i++) {
@@ -57,21 +57,21 @@ for (let i = 0; i < del.length; i++) {
     }
   }
 const con1:Array<number>=[]
-combos.forEach(({length}:mass1,i:number)=>{
+combos.forEach(({length}:mass1,i:number):void=>{
 if (length==1) con1.push(i)
     })
 let con2:number=0
-combos1.forEach((item:mass1)=>{
-if (item.every((x:number)=>cells[x].textContent=='o')) con2++     
-if (item.every((x:number)=>cells[x].textContent=='x')) con2--
+combos1.forEach((item:mass1):void=>{
+if (item.every((x:number):boolean=>cells[x].textContent=='o')) con2++     
+if (item.every((x:number):boolean=>cells[x].textContent=='x')) con2--
       })
 if (con2<0) setText('WIN')
 if (con2>0) setText('LOSE')
-if (combos.every(({length}:mass1)=>length==0&&con2==0)) setText('TIE')
+if (combos.every(({length}:mass1):boolean=>length==0&&con2==0)) setText('TIE')
 if (con1.length>0) {
 let con4:number=0
 for (let i = 0; i < con1.length; i++) {
-  if (combos1[con1[i]].every((x:number)=>cells[x].textContent!=='o')) {
+  if (combos1[con1[i]].every((x:number):boolean=>cells[x].textContent!=='o')) {
       cells[combos[con1[i]][0]].innerHTML='o'
       break
         } else{
@@ -95,18 +95,18 @@ if (mas) cells[combos[mas][Math.floor(Math.random()*2)]].innerHTML='o'
  }
             return <Main>
                       <tr>
-                      {combos1[0].map((item:number,index:number)=>(
-                        <td key={index} onClick={()=>press(item)}></td>
+                      {combos1[0].map((item:number,i:number):JSX.Element=>(
+                        <td key={i} onClick={():void=>press(item)}></td>
                         ))}
                        </tr>
                       <tr>
-                      {combos1[1].map((item:number,index:number)=>(
-                        <td key={index} onClick={()=>press(item)}></td>
+                      {combos1[1].map((item:number,i:number):JSX.Element=>(
+                        <td key={i} onClick={():void=>press(item)}></td>
                         ))}
                       </tr>
                      <tr>
-                     {combos1[2].map((item:number,index:number)=>(
-                        <td key={index} onClick={()=>press(item)}></td>
+                     {combos1[2].map((item:number,i:number):JSX.Element=>(
+                        <td key={i} onClick={():void=>press(item)}></td>
                         ))}
                      </tr>
                    <div style={style}>

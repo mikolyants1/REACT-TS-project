@@ -1,4 +1,4 @@
-import React from 'react';
+import {Component,createRef,RefObject,ReactNode,ChangeEvent} from 'react';
 import svg from '../red16.jpg'
 import { prop,style2 } from '../props/state';
 interface web{
@@ -14,7 +14,7 @@ interface web{
     backgroundColor?:string,
     height?:number
    }
-export default class Todo extends React.Component<prop,web>{
+export default class Todo extends Component<prop,web>{
        public items:Array<string>=[]
         state={
             text:this.items,
@@ -29,8 +29,8 @@ export default class Todo extends React.Component<prop,web>{
       height:200,
 }
 
-  public ref=React.createRef<HTMLInputElement>()
-  public wrap:React.RefObject<any>=React.createRef()
+  public ref=createRef<HTMLInputElement>()
+  public wrap:RefObject<any>=createRef()
     set=(x:number):void=>{
    const img:NodeListOf<HTMLImageElement>=document.querySelectorAll('.img')
        if (x>0) {
@@ -74,9 +74,9 @@ export default class Todo extends React.Component<prop,web>{
     this.setState({text:this.items,con:con-1,height:val})
     }
     focus=(x:number):void=>{
-    this.setState({backgroundColor:x==0?'rgb(210, 210, 210':''})
+    this.setState({backgroundColor:x==0?'rgb(210, 210, 210) ':''})
     }
-    render():React.ReactNode{  
+    render():ReactNode{  
     const {Wrapper,Header,Main,TodoList,Footer}:style2=this.props.struct
     enum style1 {
         width='100%',
@@ -85,15 +85,15 @@ export default class Todo extends React.Component<prop,web>{
         fontSize='16px'
         }
     
-    const items:JSX.Element[]=this.state.text.map((item:string,index:number)=>{
-        return <div key={index} className='items'
+    const items:JSX.Element[]=this.state.text.map((item:string,index:number):JSX.Element=>(
+        <div key={index} className='items'
           onMouseOver={()=>this.set(index+1)}
           onMouseOut={()=>this.set(-(index+1))}>
          <div className='div' style={style1}>{item}</div>
          <img className='img' style={this.state.style}
           onClick={()=>this.delete(index)}  src={svg} />
             </div>
-        })
+    ))
      return <div>
     <Wrapper ref={this.wrap} >
         <Header> 
@@ -102,16 +102,16 @@ export default class Todo extends React.Component<prop,web>{
             </h2>
         </Header>
             <Main>
-         <button  onClick={()=>this.press1(0)} className='but1'>+</button>
+         <button  onClick={():void=>this.press1(0)} className='but1'>+</button>
         <div className='main1'>
         <input id='input' ref={this.ref} value={this.state.value}
         style={{backgroundColor:this.state.backgroundColor}}
-        onFocus={()=>this.focus(0)} onBlur={()=>this.focus(1)} 
-        onChange={(e:React.ChangeEvent<HTMLInputElement>)=>this.setState({value:e.target.value})}
+        onFocus={():void=>this.focus(0)} onBlur={():void=>this.focus(1)} 
+        onChange={(e:ChangeEvent<HTMLInputElement>):void=>this.setState({value:e.target.value})}
         placeholder=" Add your new todo"
               type="text" />
              </div>
-             <button onClick={()=>this.press1(1)} className='ser'>search</button>
+             <button onClick={():void=>this.press1(1)} className='ser'>search</button>
           </Main>   
     <TodoList>
         {items}

@@ -1,4 +1,4 @@
-import React from "react";
+import {ReactNode,ChangeEvent,createRef,RefObject,Component} from "react";
 import { props } from "../props/state";
 type mass=Array<string>
 interface gal{
@@ -14,7 +14,7 @@ interface style{
     width:string,
 } 
 
- export default class Gallows extends React.Component<props,gal>{
+ export default class Gallows extends Component<props,gal>{
         state={
         name:[
          ['х','о','л','о','д','и','л','ь','н','и','к'],
@@ -37,9 +37,9 @@ interface style{
         lose:'',
     }
         x:number=[0,1,2,3,4,5][Math.floor(Math.random()*6)]
-        ref=React.createRef<HTMLInputElement>()
-        ref1:React.RefObject<any>=React.createRef()
-        ref2:React.RefObject<any>=React.createRef()
+        ref=createRef<HTMLInputElement>()
+        ref1:RefObject<any>=createRef()
+        ref2:RefObject<any>=createRef()
         readonly style:style={
          margin:'100px auto 0 auto',
          width:`300px`,
@@ -94,29 +94,29 @@ interface style{
         s7.marginTop='37px'
         }  
        if (win==7) {
-           s6.display="block"
-           this.setState({lose:'lose'})
+        s6.display="block"
+        this.setState({lose:'lose'})
        }
-    if (skin[this.x].every((x:string)=>x!=='_')) {
+    if (skin[this.x].every((x:string):boolean=>x!=='_')) {
         this.setState({lose:'win'}) 
        }
     }
     this.ref.current?.focus()
     }
-    render():React.ReactNode{
+    render():ReactNode{
         const {skin}:gal=this.state
         enum style{
             width='70px',
             height='20px'
         }
-    const text:JSX.Element[]=skin[this.x].map((item:string,index:number)=>(
+    const text:JSX.Element[]=skin[this.x].map((item:string,index:number):JSX.Element=>(
         <div key={index}>{item}</div>
-    ))
+           ))
         return <div style={this.style}>
             <div>
             <label htmlFor="galInput">Буква:</label>
             <input ref={this.ref} id="galInput" type="text"
-             onChange={(e:React.ChangeEvent<HTMLInputElement>)=>this.setState({val:e.target.value})} />
+             onChange={(e:ChangeEvent<HTMLInputElement>):void=>this.setState({val:e.target.value})} />
             <button onClick={this.press.bind(this)}>try</button>
            </div> 
             <div ref={this.ref1}>{text}</div>
