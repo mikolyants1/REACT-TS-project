@@ -14,7 +14,7 @@ interface style{
 } 
 
  export default class Gallows extends Component<props,gal>{
-        state={
+    state={
         name:[
          ['х','о','л','о','д','и','л','ь','н','и','к'],
          ['б','у','д','и','л','ь','н','и','к'],
@@ -33,15 +33,15 @@ interface style{
         ],
         val:'',
         win:1,
-    }
-        x:number=[0,1,2,3,4,5][Math.floor(Math.random()*6)]
-        readonly ref=createRef<HTMLInputElement>()
-        readonly ref1=createRef<HTMLDivElement>()
-        readonly ref2=createRef<HTMLDivElement>()
-        readonly style:style={
-         margin:'100px auto 0 auto',
-         width:`300px`,
-           } 
+       }
+    x:number=[0,1,2,3,4,5][Math.floor(Math.random()*6)]
+    readonly ref=createRef<HTMLInputElement>()
+    readonly ref1=createRef<HTMLDivElement>()
+    readonly ref2=createRef<HTMLDivElement>()
+    readonly style:style={
+    margin:'100px auto 0 auto',
+    width:`300px`,
+        } 
     componentDidMount():void {
     const [{current:r1},{current:r2}]
     :RefObject<HTMLDivElement>[]=[this.ref1,this.ref2]
