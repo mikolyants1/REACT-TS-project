@@ -6,7 +6,6 @@ interface gal{
     skin?:Array<mass>,
     val?:string|undefined,
     win?:number,
-     lose?:string,
      mass?:Array<number>
 }
 interface style{
@@ -34,7 +33,6 @@ interface style{
         ],
         val:'',
         win:1,
-        lose:'',
     }
         x:number=[0,1,2,3,4,5][Math.floor(Math.random()*6)]
         readonly ref=createRef<HTMLInputElement>()
@@ -45,7 +43,6 @@ interface style{
          width:`300px`,
            } 
     componentDidMount():void {
-    const {win}:gal=this.state
     const [{current:r1},{current:r2}]
     :RefObject<HTMLDivElement>[]=[this.ref1,this.ref2]
     if (r1) {
@@ -56,9 +53,6 @@ interface style{
      r2.style.cssText=`width:200px;margin-left:50px;
      height:30px;text-align:center;font-size: 23px;`
         }
-      setInterval(():void=>{
-      if (win==7) this.setState({lose:'lose'})
-       },0);
     }
     componentDidUpdate(prevProps:Readonly<props>,{win}:Readonly<gal>):void {
     const {style:s1}=document.querySelector('.a4') as HTMLElement
@@ -92,9 +86,14 @@ interface style{
        }  
     if (win==7) {
      s6.display="block"
+     this.setResult('lose')
       }
     }
-    change(e:ChangeEvent<HTMLInputElement>):void{
+    setResult(result:string):string|undefined {
+    const {current}:RefObject<HTMLDivElement>=this.ref2
+    if (current) return current.textContent=result
+    }
+    change(e:ChangeEvent<HTMLInputElement>):void {
         this.setState({val:e.target.value})
     }
     press():void{    
@@ -108,7 +107,7 @@ interface style{
        })
     if (con==arr1.length) this.setState({win:win+1})
     if (arr1.every((x:string):boolean=>x!=='_')){
-      return this.setState({lose:'win'}) 
+       this.setResult('win')
        }
     }
     this.setState({skin:skin})
@@ -123,7 +122,7 @@ interface style{
         enum style{
             width='70px',
             height='20px'
-        }
+          }
     const text:JSX.Element[]=mass.map((item:string,i:number):JSX.Element=>(
         <div key={i}>{item}</div>
            ))
@@ -135,7 +134,7 @@ interface style{
               <button onClick={this.press.bind(this)}>try</button>
             </div> 
             <div ref={this.ref1}>{text}</div>
-            <div ref={this.ref2}>{this.state.lose}</div>
+            <div ref={this.ref2}></div>
             <div className='a1'></div>
             <div className='a2'></div>
             <div className='a3'></div>
