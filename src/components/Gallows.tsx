@@ -45,16 +45,16 @@ interface style{
          width:`300px`,
            } 
    componentDidMount():void {
-if (this.ref1.current) {
- this.ref1.current.style.cssText=` margin-left: 45px;
- justify-content:space-between; width: 200px;display: flex;`
-    }
-if (this.ref2.current){
- this.ref2.current.style.cssText=` width: 200px;height: 30px;
- text-align: center;font-size: 23px;margin-left: 50px;`
-   }
-    }
-    press():void{    
+    if (this.ref1.current) {
+     this.ref1.current.style.cssText=`margin-left:45px;
+     justify-content:space-between; width: 200px;display:flex;`
+         }
+    if (this.ref2.current){
+     this.ref2.current.style.cssText=` width: 200px;height:30px;
+     text-align: center;font-size: 23px;margin-left: 50px;`
+        }
+     }
+  componentDidUpdate(prevProps:Readonly<props>,{win}:Readonly<gal>):void {
     const {style:s1}=document.querySelector('.a4') as HTMLElement
     const {style:s2}=document.querySelector('.a5') as HTMLElement
     const {style:s3}=document.querySelector('.a6') as HTMLElement
@@ -62,50 +62,50 @@ if (this.ref2.current){
     const {style:s5}=document.querySelector('.a8') as HTMLElement
     const {style:s6}=document.querySelector('.a9') as HTMLElement
     const {style:s7}=document.querySelector('.a10') as HTMLElement
+       if (win==2) {
+       s1.display="block"
+       s7.marginTop='86px'
+       }
+       if (win==3) {
+       s3.display="block"
+       s3.marginLeft='129px'
+       s7.marginTop='56px'
+       }
+       if (win==4) {
+       s2.display="block"
+       s3.marginLeft='3px'
+       s7.marginTop='56px'
+       }
+       if (win==5) {
+       s4.display="block"
+       s7.marginTop='56px'
+       }
+       if (win==6) {
+       s5.display="block"
+       s7.marginTop='37px'
+       }  
+      if (win==7) {
+       s6.display="block"
+       this.setState({lose:'lose'})
+      }
+    }
+    press():void{    
     const {name,skin,val,win}:gal=this.state
-      if (val!=='') {   
+    if (val!=='') {   
        let con:number=0
-       for (let i:number = 0; i < skin[this.x].length; i++) {
-        if (val==name[this.x][i]) {
-        skin[this.x].splice(i,1,name[this.x][i])
-        }else{ 
-        con++
-        }          
-       }
-       if (con==skin[this.x].length) {
-         this.setState({win:win+1})
-        } 
-        if (win==2) {
-        s1.display="block"
-        s7.marginTop='86px'
-        }
-        if (win==3) {
-        s3.display="block"
-        s3.marginLeft='129px'
-        s7.marginTop='56px'
-        }
-        if (win==4) {
-        s2.display="block"
-        s3.marginLeft='3px'
-        s7.marginTop='56px'
-        }
-        if (win==5) {
-        s4.display="block"
-        s7.marginTop='56px'
-        }
-        if (win==6) {
-        s5.display="block"
-        s7.marginTop='37px'
-        }  
-       if (win==7) {
-        s6.display="block"
-        this.setState({lose:'lose'})
-       }
-    if (skin[this.x].every((x:string):boolean=>x!=='_')) {
+    skin[this.x].forEach((item:string,i:number,arr:string[]):void=>{
+    val==name[this.x][i]?arr.splice(i,1,name[this.x][i]):con++           
+       })
+    if (con==skin[this.x].length) this.setState({win:win+1})
+    if (skin[this.x].every((x:string):boolean=>x!=='_')){
         this.setState({lose:'win'}) 
        }
     }
-    this.ref.current?.focus()
+    this.setState({skin:skin})
+    if (this.ref.current) {
+    this.ref.current.value=''
+    this.ref.current.focus()
+    }
     }
     render():ReactNode{
         const {skin}:gal=this.state
@@ -116,7 +116,7 @@ if (this.ref2.current){
     const text:JSX.Element[]=skin[this.x].map((item:string,i:number):JSX.Element=>(
         <div key={i}>{item}</div>
            ))
-        return <div style={this.style}>
+    return <div style={this.style}>
             <div>
             <label htmlFor="galInput">Буква:</label>
             <input ref={this.ref} id="galInput" type="text"
