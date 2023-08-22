@@ -44,17 +44,23 @@ interface style{
          margin:'100px auto 0 auto',
          width:`300px`,
            } 
-   componentDidMount():void {
-    if (this.ref1.current) {
-     this.ref1.current.style.cssText=`margin-left:45px;
-     justify-content:space-between; width: 200px;display:flex;`
+    componentDidMount():void {
+    const {win}:gal=this.state
+    const [{current:r1},{current:r2}]
+    :RefObject<HTMLDivElement>[]=[this.ref1,this.ref2]
+    if (r1) {
+     r1.style.cssText=`margin-left:45px;width:200px;
+     justify-content:space-between;display:flex;`
          }
-    if (this.ref2.current){
-     this.ref2.current.style.cssText=` width: 200px;height:30px;
-     text-align: center;font-size: 23px;margin-left: 50px;`
+    if (r2){
+     r2.style.cssText=`width:200px;margin-left:50px;
+     height:30px;text-align:center;font-size: 23px;`
         }
-     }
-  componentDidUpdate(prevProps:Readonly<props>,{win}:Readonly<gal>):void {
+      setInterval(():void=>{
+      if (win==7) this.setState({lose:'lose'})
+       },0);
+    }
+    componentDidUpdate(prevProps:Readonly<props>,{win}:Readonly<gal>):void {
     const {style:s1}=document.querySelector('.a4') as HTMLElement
     const {style:s2}=document.querySelector('.a5') as HTMLElement
     const {style:s3}=document.querySelector('.a6') as HTMLElement
@@ -62,67 +68,72 @@ interface style{
     const {style:s5}=document.querySelector('.a8') as HTMLElement
     const {style:s6}=document.querySelector('.a9') as HTMLElement
     const {style:s7}=document.querySelector('.a10') as HTMLElement
-       if (win==2) {
-       s1.display="block"
-       s7.marginTop='86px'
+    if (win==2) {
+     s1.display="block"
+     s7.marginTop='86px'
        }
-       if (win==3) {
-       s3.display="block"
-       s3.marginLeft='129px'
-       s7.marginTop='56px'
+    if (win==3) {
+     s3.display="block"
+     s3.marginLeft='129px'
+     s7.marginTop='56px'
        }
-       if (win==4) {
-       s2.display="block"
-       s3.marginLeft='3px'
-       s7.marginTop='56px'
+    if (win==4) {
+     s2.display="block"
+     s3.marginLeft='3px'
+     s7.marginTop='56px'
        }
-       if (win==5) {
-       s4.display="block"
-       s7.marginTop='56px'
+    if (win==5) {
+     s4.display="block"
+     s7.marginTop='56px'
        }
-       if (win==6) {
-       s5.display="block"
-       s7.marginTop='37px'
+    if (win==6) {
+     s5.display="block"
+     s7.marginTop='37px'
        }  
-      if (win==7) {
-       s6.display="block"
-       this.setState({lose:'lose'})
+    if (win==7) {
+     s6.display="block"
       }
     }
+    change(e:ChangeEvent<HTMLInputElement>):void{
+        this.setState({val:e.target.value})
+    }
     press():void{    
+    const {current}:RefObject<HTMLInputElement|null>=this.ref
     const {name,skin,val,win}:gal=this.state
+    const [arr1,arr2]:mass[]=[skin[this.x],name[this.x]]
     if (val!=='') {   
-       let con:number=0
-    skin[this.x].forEach((item:string,i:number,arr:string[]):void=>{
-    val==name[this.x][i]?arr.splice(i,1,name[this.x][i]):con++           
+    let con:number=0
+    arr1.forEach((_:string,i:number,arr:string[]):void=>{
+     val==arr2[i]?arr.splice(i,1,arr2[i]):con++           
        })
-    if (con==skin[this.x].length) this.setState({win:win+1})
-    if (skin[this.x].every((x:string):boolean=>x!=='_')){
-        this.setState({lose:'win'}) 
+    if (con==arr1.length) this.setState({win:win+1})
+    if (arr1.every((x:string):boolean=>x!=='_')){
+      return this.setState({lose:'win'}) 
        }
     }
     this.setState({skin:skin})
-    if (this.ref.current) {
-    this.ref.current.value=''
-    this.ref.current.focus()
+    if (current) {
+     current.value=''
+     current.focus()
     }
     }
     render():ReactNode{
         const {skin}:gal=this.state
+        const mass:mass=skin[this.x]
         enum style{
             width='70px',
             height='20px'
         }
-    const text:JSX.Element[]=skin[this.x].map((item:string,i:number):JSX.Element=>(
+    const text:JSX.Element[]=mass.map((item:string,i:number):JSX.Element=>(
         <div key={i}>{item}</div>
            ))
     return <div style={this.style}>
             <div>
-            <label htmlFor="galInput">Буква:</label>
-            <input ref={this.ref} id="galInput" type="text"
-             onChange={(e:ChangeEvent<HTMLInputElement>):void=>this.setState({val:e.target.value})} />
-            <button onClick={this.press.bind(this)}>try</button>
-           </div> 
+              <label htmlFor="galInput">Буква:</label>
+              <input ref={this.ref} id="galInput" type="text"
+               onChange={this.change.bind(this)} />
+              <button onClick={this.press.bind(this)}>try</button>
+            </div> 
             <div ref={this.ref1}>{text}</div>
             <div ref={this.ref2}>{this.state.lose}</div>
             <div className='a1'></div>
