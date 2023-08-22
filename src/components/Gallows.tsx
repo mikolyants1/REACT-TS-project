@@ -54,7 +54,7 @@ interface style{
      height:30px;text-align:center;font-size: 23px;`
         }
     }
-    componentDidUpdate(prevProps:Readonly<props>,{win}:Readonly<gal>):void {
+    componentWillUpdate(nextProps:Readonly<props>,{win}:Readonly<gal>):void {
     const {style:s1}=document.querySelector('.a4') as HTMLElement
     const {style:s2}=document.querySelector('.a5') as HTMLElement
     const {style:s3}=document.querySelector('.a6') as HTMLElement
