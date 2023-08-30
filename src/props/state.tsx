@@ -4,6 +4,9 @@ import { createContext,Context, RefObject} from "react"
 import Gallows from "../components/Gallows"
 import TicTacToe from "../components/TicTacToe"
 import Snake from "../components/Snake"
+export type union=void|null
+export type union1=string|undefined
+export type union2=HTMLDivElement|null
 export type play=(({children}:props)=>JSX.Element)|typeof Gallows
 export type obj={
     id:string,
@@ -17,19 +20,18 @@ export const games:Array<obj>=[
  {id:'2', name: "Gallows",marginLeft:85,ml:'-10px',Game:Gallows}, 
  {id:'3', name: "Snake",marginLeft:100,ml:'2px',Game:Snake} 
             ]
-        export  type color={
-                color1:string,
-                color2:string,
-            
-            }
-      export  const themes:color={
-        color1:'linear-gradient(40deg,#eaebe2,#85d3f1,#56bee7) no-repeat',
-        color2:'linear-gradient(40deg,rgb(250, 216, 24),rgb(236, 72, 72),rgb(240, 56, 240)) no-repeat',
-            }
-        export const ThemeContext:Context<string>=createContext(themes.color1)
-            type base1={
-                children:JSX.Element[],
-                ref:RefObject<HTMLDivElement>
+export type color={
+        color1:string,
+        color2:string,
+             }
+export const themes:color={
+color1:'linear-gradient(40deg,#eaebe2,#85d3f1,#56bee7) no-repeat',
+color2:'linear-gradient(40deg,rgb(250, 216, 24),rgb(236, 72, 72),rgb(240, 56, 240)) no-repeat',
+        }
+export const ThemeContext:Context<string>=createContext(themes.color1)
+    type base1={
+    children:JSX.Element[],
+    ref:RefObject<HTMLDivElement>
             }
          export  interface style2{
                 Wrapper:IStyledComponent<'web',base1>,
@@ -65,10 +67,10 @@ export const games:Array<obj>=[
               width: 90%;
               margin-left: 10px;
               `
-              export const Brand:IStyledComponent<'web',BaseObject>=styled.div`
-                text-allign:center;
-                width:200px;
-                margin:20px auto
+export const Brand:IStyledComponent<'web',BaseObject>=styled.div`
+    text-allign:center;
+     width:200px;
+    margin:20px auto
                 `
 export const Struct:style2={
         Wrapper:Wrapper,

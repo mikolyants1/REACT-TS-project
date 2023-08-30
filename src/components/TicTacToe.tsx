@@ -65,8 +65,8 @@ combos1.forEach((item:mass1):void=>{
 if (item.every((x:number):boolean=>cells[x].textContent=='o')) con2++     
 if (item.every((x:number):boolean=>cells[x].textContent=='x')) con2--
       })
-if (con2<0) setText('WIN')
-if (con2>0) setText('LOSE')
+if (con2<0) return setText('WIN')
+if (con2>0) return setText('LOSE')
 if (combos.every(({length}:mass1):boolean=>length==0&&con2==0)) setText('TIE')
 if (con1.length>0) {
 let con4:number=0
@@ -79,7 +79,7 @@ for (let i:number = 0; i < con1.length; i++) {
         }
       }
   if (con4==con1.length) cells[combos[con1[0]][0]].innerHTML='o'    
-      }else{
+    }else{
 let mas:number|null=null
   for (let i:number = 0; i < combos1.length; i++) {
     for (let ind:number = 0; ind < combos1[i].length; ind++) {

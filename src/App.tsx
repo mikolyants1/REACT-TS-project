@@ -1,12 +1,12 @@
 import {ReactNode,useState,Component,FC} from "react";
-import { BrowserRouter as Router, Route, Routes,Link,Outlet,useParams, Params } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes,Link,Outlet,useParams,Params} from "react-router-dom";
 import { ChangeContext } from "./components/Context";
 import Todo from "./components/Todo";
 import {Restart,Props,obj,games,Struct,ThemeContext,Brand,themes} from "./props/state";
 import styled,{IStyledComponent} from 'styled-components'
-import { BaseObject} from "styled-components/dist/types"
+import { BaseObject} from "styled-components/dist/types";
 
-            class Apps extends Component{
+         class Apps extends Component{
             readonly Header:IStyledComponent<'web',BaseObject>=styled.header`
                 width: 400px;
                 display:flex;
@@ -39,7 +39,7 @@ import { BaseObject} from "styled-components/dist/types"
 
                 }
             }
-            class GamesApp extends Component{
+         class GamesApp extends Component{
               render():ReactNode{
                 enum style {
                     textAllign='center',
@@ -56,7 +56,7 @@ import { BaseObject} from "styled-components/dist/types"
                children:JSX.Element,
                key:number
             }
-            class Games extends Component<Props>{
+         class Games extends Component<Props>{
             readonly GamesNav:IStyledComponent<'web',BaseObject>=styled.nav`
             textAllign:'center';
             marginLeft:'60px';
@@ -70,8 +70,9 @@ import { BaseObject} from "styled-components/dist/types"
             width:150px;
             text-decoration:none;
             `
-             render():ReactNode{
-                const list:JSX.Element[]=this.props.item.map(({id,name}:obj,i:number):JSX.Element=>(
+            render():ReactNode{
+            const {item}:Readonly<Props>=this.props
+            const list:JSX.Element[]=item.map(({id,name}:obj,i:number):JSX.Element=>(
                     <this.GamesItem key={i}>
                         <h3>
                            <Link to={`/games/${id}`}>{name}</Link>
@@ -87,13 +88,13 @@ import { BaseObject} from "styled-components/dist/types"
             }
            
            const Game:FC<Props>=({item}):JSX.Element|null=>{
-                const params:Readonly<Params<string>> = useParams()
-                const game:obj|undefined=item.find((x:obj):boolean=>x.id == params.id)
-                const HomeLink:IStyledComponent<'web',BaseObject>=styled.div`
-                margin-top:50px;
-                margin-left:20px
-                `
-                if (typeof game!=='undefined'){
+               const params:Readonly<Params<string>>=useParams()
+               const game:obj|undefined=item.find(({id}:obj):boolean=>id==params.id)
+               const HomeLink:IStyledComponent<'web',BaseObject>=styled.div`
+                 margin-top:50px;
+                 margin-left:20px
+                 `
+               if (typeof game!=='undefined'){
                 const {Game,ml,marginLeft,name}:obj=game
                 const Title:IStyledComponent<'web',BaseObject>=styled.div`
                 width:140%;
@@ -102,11 +103,11 @@ import { BaseObject} from "styled-components/dist/types"
                const Main:IStyledComponent<'web',BaseObject>=styled.div`
                 margin-left:-${marginLeft}px
                 `
-            return <div>
+             return <div>
                      <Title>
-                          <h2> 
-                            {name}
-                         </h2>
+                        <h2> 
+                          {name}
+                        </h2>
                      </Title>
                         <Main>
                           <Game>
@@ -120,42 +121,42 @@ import { BaseObject} from "styled-components/dist/types"
                 }
                 return null
            } 
-            function Main():JSX.Element{
+         function Main():JSX.Element{
             const [state,setState]=useState<string>(themes.color1)
             const [marg,setMarg]=useState<number>(0)
             const [rot,setRot]=useState<number>(0)
             const press=():void=>{
-             setState(state==themes.color1?themes.color2:themes.color1)
-             setMarg(marg==0?30:0)
-             setRot(rot==0?90:0)
-                }
-                return <Brand>
-                         <ThemeContext.Provider value={state}>
-                           <h1>DynamicApps</h1>
-                           <ChangeContext 
-                            onClick={press}
-                            marg={marg}
-                            rotate={rot}
-                             />
-                            <Outlet />
-                         </ThemeContext.Provider>
-                       </Brand> 
+            setState(state==themes.color1?themes.color2:themes.color1)
+            setMarg(marg==0?30:0)
+            setRot(rot==0?90:0)
+               }
+            return <Brand>
+                     <ThemeContext.Provider value={state}>
+                        <h1>DynamicApps</h1>
+                        <ChangeContext 
+                         onClick={press}
+                         marg={marg}
+                         rotate={rot}
+                           />
+                        <Outlet />
+                     </ThemeContext.Provider>
+                   </Brand> 
             } 
 
 function App():JSX.Element {
   return (
     <Router>
       <Routes>
-          <Route path="/" element={<Main />}>
-             <Route index element={<Apps />} />
-                 <Route path="/todo" element={<TodoApp />} />
-                 <Route path="/games" element={<GamesApp />}>
-                    <Route index element={<Games item={games} />}/>
-                    <Route path=":id" element={<Game item={games}  />} />
-                 </Route>
+        <Route path="/" element={<Main />}>
+          <Route index element={<Apps />} />
+            <Route path="/todo" element={<TodoApp />} />
+            <Route path="/games" element={<GamesApp />}>
+               <Route index element={<Games item={games} />}/>
+               <Route path=":id" element={<Game item={games}  />} />
             </Route>
-         </Routes>
-     </Router>
+         </Route>
+      </Routes>
+    </Router>
   )
 }
 

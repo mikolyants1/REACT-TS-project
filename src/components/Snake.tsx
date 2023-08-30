@@ -30,13 +30,14 @@ const [mess,setMess]=useState<mass>({items:[],text:'',last:[]})
 const [con,setCon]=useState(0)
 const ref1=useRef<HTMLDivElement>(null!)
 const ref2=useRef<HTMLDivElement>(null!)
-    useEffect(():void=>{
+useEffect(():void=>{
     ref1.current.style.cssText='width:100%;text-align:center;font-size:20px'
     ref2.current.style.cssText=`width:145px;text-align:center;height:30px;
     border-right:1px solid black;font-size:23px;background-color:white`
     const td:NodeListOf<HTMLTableCellElement>=document.querySelectorAll('td')
     td.forEach(({style}:HTMLTableCellElement):void=>{
-    style.cssText=`width:30px;height:30px;border: 1px solid black;background-color:green`
+    style.cssText=`width:30px;height:30px;
+    border:1px solid black;background-color:green`
     })
    All.forEach((item:number):string=>td[item].style.backgroundColor='brown')
     td[64].style.backgroundColor='grey'
@@ -47,13 +48,13 @@ const ref2=useRef<HTMLDivElement>(null!)
     }
 },[]
 )
-    useEffect(():void=>{
-    if (typeof localStorage.getItem('best')!==null) {
-        if (con>=JSON.parse(localStorage.getItem("best") || "")) {
-          localStorage.setItem('best',`${con}`)
-        }  
-      }else{
-        localStorage.setItem('best','0')
+useEffect(():void=>{
+ if (localStorage.getItem('best')) {
+    if (con>=JSON.parse(localStorage.getItem("best") || "")) {
+    localStorage.setItem('best',`${con}`)
+      }  
+    }else{
+    localStorage.setItem('best','0')
       }
 },[con])
 function move(n:number):void {  
@@ -134,7 +135,7 @@ let y:number=0
 td.forEach(({style:{backgroundColor}}:HTMLTableCellElement):void=>{
 if (backgroundColor=='yellow') y++
     })
-   if (y==0) {        
+if (y==0) {        
 const b:number[]=[]
 td.forEach(({style}:HTMLTableCellElement,i:number):void=>{
 const {backgroundColor}:CSSStyleDeclaration=style
@@ -146,7 +147,6 @@ if (backgroundColor!=='black'&&backgroundColor!=='grey'
     td[ran].style.backgroundColor='yellow'
     con1++
     setCon(con+1)
-  
    }
     mess.items.push(x)
 if (td[x+9].style.backgroundColor=='black') {
@@ -296,34 +296,42 @@ enum style2 {
     width='146px',
   height='30px'
 }
-    return <div style={{width:'290px'}}> 
-        <div ref={ref1}>score:{con} best:{localStorage.getItem('best')}</div>
-        <div style={style}>
-            {tds.map((index:number):JSX.Element=>(
-                 <tr key={index}>
-                    {tds.map((index:number):JSX.Element=>(
-                    <td key={index}></td>
-                     ))}
-                 </tr>
-            ))}     
+enum style3 {
+    display='flex'
+}
+enum style4 {
+    width='240px'
+}
+    return <div style={style}> 
+             <div ref={ref1}>score:{con} best:{localStorage.getItem('best')}</div>
+               <div style={style}>
+                 {tds.map((index:number):JSX.Element=>(
+                    <tr key={index}>
+                       {tds.map((index:number):JSX.Element=>(
+                         <td key={index}></td>
+                         ))}
+                    </tr>
+                   ))}     
             </div>
-            <div style={{display:'flex'}}>
-<div style={{width:'240px'}}>
-<button className='but'
- style={style1} onClick={():void=>move(2)}>left</button>
-<button className='but'
- style={style1} onClick={():void=>move(0)}>up</button>
-<button className='but'
- style={style1} onClick={():void=>move(1)}>down</button>
-<button className='but'
- style={style1} onClick={():void=>move(3)}>right</button>
-    </div>
-<div>
-    <div ref={ref2}>{mess.text}</div>
-    <div style={style2}>
-    {children}
-      </div>
-    </div>           
-  </div>
-</div>
+            <div style={style3}>
+              <div style={style4}>
+                <button className='but'
+                 style={style1} onClick={():void=>move(2)}>left</button>
+                <button className='but'
+                 style={style1} onClick={():void=>move(0)}>up</button>
+                <button className='but'
+                 style={style1} onClick={():void=>move(1)}>down</button>
+                <button className='but'
+                 style={style1} onClick={():void=>move(3)}>right</button>
+              </div>
+              <div>
+                <div ref={ref2}>
+                  {mess.text}
+                </div>
+                <div style={style2}>
+                  {children}
+                </div>
+              </div>           
+            </div>
+          </div>
     }

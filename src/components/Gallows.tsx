@@ -1,10 +1,10 @@
 import {ReactNode,ChangeEvent,createRef,RefObject,Component} from "react";
-import { props } from "../props/state";
+import { props ,union,union1} from "../props/state";
 type mass=Array<string>
 interface gal{
     name?:Array<mass>,
     skin?:Array<mass>,
-    val?:string|undefined,
+    val?:union1,
     win?:number,
      mass?:Array<number>
 }
@@ -13,8 +13,14 @@ interface style{
     width:string,
 } 
 
+type union3=gal|undefined
+type union4=HTMLInputElement|null
+
  export default class Gallows extends Component<props,gal>{
-    state={
+   public state:gal
+   constructor(props:props){
+     super(props)
+     this.state={
         name:[
          ['х','о','л','о','д','и','л','ь','н','и','к'],
          ['б','у','д','и','л','ь','н','и','к'],
@@ -34,6 +40,7 @@ interface style{
         val:'',
         win:1,
        }
+     }
     x:number=[0,1,2,3,4,5][Math.floor(Math.random()*6)]
     readonly ref=createRef<HTMLInputElement>()
     readonly ref1=createRef<HTMLDivElement>()
@@ -47,7 +54,7 @@ interface style{
     :RefObject<HTMLDivElement>[]=[this.ref1,this.ref2]
     if (r1) {
      r1.style.cssText=`margin-left:45px;width:200px;
-     justify-content:space-between;display:flex;`
+     justify-content: space-between;display: flex;`
          }
     if (r2){
      r2.style.cssText=`width:200px;margin-left:50px;
@@ -89,16 +96,17 @@ interface style{
      this.setResult('lose')
       }
     }
-    setResult(result:string):string|undefined {
+    setResult(result:string):union1 {
     const {current}:RefObject<HTMLDivElement>=this.ref2
     if (current) return current.textContent=result
     }
     change(e:ChangeEvent<HTMLInputElement>):void {
         this.setState({val:e.target.value})
     }
-    press():void{    
-    const {current}:RefObject<HTMLInputElement|null>=this.ref
-    const {name,skin,val,win}:gal=this.state
+    press():union{    
+    const {current}:RefObject<union4>=this.ref
+    const {name,skin,val,win}:union3=this.state
+    if (!skin||!name||!val||!win) return null
     const [arr1,arr2]:mass[]=[skin[this.x],name[this.x]]
     if (val!=='') {   
     let con:number=0
@@ -118,6 +126,7 @@ interface style{
     }
     render():ReactNode{
         const {skin}:gal=this.state
+        if (!skin) return null
         const mass:mass=skin[this.x]
         enum style{
             width='70px',
