@@ -4,7 +4,7 @@ import { ChangeContext } from "./components/Context";
 import Todo from "./components/Todo";
 import {Restart,Props,obj,games,Struct,ThemeContext,Brand,themes} from "./props/state";
 import styled,{IStyledComponent} from 'styled-components'
-import { BaseObject} from "styled-components/dist/types";
+import { BaseObject} from "styled-components/dist/types"
 
             class Apps extends Component{
             readonly Header:IStyledComponent<'web',BaseObject>=styled.header`
