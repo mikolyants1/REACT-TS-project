@@ -1,20 +1,19 @@
 import {Component,createRef,ReactNode,ChangeEvent,RefObject} from 'react';
 import svg from '../red16.jpg'
-import { prop,style2,union,union2 } from '../props/state';
+import { prop,style2,union2 } from '../props/state';
 interface web{
-    text?:Array<string>,
-    value?:string,
-    value1?:string,
-    con?:number,
-    style?:{
+    text:Array<string>,
+    value:string,
+    con:number,
+    style:{
       transform:string,
       transitionDuration:string,
       transitionTimingFunction:string
     },
-    backgroundColor?:string,
-    height?:number,
-    progValue?:number,
-    progMass?:number[],
+    backgroundColor:string,
+    height:number,
+    progValue:number,
+    progMass:number[],
    }
 export default class Todo extends Component<prop,web>{
       readonly items:Array<string>=[]
@@ -46,9 +45,8 @@ export default class Todo extends Component<prop,web>{
     this.setState({text:this.items,con:0,height:200,
     progMass:[1],progValue:1})
     }
-  press1=(x:number):union=>{
+  press1=(x:number):void=>{
     const {height,value,progMass,con}:web=this.state
-    if (!height||!value||!progMass||!con) return null
     const {current}:RefObject<union2>=this.wrap
     switch (x) {
     case 0:
@@ -75,9 +73,8 @@ export default class Todo extends Component<prop,web>{
       }  
     }
 
-  delete=(x:number):union=>{
+  delete=(x:number):void=>{
     const {con,progMass,progValue}:web=this.state
-    if (!progValue||!progMass||!con) return null
     const {current}:RefObject<union2>=this.wrap
     progMass.push(con)
     const val:number=con<5?con*50+200-50:400
@@ -92,7 +89,6 @@ export default class Todo extends Component<prop,web>{
   render():ReactNode{  
     const {Wrapper,Header,Main,TodoList,Footer}:style2=this.props.struct
     const {text,style,progMass,progValue}:web=this.state
-    if (!text||!style||!progMass||!progValue) return null
     enum style1 {
       width='100%',
       marginTop='7px',
@@ -109,7 +105,7 @@ export default class Todo extends Component<prop,web>{
           onMouseOut={():void=>this.set(-(i+1))}>
          <div className='div' style={style1}>{item}</div>
          <img className='img' style={style}
-          onClick={():union=>this.delete(i)} src={svg} />
+          onClick={():void=>this.delete(i)} src={svg} />
             </div>
     ))
      return (
@@ -122,7 +118,7 @@ export default class Todo extends Component<prop,web>{
           </h2>
         </Header>
             <Main>
-              <button onClick={():union=>this.press1(0)}
+              <button onClick={():void=>this.press1(0)}
                 className='but1'>+</button>
               <div className='main1'>
                 <input id='input' ref={this.ref} value={this.state.value}
@@ -131,7 +127,7 @@ export default class Todo extends Component<prop,web>{
                   onChange={(e:ChangeEvent<HTMLInputElement>):void=>this.setState({value:e.target.value})}
                   placeholder=" Add your new todo"  type="text" />
               </div>
-              <button onClick={():union=>this.press1(1)}
+              <button onClick={():void=>this.press1(1)}
                className='ser'>search</button>
            </Main>   
            <TodoList>

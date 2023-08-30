@@ -1,12 +1,11 @@
 import {ReactNode,ChangeEvent,createRef,RefObject,Component} from "react";
-import { props ,union,union1} from "../props/state";
+import { props ,union1} from "../props/state";
 type mass=Array<string>
 interface gal{
-    name?:Array<mass>,
-    skin?:Array<mass>,
-    val?:union1,
-    win?:number,
-     mass?:Array<number>
+    name:Array<mass>,
+    skin:Array<mass>,
+    val:union1,
+    win:number,
 }
 interface style{
     margin:string,
@@ -103,10 +102,9 @@ type union4=HTMLInputElement|null
     change(e:ChangeEvent<HTMLInputElement>):void {
         this.setState({val:e.target.value})
     }
-    press():union{    
+    press():void{    
     const {current}:RefObject<union4>=this.ref
     const {name,skin,val,win}:union3=this.state
-    if (!skin||!name||!val||!win) return null
     const [arr1,arr2]:mass[]=[skin[this.x],name[this.x]]
     if (val!=='') {   
     let con:number=0
@@ -126,7 +124,6 @@ type union4=HTMLInputElement|null
     }
     render():ReactNode{
         const {skin}:gal=this.state
-        if (!skin) return null
         const mass:mass=skin[this.x]
         enum style{
             width='70px',

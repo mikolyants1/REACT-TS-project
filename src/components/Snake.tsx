@@ -18,12 +18,10 @@ const Up:number[]=[0,1,2,3,4,5,6,7,8]
 const Down:number[]=[73,74,75,76,77,78,79,80]
 const All:number[]=Left.concat(Right,Down,Up)
 for (let index:number = 0; index < All.length; index++) {
-    for (let i:number = 0; i < a1.length; i++) {    
-         if (All[index]==a1[i]) {
-          a1.splice(i,1)
-         }
-        }
-       }  
+  for (let i:number = 0; i < a1.length; i++) {    
+    if (All[index]==a1[i]) a1.splice(i,1) 
+    }
+  }  
 a1.splice(64,1)
 const [state,setState]=useState<state>({con:0,random:a1})
 const [mess,setMess]=useState<mass>({items:[],text:'',last:[]})
@@ -31,13 +29,13 @@ const [con,setCon]=useState(0)
 const ref1=useRef<HTMLDivElement>(null!)
 const ref2=useRef<HTMLDivElement>(null!)
 useEffect(():void=>{
-    ref1.current.style.cssText='width:100%;text-align:center;font-size:20px'
-    ref2.current.style.cssText=`width:145px;text-align:center;height:30px;
-    border-right:1px solid black;font-size:23px;background-color:white`
-    const td:NodeListOf<HTMLTableCellElement>=document.querySelectorAll('td')
+  ref1.current.style.cssText='width:100%;text-align:center;font-size:20px'
+  ref2.current.style.cssText=`width:145px;text-align:center;height:30px;
+   border-right:1px solid black;font-size:23px;background-color:white`
+   const td:NodeListOf<HTMLTableCellElement>=document.querySelectorAll('td')
     td.forEach(({style}:HTMLTableCellElement):void=>{
-    style.cssText=`width:30px;height:30px;
-    border:1px solid black;background-color:green`
+    style.cssText=`width:30px;border:1px solid black;
+    background-color:green;height:30px`
     })
    All.forEach((item:number):string=>td[item].style.backgroundColor='brown')
     td[64].style.backgroundColor='grey'

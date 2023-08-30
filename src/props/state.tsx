@@ -4,7 +4,6 @@ import { createContext,Context, RefObject} from "react"
 import Gallows from "../components/Gallows"
 import TicTacToe from "../components/TicTacToe"
 import Snake from "../components/Snake"
-export type union=void|null
 export type union1=string|undefined
 export type union2=HTMLDivElement|null
 export type play=(({children}:props)=>JSX.Element)|typeof Gallows
