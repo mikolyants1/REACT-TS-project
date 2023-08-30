@@ -15,7 +15,7 @@ interface style{
 type union3=gal|undefined
 type union4=HTMLInputElement|null
 
- export default class Gallows extends Component<props,gal>{
+export default class Gallows extends Component<props,gal>{
    public state:gal
    constructor(props:props){
      super(props)

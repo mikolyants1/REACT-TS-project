@@ -6,6 +6,7 @@ type mass1=Array<number>
 const Main:IStyledComponent<'web',BaseObject>=styled.div`
 width:249px
 `
+type union=number|null
 export default function TicTacToe({children}:props):JSX.Element{  
 const [text,setText]=useState<string>('')
 const [cress,setCress]=useState<number[]>([])
@@ -80,7 +81,7 @@ for (let i:number = 0; i < con1.length; i++) {
       }
   if (con4==con1.length) cells[combos[con1[0]][0]].innerHTML='o'    
     }else{
-let mas:number|null=null
+let mas:union=null
   for (let i:number = 0; i < combos1.length; i++) {
     for (let ind:number = 0; ind < combos1[i].length; ind++) {
       if (combos1[i][ind]==cress[cress.length-1]&&combos[i].length!==0) {
