@@ -17,8 +17,8 @@ type union4=HTMLInputElement|null
 
 export default class Gallows extends Component<props,gal>{
    public state:gal
-   constructor(props:props){
-     super(props)
+   constructor({children}:props){
+     super({children})
      this.state={
         name:[
          ['х','о','л','о','д','и','л','ь','н','и','к'],
