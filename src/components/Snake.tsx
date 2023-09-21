@@ -10,6 +10,7 @@ interface mass{
     last:number[]
 }
 export default function Snake({children}:props):JSX.Element {
+const next:string[]=['up','down','left','right']
 const tds:number[]=Array.from(Array(9).keys())
 const a1:number[]=Array.from(Array(81).keys())
 const Left:number[]=[9,18,27,36,45,54,63,72]
@@ -29,7 +30,7 @@ const [con,setCon]=useState(0)
 const ref1=useRef<HTMLDivElement>(null!)
 const ref2=useRef<HTMLDivElement>(null!)
 useEffect(():void=>{
-  ref1.current.style.cssText='width:100%;text-align:center;font-size:20px'
+  ref1.current.style.cssText='width:100%;text-align:center;font-size:20px;background:opacity'
   ref2.current.style.cssText=`width:145px;text-align:center;height:30px;
    border-right:1px solid black;font-size:23px;background-color:white`
    const td:NodeListOf<HTMLTableCellElement>=document.querySelectorAll('td')
@@ -73,8 +74,8 @@ if (backgroundColor=='grey') x=i
 let con1:number=0
 const up:NodeJS.Timer=setInterval(():void => {    
 if (All.some((z:number):boolean=>z==x)) {    
-setMess({text:'lose',items:mess.items,last:mess.last})  
-    }else{
+setMess((prev:mass)=>({...prev,text:'lose'}))
+  }else{
 let y:number=0
 td.forEach(({style:{backgroundColor}}:HTMLTableCellElement):void=>{
 if (backgroundColor=='yellow') y++
@@ -95,7 +96,7 @@ setCon(con+1)
 mess.items.push(x)
 if (td[x-9].style.backgroundColor=='black') {
 clearInterval(up)
-setMess({text:'lose',items:mess.items,last:mess.last})
+setMess((prev:mass)=>({...prev,text:'lose'}))
      }
 td[x].style.backgroundColor='green'
 for (let i:number = 0; i < td.length; i++) {
@@ -108,7 +109,7 @@ for (let i:number = 0; i < td.length; i++) {
 td.forEach(({style:{backgroundColor}}:HTMLTableCellElement):void=>{
 if (backgroundColor=='green') con2++ 
     })
-if (con2==0) setMess({text:'win',items:mess.items,last:mess.last})
+if (con2==0) setMess((prev:mass)=>({...prev,text:'win'}))
 if (!but[0].hasAttribute('id')) {
 clearInterval(up)
 }else{      
@@ -127,7 +128,7 @@ if (backgroundColor=='grey')  x=i
 let con1:number=0
 const down:NodeJS.Timer=setInterval(():void => {
 if (All.some((z:number):boolean=>z==x)) {    
-setMess({text:'lose',items:mess.items,last:mess.last})  
+  setMess((prev:mass)=>({...prev,text:'lose'}))
     }else{
 let y:number=0
 td.forEach(({style:{backgroundColor}}:HTMLTableCellElement):void=>{
@@ -149,7 +150,7 @@ if (backgroundColor!=='black'&&backgroundColor!=='grey'
     mess.items.push(x)
 if (td[x+9].style.backgroundColor=='black') {
     clearInterval(down)
-   setMess({text:'lose',items:mess.items,last:mess.last})
+    setMess((prev:mass)=>({...prev,text:'lose'}))
      }
     td[x].style.backgroundColor='green'
 for (let i:number = 0; i < td.length; i++) {
@@ -181,8 +182,8 @@ if (backgroundColor=='grey') x=i
 let con1:number=0
 const left:NodeJS.Timer=setInterval(():void => {
 if (All.some((z:number):boolean=>z==x)) {    
-setMess({text:'lose',items:mess.items,last:mess.last})  
-    }else{
+setMess((prev:mass)=>({...prev,text:'lose'}))
+  }else{
 let y:number=0
 td.forEach(({style:{backgroundColor}}:HTMLTableCellElement):void=>{
 if (backgroundColor=='yellow') y++
@@ -203,7 +204,7 @@ setCon(con+1)
 mess.items.push(x)
 if (td[x-1].style.backgroundColor=='black') {
 clearInterval(left)
-setMess({text:'lose',items:mess.items,last:mess.last})
+setMess((prev:mass)=>({...prev,text:'lose'}))
     }
 td[x].style.backgroundColor='green'
 for (let i:number = 0; i < td.length; i++) {
@@ -216,7 +217,7 @@ for (let i:number = 0; i < td.length; i++) {
 td.forEach(({style:{backgroundColor}}:HTMLTableCellElement):void=>{
 if (backgroundColor=='green') con2++ 
     })
-if (con2==0) setMess({text:'win',items:mess.items,last:mess.last})
+if (con2==0) setMess((prev:mass)=>({...prev,text:'win'}))
 if (!but[2].hasAttribute('id')) {
 clearInterval(left)
     }else{
@@ -235,7 +236,7 @@ if (backgroundColor=='grey')  x=i
 let con1:number=0
 const right:NodeJS.Timer=setInterval(():void => {
 if (All.some((z:number):boolean=>z==x)) {    
-setMess({text:'lose',items:mess.items,last:mess.last})  
+setMess((prev:mass)=>({...prev,text:'lose'}))  
     }else{
 let y:number=0
 td.forEach(({style}:HTMLTableCellElement):void=>{
@@ -258,7 +259,7 @@ setCon(con+1)
 mess.items.push(x)
 if (td[x+1].style.backgroundColor=='black') {
 clearInterval(right)
-setMess({text:'lose',items:mess.items,last:mess.last})
+setMess((prev:mass)=>({...prev,text:'lose'}))
     }
 td[x].style.backgroundColor='green'
 for (let i:number = 0; i < td.length; i++) {
@@ -271,7 +272,7 @@ for (let i:number = 0; i < td.length; i++) {
 td.forEach(({style}:HTMLTableCellElement):void=>{
 if (style.backgroundColor=='green') con2++ 
      })
-if (con2==0) setMess({text:'win',items:mess.items,last:mess.last})
+if (con2==0) setMess((prev:mass)=>({...prev,text:'win'}))
 if (!but[3].hasAttribute('id')) {
         clearInterval(right)
     }else{
@@ -283,7 +284,6 @@ td[x+=1].style.backgroundColor='grey'
 }
 }
 enum style {
-    backgroundColor='white',
     width='290px'
 }
 enum style1 {
@@ -300,27 +300,28 @@ enum style3 {
 enum style4 {
     width='240px'
 }
+const best:string|null=localStorage.getItem('best')
     return <div style={style}> 
-             <div ref={ref1}>score:{con} best:{localStorage.getItem('best')}</div>
-               <div style={style}>
-                 {tds.map((index:number):JSX.Element=>(
-                    <tr key={index}>
-                       {tds.map((index:number):JSX.Element=>(
-                         <td key={index}></td>
-                         ))}
-                    </tr>
-                   ))}     
+             <div ref={ref1}>
+                score:{con} best:{best}
+             </div>
+             <div style={style}>
+                {tds.map((i:number):JSX.Element=>(
+                  <tr key={i}>
+                    {tds.map((i:number):JSX.Element=>(
+                      <td key={i} />
+                     ))}
+                  </tr>
+                ))}     
             </div>
             <div style={style3}>
               <div style={style4}>
-                <button className='but'
-                 style={style1} onClick={():void=>move(2)}>left</button>
-                <button className='but'
-                 style={style1} onClick={():void=>move(0)}>up</button>
-                <button className='but'
-                 style={style1} onClick={():void=>move(1)}>down</button>
-                <button className='but'
-                 style={style1} onClick={():void=>move(3)}>right</button>
+                {next.map((item:string,i:number):JSX.Element=>(
+                   <button className='but' style={style1}
+                     key={i} onClick={():void=>move(i)}>
+                      {item}
+                  </button>
+                ))}
               </div>
               <div>
                 <div ref={ref2}>

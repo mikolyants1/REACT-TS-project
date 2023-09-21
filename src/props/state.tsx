@@ -70,7 +70,49 @@ export const Brand:IStyledComponent<'web',BaseObject>=styled.div`
     text-allign:center;
      width:200px;
     margin:20px auto
-                `
+        `
+
+        interface ToggleProp{
+            rotate:number,
+            marg:number,
+            children:JSX.Element
+        }
+export const Toggle:IStyledComponent<'web',ToggleProp>=styled.div`
+width:60px;
+height:30px;
+background-color:rgb(200,200,200);
+border-radius:15px;
+border:1px solid grey;
+margin:auto;
+& div {
+rotate:${({rotate}:ToggleProp):number=>rotate}deg;
+width:30px;
+height:30px;
+background-color:white;
+box-shadow:1px 1px 1px 0px grey;
+border-radius:50%;
+margin-left:${({marg}:ToggleProp):number=>marg}px;
+}
+`
+interface TitleProp {
+    ml:string,
+    children:JSX.Element
+}
+interface MainProp {
+    marginLeft:number,
+    children:JSX.Element
+}
+export const HomeLink:IStyledComponent<'web',BaseObject>=styled.div`
+margin-top:50px;
+margin-left:20px
+`
+export const Title:IStyledComponent<'web',TitleProp>=styled.div`
+width:140%;
+margin-left:${props=>props.ml}
+`
+export const GameMain:IStyledComponent<'web',MainProp>=styled.div`
+margin-left:-${props=>props.marginLeft}px
+`
 export const Struct:style2={
         Wrapper:Wrapper,
         Header:Header,
@@ -99,7 +141,7 @@ export function Restart():JSX.Element{
     height='100%'
     }
     return <button style={style}
-    onClick={()=>window.location.reload()}>
+     onClick={()=>window.location.reload()}>
         restart
      </button>
 }

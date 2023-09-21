@@ -16,37 +16,40 @@ interface web{
     progMass:number[],
    }
 export default class Todo extends Component<prop,web>{
-      readonly items:Array<string>=[]
-      state:web={
-          text:this.items,
-          value:'',
-          con:0,
-        style:{
-            transform:`translateX(50px)`,
-            transitionDuration:'0.5s',
-            transitionTimingFunction:'ease'
+    readonly items:Array<string>=[]
+     state: web
+    constructor(props:prop){
+     super(props)
+     this.state={
+      text:this.items,
+      value:'',
+      con:0,
+      style:{
+        transform:`translateX(50px)`,
+        transitionDuration:'0.5s',
+        transitionTimingFunction:'ease'
         },
       backgroundColor:'',
       height:200,
       progValue:1,
       progMass:[],
-       }
-
-    readonly ref=createRef<HTMLInputElement>()
-    readonly wrap=createRef<HTMLDivElement>()
+    }
+  }
+  readonly ref=createRef<HTMLInputElement>()
+  readonly wrap=createRef<HTMLDivElement>()
   set=(x:number):void=>{
     const img:NodeListOf<HTMLImageElement>=document.querySelectorAll('.img')
     img[x>0?x-1:-x-1].style.transform=`translateX(${x>0?0:50}px)`
     }
   change(e:ChangeEvent<HTMLInputElement>):void{
     this.setState({value:e.target.value})
-  }
+    }
   clear():void{
     const {current}:RefObject<union2>=this.wrap
     if (current) current.style.height='200px'
     this.items.length=0
-    this.setState({text:this.items,con:0,height:200,
-    progMass:[1],progValue:1})
+    this.setState({text:this.items,con:0,
+    height:200,progMass:[1],progValue:1})
     }
   press=(x:number):void=>{
     const {height,value,progMass,con}:web=this.state
@@ -59,14 +62,16 @@ export default class Todo extends Component<prop,web>{
      const val:number=height<400?height+50:height
      if (current) current.style.height=`${val}px`
      this.items.push(value)
-     this.setState({text:this.items,con:con+1,
-     height:val,progMass:progMass,progValue:this.state.progValue})
+     this.setState({text:this.items,con:con+1,height:val,
+     progMass:progMass,progValue:this.state.progValue})
      this.ref.current?.focus()
      }
     break;
       case 1:
-     const val:string=value.trim().toLowerCase()
-     const text:string[]=this.items.filter((item:string):Boolean=>item.toLowerCase().indexOf(val)!==-1)  
+      const val:string=value.trim().toLowerCase()
+      const text:string[]=this.items.filter((item:string):boolean=>{
+      return item.toLowerCase().indexOf(val)!==-1
+      })  
      const val1:number=text.length<5?50*text.length+200:400
      if (current) current.style.height=`${val1}px`
      this.setState({text:text,height:val1}) 
@@ -109,7 +114,9 @@ export default class Todo extends Component<prop,web>{
         <div key={i} className='items'
           onMouseOver={():void=>this.set(i+1)}
           onMouseOut={():void=>this.set(-(i+1))}>
-         <div className='div' style={style1}>{item}</div>
+         <div className='div' style={style1}>
+           {item}
+         </div>
          <img className='img' style={style}
           onClick={():void=>this.delete(i)} src={svg} />
             </div>
@@ -144,7 +151,9 @@ export default class Todo extends Component<prop,web>{
            </TodoList>
            <Footer>
              <div className="con">
-               <div>you have {this.state.con} pending tasks</div>
+               <div>
+                  you have {this.state.con} pending tasks
+               </div>
                <div style={style3}>
                  progress: 
                  <meter min={0} max={max}

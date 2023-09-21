@@ -96,22 +96,24 @@ if (mas) cells[combos[mas][Math.floor(Math.random()*2)]].innerHTML='o'
  }
             return <Main>
                       <tr>
-                      {combos1[0].map((item:number,i:number):JSX.Element=>(
-                        <td key={i} onClick={():void=>press(item)}></td>
+                      {combos1[0].map((item:number):JSX.Element=>(
+                        <td key={item} onClick={():void=>press(item)} />
                         ))}
                        </tr>
                       <tr>
-                      {combos1[1].map((item:number,i:number):JSX.Element=>(
-                        <td key={i} onClick={():void=>press(item)}></td>
+                      {combos1[1].map((item:number):JSX.Element=>(
+                        <td key={item} onClick={():void=>press(item)} />
                         ))}
                       </tr>
                      <tr>
-                     {combos1[2].map((item:number,i:number):JSX.Element=>(
-                        <td key={i} onClick={():void=>press(item)}></td>
+                     {combos1[2].map((item:number):JSX.Element=>(
+                        <td key={item} onClick={():void=>press(item)} />
                         ))}
                      </tr>
                    <div style={style}>
-                    <div style={style1}>{text}</div>
+                    <div style={style1}>
+                      {text}
+                    </div>
                     <div className="res">
                       {children}
                       </div>

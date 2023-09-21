@@ -2,7 +2,8 @@ import {ReactNode,useState,Component,FC} from "react";
 import { BrowserRouter as Router, Route, Routes,Link,Outlet,useParams,Params} from "react-router-dom";
 import { ChangeContext } from "./components/Context";
 import Todo from "./components/Todo";
-import {Restart,Props,obj,games,Struct,ThemeContext,Brand,themes} from "./props/state";
+import {Restart,Props,obj,games,Struct,ThemeContext,Brand,
+themes,color,GameMain,Title,HomeLink} from "./props/state";
 import styled,{IStyledComponent} from 'styled-components'
 import { BaseObject} from "styled-components/dist/types";
 
@@ -20,12 +21,16 @@ import { BaseObject} from "styled-components/dist/types";
               return <this.Header>  
                          <div style={style}>
                             <h2>
-                              <Link to='/todo'>Todo App </Link>
+                              <Link to='/todo'>
+                                 Todo App
+                               </Link>
                             </h2>
                          </div> 
                    <div style={style}>
                       <h2>
-                        <Link to='/games'>Games App </Link>
+                        <Link to='/games'>
+                           Games App 
+                        </Link>
                       </h2>
                    </div> 
                 </this.Header>
@@ -34,7 +39,9 @@ import { BaseObject} from "styled-components/dist/types";
             class TodoApp extends Component{
                 render(): ReactNode {
                     return <div>
-                       <Todo struct={Struct} />
+                       <Todo
+                        struct={Struct} 
+                        />
                     </div>
 
                 }
@@ -75,7 +82,9 @@ import { BaseObject} from "styled-components/dist/types";
             const list:JSX.Element[]=item.map(({id,name}:obj,i:number):JSX.Element=>(
                     <this.GamesItem key={i}>
                         <h3>
-                           <Link to={`/games/${id}`}>{name}</Link>
+                           <Link to={`/games/${id}`}>
+                              {name}
+                           </Link>
                         </h3>
                      </this.GamesItem>
                 ))
@@ -86,36 +95,28 @@ import { BaseObject} from "styled-components/dist/types";
                          </this.GamesNav>
                 }
             }
-           
-           const Game:FC<Props>=({item}):JSX.Element|null=>{
+           type union=obj|undefined
+           type union1=JSX.Element|null
+         const Game:FC<Props>=({item}):union1=>{
                const params:Readonly<Params<string>>=useParams()
-               const game:obj|undefined=item.find(({id}:obj):boolean=>id==params.id)
-               const HomeLink:IStyledComponent<'web',BaseObject>=styled.div`
-                 margin-top:50px;
-                 margin-left:20px
-                 `
+               const game:union=item.find(({id}:obj):boolean=>id==params.id)
                if (typeof game!=='undefined'){
                 const {Game,ml,marginLeft,name}:obj=game
-                const Title:IStyledComponent<'web',BaseObject>=styled.div`
-                width:140%;
-                margin-left:${ml}
-                `
-               const Main:IStyledComponent<'web',BaseObject>=styled.div`
-                margin-left:-${marginLeft}px
-                `
              return <div>
-                     <Title>
+                     <Title ml={ml}>
                         <h2> 
                           {name}
                         </h2>
                      </Title>
-                        <Main>
+                        <GameMain marginLeft={marginLeft}>
                           <Game>
                             <Restart />
                           </Game>
-                        </Main>
+                        </GameMain>
                       <HomeLink>
-                        <Link to='/'>MAIN</Link>
+                        <Link to='/'>
+                           MAIN
+                        </Link>
                      </HomeLink> 
                     </div>
                 }
@@ -126,7 +127,8 @@ import { BaseObject} from "styled-components/dist/types";
             const [marg,setMarg]=useState<number>(0)
             const [rot,setRot]=useState<number>(0)
             const press=():void=>{
-            setState(state==themes.color1?themes.color2:themes.color1)
+            const {color1,color2}:color=themes
+            setState(state==color1?color2:color1)
             setMarg(marg==0?30:0)
             setRot(rot==0?90:0)
                }

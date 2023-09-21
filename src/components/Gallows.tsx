@@ -40,7 +40,7 @@ export default class Gallows extends Component<props,gal>{
         win:1,
        }
      }
-    x:number=[0,1,2,3,4,5][Math.floor(Math.random()*6)]
+    readonly x:number=[0,1,2,3,4,5][Math.floor(Math.random()*6)]
     readonly ref=createRef<HTMLInputElement>()
     readonly ref1=createRef<HTMLDivElement>()
     readonly ref2=createRef<HTMLDivElement>()
@@ -100,7 +100,7 @@ export default class Gallows extends Component<props,gal>{
     if (current) return current.textContent=result
     }
     change(e:ChangeEvent<HTMLInputElement>):void {
-        this.setState({val:e.target.value})
+      this.setState({val:e.target.value})
     }
     press():void{    
     const {current}:RefObject<union4>=this.ref
@@ -130,31 +130,37 @@ export default class Gallows extends Component<props,gal>{
             height='20px'
           }
     const text:JSX.Element[]=mass.map((item:string,i:number):JSX.Element=>(
-        <div key={i}>{item}</div>
+        <div key={i}>
+           {item}
+        </div>
            ))
     return <div style={this.style}>
             <div>
               <label htmlFor="galInput">Буква:</label>
               <input ref={this.ref} id="galInput" type="text"
                onChange={this.change.bind(this)} />
-              <button onClick={this.press.bind(this)}>try</button>
+              <button onClick={this.press.bind(this)}>
+                try
+              </button>
             </div> 
-            <div ref={this.ref1}>{text}</div>
-            <div ref={this.ref2}></div>
-            <div className='a1'></div>
-            <div className='a2'></div>
-            <div className='a3'></div>
-            <div className='a4'></div>
+            <div ref={this.ref1}>
+              {text}
+            </div>
+            <div ref={this.ref2} />
+            <div className='a1' />
+            <div className='a2' />
+            <div className='a3' />
+            <div className='a4' />
             <div className='a51'>
-               <div className='a5'></div>
-               <div className='a6'></div>
-               <div className='a7'></div>
+               <div className='a5' />
+               <div className='a6' />
+               <div className='a7' />
             </div>
             <div className='a61'>
-               <div className='a8'></div>
-               <div className='a9'></div>
+               <div className='a8' />
+               <div className='a9' />
             </div>
-            <div className='a10'></div>
+            <div className='a10' />
               <div style={style}>
             {this.props.children}
                 </div>               
