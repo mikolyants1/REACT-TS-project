@@ -5,83 +5,17 @@
   margin-top: -20px;
   margin-left: -10px;
  }
- label{
-  cursor: pointer;
- }
- .items{
-  width: 93%;
-  margin:10px 0 0 10px;
-  height: 40px;
-  background-color:rgb(239, 239, 239);
-  display: flex;
-  overflow: hidden;
-  border-radius:5px
- }
-
- ::-webkit-scrollbar{
-  display: none;
- }
- 
- h2{
-  font-size: 29px;
- }
- .main1{
-  width: 250px;
- }
- input{
-  width: 100%;
-  height: 90%;
-  border: 1px solid grey;
-  font-size: 17px;
- }
  #galInput{
   width: 170px;
   height: 18px;
   border: 1px solid grey;
   font-size: 17px;
  }
- .but1{
-  background-color: blueviolet;
-  width: 40px;height: 40px;
-  border-radius:5px 0px 0 5px;
-  margin-left: 10px;
-  border: none;
-  color: white;
-   font-size: 35px;
-  font-weight: bolder;
- }
- .ser{
-  background-color: blueviolet;
-  height: 40px;
-  border-radius:0 5px  5px 0;
-  border: none;
-  color: white;
-  font-weight: bolder;
- }
- .con{
-  width: 74%;
- }
- .but2{
-  background-color: blueviolet;
-  width: 75px;height: 30px;
-  color: white;
-  border-radius: 3px;
-  font-size: 15px;
-  border: none;
- }
- .list0{
-  width: 400px;
-  display:flex;
-  margin-left:-100px
- }
- 
 a{
    margin-top: 30px;
    text-decoration:none ;
    color: rgb(32, 31, 31);
 }
-
-
 .a1{
 margin-left: 130px;
 margin-top: 50px;
@@ -168,33 +102,9 @@ height: 4px;
 background-color: black;
 }
 
-td{
-  border:1px solid black;
-   width: 80px;
-    height: 80px;
-    text-align: center;
-    font-size: 60px;
-   background-color:white 
-}
-
-.res{
-  width: 120px; 
-  height: 100%;
-  border-radius:0px;
-  border:0px;
-  border-left: 2px solid black;
-}
-@media (max-width:420px) {
-.list1{
-width: 100px;
-margin-left: 15px;
-}
-
-}
 @media (max-width:400px) {
 #root{
    width: 440px;
    margin-top: -22px;
 }
-
 }

@@ -1,4 +1,4 @@
-import {useState,useEffect,useRef} from "react";
+import {useState,useEffect,useRef,memo} from "react";
 import { props } from "../props/state";
 interface state{
     con?:number,
@@ -9,7 +9,7 @@ interface mass{
     text:string,
     last:number[]
 }
-export default function Snake({children}:props):JSX.Element {
+ function Snake({children}:props):JSX.Element {
 const next:string[]=['up','down','left','right']
 const tds:number[]=Array.from(Array(9).keys())
 const a1:number[]=Array.from(Array(81).keys())
@@ -88,7 +88,8 @@ if (backgroundColor!=='black'&&backgroundColor!=='grey'
 &&backgroundColor!=='brown') b.push(i)
     })
 setState({random:b})
-const ran:number=state.random[Math.floor(Math.random()*state.random.length)]
+const ran:number= state.random[Math.floor(Math.random()*state.random.length)]
+
 td[ran].style.backgroundColor='yellow'
 con1++
 setCon(con+1)
@@ -334,3 +335,4 @@ const best:string|null=localStorage.getItem('best')
             </div>
           </div>
     }
+export default memo(Snake)

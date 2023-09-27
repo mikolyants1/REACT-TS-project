@@ -6,12 +6,8 @@ interface gal{
     skin:Array<mass>,
     val:union1,
     win:number,
+    
 }
-interface style{
-    margin:string,
-    width:string,
-} 
-
 type union3=gal|undefined
 type union4=HTMLInputElement|null
 
@@ -44,10 +40,6 @@ export default class Gallows extends Component<props,gal>{
     readonly ref=createRef<HTMLInputElement>()
     readonly ref1=createRef<HTMLDivElement>()
     readonly ref2=createRef<HTMLDivElement>()
-    readonly style:style={
-    margin:'100px auto 0 auto',
-    width:`300px`,
-        } 
     componentDidMount():void {
     const [{current:r1},{current:r2}]
     :RefObject<HTMLDivElement>[]=[this.ref1,this.ref2]
@@ -60,7 +52,7 @@ export default class Gallows extends Component<props,gal>{
      height:30px;text-align:center;font-size: 23px;`
         }
     }
-    componentWillUpdate(nextProps:Readonly<props>,{win}:Readonly<gal>):void {
+    componentWillUpdate(_:Readonly<props>,{win}:Readonly<gal>):void {
     const {style:s1}=document.querySelector('.a4') as HTMLElement
     const {style:s2}=document.querySelector('.a5') as HTMLElement
     const {style:s3}=document.querySelector('.a6') as HTMLElement
@@ -129,12 +121,16 @@ export default class Gallows extends Component<props,gal>{
             width='70px',
             height='20px'
           }
+        enum style1 {
+          margin='100px auto 0 auto',
+          width=`300px`,
+              } 
     const text:JSX.Element[]=mass.map((item:string,i:number):JSX.Element=>(
         <div key={i}>
            {item}
         </div>
            ))
-    return <div style={this.style}>
+    return <div style={style1}>
             <div>
               <label htmlFor="galInput">Буква:</label>
               <input ref={this.ref} id="galInput" type="text"

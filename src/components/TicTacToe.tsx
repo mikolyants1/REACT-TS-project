@@ -1,5 +1,6 @@
-import {useState} from "react";
+import {useState,memo} from "react";
 import { props } from "../props/state";
+import { RestartDiv,Table,Finish,Result } from "../props/state";
 import styled,{IStyledComponent} from 'styled-components'
 import { BaseObject } from "styled-components/dist/types";
 type mass1=Array<number>
@@ -7,7 +8,7 @@ const Main:IStyledComponent<'web',BaseObject>=styled.div`
 width:249px
 `
 type union=number|null
-export default function TicTacToe({children}:props):JSX.Element{  
+function TicTacToe({children}:props):JSX.Element{  
 const [text,setText]=useState<string>('')
 const [cress,setCress]=useState<number[]>([])
 const [combos,setCombos]=useState<mass1[]>([
@@ -22,19 +23,7 @@ const combos1:Array<mass1>=[
 [1, 4, 7],[2, 5, 8],
 [0, 4, 8],[6, 4, 2]
         ]
-enum style {
-display= 'flex',
-width='247px',
-height='40px',
-border='1px solid black',
-justifyContent='space-between'
-    }
-enum style1 {
-fontSize='30px',
-width='100%',
-backgroundColor='white',
-textAlign='center',
-    }
+const Combo:mass1[]=combos1.slice(0,3)
 function press(n:number):void {
 const cells:NodeListOf<HTMLTableCellElement>=document.querySelectorAll("td")
 if (text=='') {
@@ -95,28 +84,21 @@ if (mas) cells[combos[mas][Math.floor(Math.random()*2)]].innerHTML='o'
 	  }
  }
             return <Main>
-                      <tr>
-                      {combos1[0].map((item:number):JSX.Element=>(
-                        <td key={item} onClick={():void=>press(item)} />
-                        ))}
-                       </tr>
-                      <tr>
-                      {combos1[1].map((item:number):JSX.Element=>(
-                        <td key={item} onClick={():void=>press(item)} />
+                    {Combo.map((data:mass1,i:number):JSX.Element=>(
+                      <tr key={i}>
+                       {data.map((item:number):JSX.Element=>(
+                         <Table key={item} onClick={():void=>press(item)} />
                         ))}
                       </tr>
-                     <tr>
-                     {combos1[2].map((item:number):JSX.Element=>(
-                        <td key={item} onClick={():void=>press(item)} />
-                        ))}
-                     </tr>
-                   <div style={style}>
-                    <div style={style1}>
-                      {text}
-                    </div>
-                    <div className="res">
-                      {children}
-                      </div>
-                    </div>       
-                 </Main>
+                    ))}
+                   <Finish>
+                    <Result>
+                        {text}
+                    </Result>
+                    <RestartDiv>
+                         {children}
+                    </RestartDiv>
+                  </Finish>       
+                </Main>
     }
+    export default memo(TicTacToe)

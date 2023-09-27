@@ -1,16 +1,12 @@
 import {Component,createRef,ReactNode,ChangeEvent,RefObject} from 'react';
 import svg from '../red16.jpg'
-import { prop,style2,union2 } from '../props/state';
-interface web{
+import { prop,style2,union2,ClearButton,Item,Items,Img,Label,Static,Meter,
+SerButton,SetButton,Count,Block,Input,Head } from '../props/state';
+interface web {
     text:Array<string>,
     value:string,
     con:number,
-    style:{
-      transform:string,
-      transitionDuration:string,
-      transitionTimingFunction:string
-    },
-    backgroundColor:string,
+    transform:string,
     height:number,
     progValue:number,
     progMass:number[],
@@ -24,21 +20,17 @@ export default class Todo extends Component<prop,web>{
       text:this.items,
       value:'',
       con:0,
-      style:{
-        transform:`translateX(50px)`,
-        transitionDuration:'0.5s',
-        transitionTimingFunction:'ease'
-        },
-      backgroundColor:'',
+      transform:`translateX(50px)`,
       height:200,
       progValue:1,
       progMass:[],
+
     }
   }
   readonly ref=createRef<HTMLInputElement>()
   readonly wrap=createRef<HTMLDivElement>()
   set=(x:number):void=>{
-    const img:NodeListOf<HTMLImageElement>=document.querySelectorAll('.img')
+    const img:NodeListOf<HTMLImageElement>=document.querySelectorAll('#img')
     img[x>0?x-1:-x-1].style.transform=`translateX(${x>0?0:50}px)`
     }
   change(e:ChangeEvent<HTMLInputElement>):void{
@@ -91,83 +83,72 @@ export default class Todo extends Component<prop,web>{
     this.setState({text:this.items,con:con-1,height:val,
     progMass:progMass,progValue:progValue+1})
     }
-  focus=(x:number):void=>{
-  this.setState({backgroundColor:x==0?'rgb(210, 210, 210)':''})
-    }
   render():ReactNode{  
     const {Wrapper,Header,Main,TodoList,Footer}:style2=this.props.struct
-    const {text,style,progMass,progValue,backgroundColor}:web=this.state
-    enum style1 {
-      width='100%',
-      marginTop='7px',
-      marginLeft='10px',
-      fontSize='16px'
-        }
-    enum style3 {
-      marginTop='-4px'
-        }
-    const style4={
-    backgroundColor:`${backgroundColor}`
-    }
+    const {text,transform,progMass,progValue}:web=this.state
     const max:number=progMass.length!==0?progMass[0]:1
     const items:JSX.Element[]=text.map((item:string,i:number):JSX.Element=>(
-        <div key={i} className='items'
-          onMouseOver={():void=>this.set(i+1)}
-          onMouseOut={():void=>this.set(-(i+1))}>
-         <div className='div' style={style1}>
+        <Items key={i} 
+         onMouseOver={():void=>this.set(i+1)}
+         onMouseOut={():void=>this.set(-(i+1))}>
+         <Item>
            {item}
-         </div>
-         <img className='img' style={style}
-          onClick={():void=>this.delete(i)} src={svg} />
-            </div>
+         </Item>
+         <Img 
+          id='img' 
+          tran={transform}
+          onClick={():void=>this.delete(i)} 
+          src={svg} 
+          />
+       </Items>
     ))
      return (
-    <Wrapper ref={this.wrap} >
-        <Header> 
-          <h2>
-            <label htmlFor='input'>
-                Todo App
-            </label>
-          </h2>
-        </Header>
-            <Main>
-              <button className='but1'
-               onClick={():void=>this.press(0)}>
-                 +
-              </button>
-              <div className='main1'>
-                <input id='input' ref={this.ref} style={style4} 
-                value={this.state.value} onChange={this.change.bind(this)} 
-                onFocus={():void=>this.focus(0)} onBlur={():void=>this.focus(1)} 
-                placeholder=" Add your new todo" type="text" />
-              </div>
-              <button onClick={():void=>this.press(1)}
-                className='ser'>
-                search
-              </button>
-           </Main>   
-           <TodoList>
-               {items}
-           </TodoList>
-           <Footer>
-             <div className="con">
-               <div>
-                  you have {this.state.con} pending tasks
-               </div>
-               <div style={style3}>
-                 progress: 
-                 <meter min={0} max={max}
-                   value={progValue}>
-                 </meter>
-                  {Math.floor(progValue/max*100)}%
-               </div>
-             </div>
-             <button className='but2'
-              onClick={this.clear.bind(this)}>
-                Clear All
-             </button>
-          </Footer>
-       </Wrapper>
+    <Wrapper ref={this.wrap}>
+      <Header> 
+        <Head>
+          <Label htmlFor='input'>
+            Todo App
+          </Label>
+        </Head>
+      </Header>
+      <Main>
+        <SetButton onClick={():void=>this.press(0)}>
+            +
+        </SetButton>
+        <Block>
+          <Input 
+           id='input' 
+           onChange={this.change.bind(this)}
+           ref={this.ref}  
+           value={this.state.value}  
+           placeholder=" Add your new todo" 
+           type="text" 
+            />
+         </Block>
+         <SerButton onClick={():void=>this.press(1)}>
+            search
+         </SerButton>
+       </Main>   
+       <TodoList>
+          {items}
+       </TodoList>
+       <Footer>
+        <Count>
+          <div>
+            you have {this.state.con} pending tasks
+          </div>
+          <Static>
+            progress: 
+            <Meter min={0} max={max}
+             value={progValue} />
+             {Math.floor(progValue/max*100)}%
+          </Static>
+        </Count>
+        <ClearButton onClick={this.clear.bind(this)}>
+           Clear All
+        </ClearButton>
+      </Footer>
+    </Wrapper>
      )
   }
 }
