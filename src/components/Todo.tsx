@@ -43,10 +43,10 @@ export default class Todo extends Component<prop,web>{
     this.setState({text:this.items,con:0,
     height:200,progMass:[1],progValue:1})
     }
-  press=(x:number):void=>{
+  press=(val:number):void=>{
     const {height,value,progMass,con}:web=this.state
     const {current}:RefObject<union2>=this.wrap
-    switch (x) {
+    switch (val) {
     case 0:
      if (value!=='') {
      progMass.length=0
@@ -102,7 +102,7 @@ export default class Todo extends Component<prop,web>{
           />
        </Items>
     ))
-     return (
+  return (
     <Wrapper ref={this.wrap}>
       <Header> 
         <Head>

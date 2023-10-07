@@ -10,7 +10,8 @@ interface gal{
 }
 type union3=gal|undefined
 type union4=HTMLInputElement|null
-
+type refType=RefObject<HTMLDivElement>
+type Res=HTMLDivElement|null
 export default class Gallows extends Component<props,gal>{
    public state:gal
    constructor({children}:props){
@@ -41,8 +42,7 @@ export default class Gallows extends Component<props,gal>{
     readonly ref1=createRef<HTMLDivElement>()
     readonly ref2=createRef<HTMLDivElement>()
     componentDidMount():void {
-    const [{current:r1},{current:r2}]
-    :RefObject<HTMLDivElement>[]=[this.ref1,this.ref2]
+    const [r1,r2]:Res[]=this.getCurrent(this.ref1,this.ref2)
     if (r1) {
      r1.style.cssText=`margin-left:45px;width:200px;
      justify-content: space-between;display: flex;`
@@ -91,6 +91,9 @@ export default class Gallows extends Component<props,gal>{
     const {current}:RefObject<HTMLDivElement>=this.ref2
     if (current) return current.textContent=result
     }
+    getCurrent(...refs:refType[]):Res[]{
+    return refs.map(({current}:refType)=>current)
+    }
     change(e:ChangeEvent<HTMLInputElement>):void {
       this.setState({val:e.target.value})
     }
@@ -112,21 +115,21 @@ export default class Gallows extends Component<props,gal>{
     if (current) {
      current.value=''
      current.focus()
-    }
+       }
     }
     render():ReactNode{
-        const {skin}:gal=this.state
-        const mass:mass=skin[this.x]
-        enum style{
-            width='70px',
-            height='20px'
-          }
-        enum style1 {
-          margin='100px auto 0 auto',
-          width=`300px`,
-              } 
-    const text:JSX.Element[]=mass.map((item:string,i:number):JSX.Element=>(
-        <div key={i}>
+      const {skin}:gal=this.state
+      const mass:mass=skin[this.x]
+      enum style{
+       width='70px',
+       height='20px'
+        }
+      enum style1 {
+       margin='100px auto 0 auto',
+       width=`300px`,
+        } 
+    const text:JSX.Element[]=mass.map((item:string):JSX.Element=>(
+        <div key={item}>
            {item}
         </div>
            ))
@@ -148,19 +151,19 @@ export default class Gallows extends Component<props,gal>{
             <div className='a3' />
             <div className='a4' />
             <div className='a51'>
-               <div className='a5' />
-               <div className='a6' />
-               <div className='a7' />
+              <div className='a5' />
+              <div className='a6' />
+              <div className='a7' />
             </div>
             <div className='a61'>
-               <div className='a8' />
-               <div className='a9' />
+              <div className='a8' />
+              <div className='a9' />
             </div>
             <div className='a10' />
-              <div style={style}>
-            {this.props.children}
-                </div>               
-            </div>
+            <div style={style}>
+               {this.props.children}
+            </div>               
+          </div>
     }
   }
  

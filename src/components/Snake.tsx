@@ -1,5 +1,6 @@
 import {useState,useEffect,useRef,memo} from "react";
 import { props } from "../props/state";
+import useBest from "./Custom";
 interface state{
     con?:number,
     random:number[]
@@ -27,8 +28,10 @@ a1.splice(64,1)
 const [state,setState]=useState<state>({con:0,random:a1})
 const [mess,setMess]=useState<mass>({items:[],text:'',last:[]})
 const [con,setCon]=useState(0)
+const [best,setBest]=useBest('best')
 const ref1=useRef<HTMLDivElement>(null!)
 const ref2=useRef<HTMLDivElement>(null!)
+useEffect(():void=>setBest(`${con}`),[con])
 useEffect(():void=>{
   ref1.current.style.cssText='width:100%;text-align:center;font-size:20px;background:opacity'
   ref2.current.style.cssText=`width:145px;text-align:center;height:30px;
@@ -47,15 +50,6 @@ useEffect(():void=>{
     }
 },[]
 )
-useEffect(():void=>{
- if (localStorage.getItem('best')) {
-    if (con>=JSON.parse(localStorage.getItem("best") || "")) {
-    localStorage.setItem('best',`${con}`)
-      }  
-    }else{
-    localStorage.setItem('best','0')
-      }
-},[con])
 function move(n:number):void {  
 const td:NodeListOf<HTMLTableCellElement>=document.querySelectorAll('td')
 const but:NodeListOf<HTMLButtonElement>=document.querySelectorAll('.but')
@@ -301,7 +295,6 @@ enum style3 {
 enum style4 {
     width='240px'
 }
-const best:string|null=localStorage.getItem('best')
     return <div style={style}> 
              <div ref={ref1}>
                 score:{con} best:{best}

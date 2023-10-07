@@ -92,13 +92,13 @@ if (mas) cells[combos[mas][Math.floor(Math.random()*2)]].innerHTML='o'
                       </tr>
                     ))}
                    <Finish>
-                    <Result>
-                        {text}
-                    </Result>
-                    <RestartDiv>
-                         {children}
-                    </RestartDiv>
-                  </Finish>       
-                </Main>
+                     <Result>
+                      {text}
+                     </Result>
+                     <RestartDiv>
+                      {children}
+                     </RestartDiv>
+                   </Finish>       
+                 </Main>
     }
     export default memo(TicTacToe)

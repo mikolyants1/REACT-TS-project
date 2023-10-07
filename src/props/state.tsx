@@ -6,6 +6,7 @@ import TicTacToe from "../components/TicTacToe"
 import Snake from "../components/Snake"
 export type union1=string|undefined
 export type union2=HTMLDivElement|null
+export type union3=string|null
 export type play=MemoExoticComponent<(({children}:props)=>JSX.Element)>|typeof Gallows
 export type obj={
     id:string,
@@ -20,9 +21,9 @@ export const games:Array<obj>=[
  {id:'3', name: "Snake",marginLeft:100,ml:'2px',Game:Snake} 
             ]
 export type color={
-        color1:string,
-        color2:string,
-             }
+    color1:string,
+    color2:string,
+        }
 export const themes:color={
 color1:'linear-gradient(40deg,#eaebe2,#85d3f1,#56bee7) no-repeat',
 color2:'linear-gradient(40deg,rgb(250, 216, 24),rgb(236, 72, 72),rgb(240, 56, 240)) no-repeat',
@@ -44,7 +45,7 @@ interface TitleProp {
     children:JSX.Element
         }
 interface MainProp {
-    marginLeft:number,
+    margin:number,
     children:JSX.Element
         }
 interface ToggleProp{
@@ -166,7 +167,7 @@ width:140%;
 margin-left:${props=>props.ml}
 `
 export const GameMain:IStyledComponent<'web',MainProp>=styled.div`
-margin-left:-${({marginLeft}:MainProp):number=>marginLeft}px
+margin-left:-${({margin}:MainProp):number=>margin}px
 `
 export const Table:IStyledComponent<'web',TableProp>=styled.td`
     border:1px solid black;

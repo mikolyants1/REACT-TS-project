@@ -93,36 +93,36 @@ const Game:FC<Props>=({item}):union1=>{
    const game:union=item.find(({id}:obj):boolean=>id==params.id)
    if (typeof game!=='undefined'){
       const {Game,ml,marginLeft,name}:obj=game
-             return <div>
-                     <Title ml={ml}>
+             return <>
+                      <Title ml={ml}>
                         <Head> 
                           {name}
                         </Head>
-                     </Title>
-                        <GameMain marginLeft={marginLeft}>
-                          <Game>
-                            <Restart />
-                          </Game>
-                        </GameMain>
+                      </Title>
+                      <GameMain margin={marginLeft}>
+                        <Game>
+                          <Restart />
+                        </Game>
+                      </GameMain>
                       <HomeLink>
                         <Link to='/'>
-                           MAIN
+                          MAIN
                         </Link>
-                     </HomeLink> 
-                    </div>
+                      </HomeLink> 
+                    </>
                 }
-                return null
+            return null
          } 
 function Main():JSX.Element{
    const [state,setState]=useState<string>(themes.color1)
    const [marg,setMarg]=useState<number>(0)
    const [rot,setRot]=useState<number>(0)
    const press=():void=>{
-      const {color1,color2}:color=themes
-      setState(state==color1?color2:color1)
-      setMarg(marg==0?30:0)
-      setRot(rot==0?90:0)
-            }
+    const {color1,color2}:color=themes
+    setState(state==color1?color2:color1)
+    setMarg(marg==0?30:0)
+    setRot(rot==0?90:0)
+        }
             return <Brand>
                      <ThemeContext.Provider value={state}>
                         <h1>DynamicApps</h1>
